@@ -15,7 +15,7 @@ public class UserController {
 
     @RequestMapping("test")
     public String test() {
-        return "test";
+        return "background/index";
     }
 
 }

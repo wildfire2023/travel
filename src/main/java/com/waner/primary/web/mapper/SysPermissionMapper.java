@@ -1,8 +1,9 @@
 package com.waner.primary.web.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.waner.primary.web.entity.SysPermission;
 
-public interface SysPermissionMapper {
+public interface SysPermissionMapper extends BaseMapper<SysPermission> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(SysPermission record);
@@ -15,3 +16,4 @@ public interface SysPermissionMapper {
 
     int updateByPrimaryKey(SysPermission record);
 }
+

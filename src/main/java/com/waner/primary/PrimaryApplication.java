@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * <p>程序启动类</p>
+ *
  * @author Monster
  * @date 2018/12/22 17:05
  * @since 1.8

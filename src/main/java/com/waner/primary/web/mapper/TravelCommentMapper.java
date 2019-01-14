@@ -1,8 +1,9 @@
 package com.waner.primary.web.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.waner.primary.web.entity.TravelComment;
 
-public interface TravelCommentMapper {
+public interface TravelCommentMapper extends BaseMapper<TravelComment> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(TravelComment record);

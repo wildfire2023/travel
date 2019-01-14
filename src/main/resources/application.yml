@@ -1,7 +1,22 @@
-# Datasource config
+# Spring 配置
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306?travel
+    url: jdbc:mysql://localhost:3306/travel
     username: root
     password: root
+  # 模板引擎配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+  # 静态资源配置
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
