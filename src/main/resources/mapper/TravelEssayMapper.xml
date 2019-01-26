@@ -31,7 +31,7 @@
     delete from travel_essay
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.TravelEssay" >
+  <insert id="insertTravelEssayMapper" parameterType="com.waner.primary.web.entity.TravelEssay" >
     insert into travel_essay (id, sys_user_id, title, 
       head_img_url, content_img_url, create_time, 
       del_flag, content)

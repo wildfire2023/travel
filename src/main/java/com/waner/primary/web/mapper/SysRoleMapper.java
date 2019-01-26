@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.SysRole;
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SysRole record);
+    int insertSysRoleMapper(SysRole record);
 
     int insertSelective(SysRole record);
 

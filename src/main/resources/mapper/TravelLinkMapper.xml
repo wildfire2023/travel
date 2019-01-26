@@ -20,7 +20,7 @@
     delete from travel_link
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.TravelLink" >
+  <insert id="insertTravelLinkMapper" parameterType="com.waner.primary.web.entity.TravelLink" >
     insert into travel_link (id, title, img_url, 
       del_flag)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 

@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.SysUser;
 public interface SysUserMapper extends BaseMapper<SysUser> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SysUser record);
+    int insertSysUserMapper(SysUser record);
 
     int insertSelective(SysUser record);
 
