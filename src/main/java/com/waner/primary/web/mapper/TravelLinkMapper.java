@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.TravelLink;
 public interface TravelLinkMapper extends BaseMapper<TravelLink> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TravelLink record);
+    int insertTravelLinkMapper(TravelLink record);
 
     int insertSelective(TravelLink record);
 

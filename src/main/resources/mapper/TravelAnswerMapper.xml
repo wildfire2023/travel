@@ -30,7 +30,7 @@
     delete from travel_answer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.TravelAnswer" >
+  <insert id="insertTravelAnswerMapper" parameterType="com.waner.primary.web.entity.TravelAnswer" >
     insert into travel_answer (id, parent_id, sys_user_id, 
       content_img_url, create_time, del_flag, 
       content)

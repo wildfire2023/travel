@@ -28,7 +28,7 @@
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.SysUser" >
+  <insert id="insertSysUserMapper" parameterType="com.waner.primary.web.entity.SysUser" >
     insert into sys_user (id, username, password, 
       nickname, email, phone, 
       status, remark, operator, 

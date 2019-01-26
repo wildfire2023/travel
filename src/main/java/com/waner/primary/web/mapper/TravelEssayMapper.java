@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.TravelEssay;
 public interface TravelEssayMapper extends BaseMapper<TravelEssay> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TravelEssay record);
+    int insertTravelEssayMapper(TravelEssay record);
 
     int insertSelective(TravelEssay record);
 

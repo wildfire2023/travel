@@ -29,7 +29,7 @@
     delete from travel_question
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.TravelQuestion" >
+  <insert id="insertTravelQuetionMapper" parameterType="com.waner.primary.web.entity.TravelQuestion" >
     insert into travel_question (id, sys_user_id, title, 
       create_time, del_flag, content
       )

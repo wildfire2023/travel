@@ -1,16 +1,14 @@
-
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>注册 - layuiAdmin</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
-  <link rel="stylesheet" href="../../layuiadmin/style/login.css" media="all">
+  <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+  <link rel="stylesheet" th:href="@{/layuiadmin/style/login.css}" media="all">
 </head>
 <body>
 
@@ -58,30 +56,18 @@
           <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
         </div>
         <div class="layui-trans layui-form-item layadmin-user-login-other">
-          <label>社交账号注册</label>
-          <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
-          <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
-          <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
-          
-          <a href="login.html" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
+          <label>已有账号?</label>
+
+          <a href="/page/login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
           <a href="login.html" class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>
         </div>
       </div>
     </div>
-    
-    <div class="layui-trans layadmin-user-login-footer">
-      
-      <p>© 2018 <a href="http://www.layui.com/" target="_blank">layui.com</a></p>
-      <p>
-        <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
-        <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
-        <span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>
-      </p>
-    </div>
+
 
   </div>
 
-  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script th:src="@{/layuiadmin/layui/layui.js}"></script>
   <script>
   layui.config({
     base: '../../layuiadmin/' //静态资源所在路径
@@ -99,22 +85,22 @@
     //提交
     form.on('submit(LAY-user-reg-submit)', function(obj){
       var field = obj.field;
-      
+
       //确认密码
       if(field.password !== field.repass){
         return layer.msg('两次密码输入不一致');
       }
-      
+
       //是否同意用户协议
       if(!field.agreement){
         return layer.msg('你必须同意用户协议才能注册');
       }
-      
+
       //请求接口
       admin.req({
         url: layui.setter.base + 'json/user/reg.js' //实际使用请改成服务端真实接口
         ,data: field
-        ,done: function(res){        
+        ,done: function(res){
           layer.msg('注册成功', {
             offset: '15px'
             ,icon: 1
@@ -124,7 +110,7 @@
           });
         }
       });
-      
+
       return false;
     });
   });

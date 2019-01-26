@@ -26,7 +26,7 @@
     delete from sys_permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.SysPermission" >
+  <insert id="insertSysPermissionMapper" parameterType="com.waner.primary.web.entity.SysPermission" >
     insert into sys_permission (id, code, name, 
       url, type, status, 
       remark, operator, operator_time, 
@@ -149,4 +149,5 @@
       operator_ip = #{operatorIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>
