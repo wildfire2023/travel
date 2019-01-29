@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 全局异常处理
+ * @author Monster
+ * @date 2019/1/26 16:32
+ * @since 1.8
+ */
 @ControllerAdvice
 @RestController
 public class GlobalExceptionHandler {

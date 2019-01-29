@@ -11,8 +11,8 @@ import lombok.Data;
  */
 @Data
 public class Response<T> {
-    private String message;
     private Integer code;
+    private String message;
     private T data;
 
     private Response(T data) {

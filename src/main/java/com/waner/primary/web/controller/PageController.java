@@ -1,6 +1,7 @@
 package com.waner.primary.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -17,16 +18,16 @@ public class PageController {
      * 跳转后台控制台页面
      * @return
      */
-    @RequestMapping("console")
+    @GetMapping("console")
     public String toConsolePage() {
-        return "background/home/console";
+        return "background/index";
     }
 
     /**
      * 跳转登录页面
      * @return
      */
-    @RequestMapping("login")
+    @GetMapping("login")
     public String login() {
         return "background/user/login";
     }
@@ -35,7 +36,7 @@ public class PageController {
      * 跳转注册页面
      * @return
      */
-    @RequestMapping("register")
+    @GetMapping("register")
     public String register() {
         return "background/user/reg";
     }
@@ -44,7 +45,7 @@ public class PageController {
      * 忘记密码页面
      * @return
      */
-    @RequestMapping("forget")
+    @GetMapping("forget")
     public String forget() {
         return "background/user/forget";
     }

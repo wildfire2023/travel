@@ -20,3 +20,4 @@ spring:
         content:
           enabled: true
           paths: /**
+
