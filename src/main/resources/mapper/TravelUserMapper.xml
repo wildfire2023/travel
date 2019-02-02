@@ -15,7 +15,7 @@
     sys_user_id, nickname, sex, city, birth, intro, img_url, cover
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from travel_user
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
@@ -24,7 +24,7 @@
     delete from travel_user
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.TravelUser" >
+  <insert id="insertTravelUserMapper" parameterType="com.waner.primary.web.entity.TravelUser" >
     insert into travel_user (sys_user_id, nickname, sex, 
       city, birth, intro, 
       img_url, cover)

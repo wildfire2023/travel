@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.TravelComment;
 public interface TravelCommentMapper extends BaseMapper<TravelComment> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TravelComment record);
+    int insertTravelCommentMapper(TravelComment record);
 
     int insertSelective(TravelComment record);
 

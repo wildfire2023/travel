@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.SysPermission;
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SysPermission record);
+    int insertSysPermissionMapper(SysPermission record);
 
     int insertSelective(SysPermission record);
 
@@ -15,5 +15,6 @@ public interface SysPermissionMapper extends BaseMapper<SysPermission> {
     int updateByPrimaryKeySelective(SysPermission record);
 
     int updateByPrimaryKey(SysPermission record);
+
 }
 

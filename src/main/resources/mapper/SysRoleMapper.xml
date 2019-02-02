@@ -24,7 +24,7 @@
     delete from sys_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.waner.primary.web.entity.SysRole" >
+  <insert id="insertSysRoleMapper" parameterType="com.waner.primary.web.entity.SysRole" >
     insert into sys_role (id, name, type, 
       status, remark, operator, 
       operator_time, operator_ip)

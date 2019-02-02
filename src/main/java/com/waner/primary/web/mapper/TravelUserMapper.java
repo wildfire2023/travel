@@ -6,7 +6,7 @@ import com.waner.primary.web.entity.TravelUser;
 public interface TravelUserMapper extends BaseMapper<TravelUser> {
     int deleteByPrimaryKey(Integer sysUserId);
 
-    int insert(TravelUser record);
+    int insertTravelUserMapper(TravelUser record);
 
     int insertSelective(TravelUser record);
 
