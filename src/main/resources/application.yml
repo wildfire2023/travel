@@ -9,6 +9,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    # 非规范html
     mode: LEGACYHTML5
     encoding: utf-8
     content-type: text/html
@@ -20,4 +21,10 @@ spring:
         content:
           enabled: true
           paths: /**
+  # 邮箱服务配置
+  mail:
+    host: smtp.163.com
+    port: 25
+    username: bengangxue@163.com
+    password: m2015214296
 

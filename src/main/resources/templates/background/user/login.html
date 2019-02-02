@@ -18,7 +18,7 @@
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>Waner - 登录</h2>
-            <p>Waner 后台管理员登录</p>
+            <p>Waner 登录</p>
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
@@ -35,7 +35,7 @@
             </div>
             <div class="layui-form-item" style="margin-bottom: 20px;">
                 <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-                <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
+                <a href="/page/forget" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
             </div>
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
@@ -51,7 +51,12 @@
 </div>
 
 <script th:src="@{/layuiadmin/layui/layui.js}"></script>
+<script th:src="@{/layuiadmin/myfile/md5.js}"></script>
 <script>
+
+    /**
+     * use(['index']) 使用的是 extend 建立的别名
+     */
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
@@ -68,11 +73,16 @@
 
         //提交
         form.on('submit(LAY-user-login-submit)', function (obj) {
+            var password = $("#LAY-user-login-password").val();
+            var md5Password = hex_md5(password);
+            var formData = obj.field;
+            $.extend(formData,  {password: md5Password});
+
             //请求登入接口
             admin.req({
                 url: '/user/login' //实际使用请改成服务端真实接口
                 , type: 'POST'
-                , data: obj.field
+                , data: formData
                 , done: function (res) {
 
                     //请求成功后，写入 access_token

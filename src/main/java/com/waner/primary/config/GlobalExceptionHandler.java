@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 全局异常处理
+ *
  * @author Monster
  * @date 2019/1/26 16:32
  * @since 1.8
@@ -19,14 +20,16 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
+    /**
+     * 处理自定义全局异常
+     * @param request
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = GlobalException.class)
     public Response<String> exceptionHandler(HttpServletRequest request, Exception e) {
-        if (e instanceof GlobalException) {
-            GlobalException ex = (GlobalException) e;
-            return Response.fail(ex.getCodeMsg());
-        } else {
-            return Response.fail(CodeMsg.SERVER_ERROR);
-        }
+        GlobalException ex = (GlobalException) e;
+        return Response.fail(ex.getCodeMsg());
     }
 
 }

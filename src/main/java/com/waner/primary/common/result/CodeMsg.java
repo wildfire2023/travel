@@ -13,13 +13,24 @@ public enum CodeMsg {
     /**
      * 失败响应结果
      */
-    FAIL(500,"失败"),
+    FAIL(500, "失败"),
     /**
      *
      */
-    SERVER_ERROR(500500, "系统错误")
+    SERVER_ERROR(500500, "系统错误"),
+    /**
+     * 空用户
+     */
+    USER_NULL(500001, "空用户"),
+    /**
+     * 密码错误
+     */
+    PASS_ERROR(500002, "密码错误"),
+    /**
+     * 用户注册失败
+     */
+    USER_REGISTER_ERROR(500003, "用户注册失败")
     ;
-
     private Integer code;
     private String msg;
 

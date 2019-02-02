@@ -6,7 +6,9 @@
  @License：LPPL（layui付费产品协议）
     
  */
- 
+/**
+ * 一般不建议修改
+ */
 layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
   exports('setter', {
     container: 'LAY_app' //容器ID
