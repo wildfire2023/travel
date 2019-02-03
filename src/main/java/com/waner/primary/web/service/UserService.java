@@ -14,5 +14,10 @@ public interface UserService {
      */
     Response<Boolean> passwordLogin(SysUser sysUser, HttpSession session);
 
+    /**
+     * register user info to db
+     * @param sysUser
+     * @return
+     */
     Response<Boolean> register(SysUser sysUser);
 }

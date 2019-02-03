@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
  * @since 1.8
  */
 @SpringBootConfiguration
-@ConfigurationProperties(prefix = "spring.boot")
+@ConfigurationProperties(prefix = "spring.mail")
 @Data
 public class MailService {
     private String host;

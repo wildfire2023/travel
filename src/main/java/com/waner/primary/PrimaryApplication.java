@@ -22,5 +22,6 @@ public class PrimaryApplication {
         SpringApplication.run(PrimaryApplication.class, args);
     }
 
+
 }
 
