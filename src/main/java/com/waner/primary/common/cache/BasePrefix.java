@@ -8,8 +8,8 @@ package com.waner.primary.common.cache;
  * @since 1.8
  */
 public abstract class BasePrefix implements KeyPrefix {
-    protected int seconds;
-    protected String prefix;
+    private int seconds;
+    private String prefix;
 
 
     /**
@@ -18,12 +18,12 @@ public abstract class BasePrefix implements KeyPrefix {
      * @param prefix
      */
     protected BasePrefix(String prefix) {
-        this(0, prefix);
+        this(prefix, 0);
     }
 
-    protected BasePrefix(int seconds, String prefix) {
-        this.seconds = seconds;
+    protected BasePrefix(String prefix, int seconds) {
         this.prefix = prefix;
+        this.seconds = seconds;
     }
 
     @Override

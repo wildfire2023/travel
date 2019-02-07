@@ -1,6 +1,10 @@
 package com.waner.primary;
 
+import com.waner.primary.common.cache.BasePrefix;
+import com.waner.primary.common.cache.TestKey;
 import com.waner.primary.common.util.RedisUtil;
+import com.waner.primary.web.entity.SysUser;
+import org.apache.xerces.util.SynchronizedSymbolTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +20,9 @@ public class PrimaryApplicationTests {
 
     @Test
     public void contextLoads() {
-        redisUtil.set();
+        SysUser sysUser = new SysUser();
+        sysUser.setNickname("薛本刚");
+        redisUtil.set(TestKey.TEST, "test", sysUser);
     }
 
 }

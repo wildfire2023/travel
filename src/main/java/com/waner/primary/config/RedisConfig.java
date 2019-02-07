@@ -1,5 +1,6 @@
 package com.waner.primary.config;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.waner.primary.common.cache.Fastjson2JsonRedisSerializer;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.cache.CacheManager;
@@ -11,6 +12,10 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
 
 /**
  * Redis配置
@@ -61,9 +66,24 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setValueSerializer(fastjson2JsonRedisServer);
         // 设置redis key 序列化方式（一般为String）
         template.setKeySerializer(new StringRedisSerializer());
-        //
+        // 设置事务支持
+        template.setEnableTransactionSupport(true);
         template.afterPropertiesSet();
         return template;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+
+    /**
+     * 引入druid数据源操作数据库
+     * @return
+     */
+    @Bean
+    public DataSource dataSource() {
+        return DruidDataSourceBuilder.create().build();
     }
 
 
