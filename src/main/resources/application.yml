@@ -27,7 +27,6 @@ spring:
     port: 25
     username: bengangxue@163.com
     password: cq2015214296
-
   # Redis配置
   redis:
     database: 0
@@ -39,5 +38,16 @@ spring:
       max-wait: 600
       min-idle: 10
       max-idle: 30
+  # 消息队列配置
+  activemq:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    # 取消池化连接池
+    pool:
+      enabled: false
+    user: admin
+    password: admin
+    packages:
+      trust-all: true
 
 

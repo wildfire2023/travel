@@ -35,7 +35,6 @@ public class MailService {
 
     /**
      * 邮件发送
-     * TODO 待异步化
      * @param to
      * @param subject
      * @param content

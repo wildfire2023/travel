@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.jms.annotation.EnableJms;
 
 /**
  * <p>程序启动类</p>
@@ -14,6 +15,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 1.8
  */
 @EnableConfigurationProperties(value = {MailConfigurationProperties.class})
+@EnableJms
 @SpringBootApplication
 @MapperScan("com.waner.primary.web.mapper")
 public class PrimaryApplication {
