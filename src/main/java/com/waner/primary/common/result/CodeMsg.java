@@ -29,7 +29,11 @@ public enum CodeMsg {
     /**
      * 用户注册失败
      */
-    USER_REGISTER_ERROR(500003, "用户注册失败")
+    USER_REGISTER_ERROR(500003, "用户注册失败"),
+    /**
+     * 邮件发送失败
+     */
+    MAIL_SEND_ERROR(500004, "邮件发送失败");
     ;
     private Integer code;
     private String msg;

@@ -1,10 +1,8 @@
 package com.waner.primary;
 
-import com.waner.primary.common.cache.BasePrefix;
 import com.waner.primary.common.cache.TestKey;
 import com.waner.primary.common.util.RedisUtil;
 import com.waner.primary.web.entity.SysUser;
-import org.apache.xerces.util.SynchronizedSymbolTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.waner.primary;
 
-import com.waner.primary.config.MailService;
+import com.waner.primary.config.MailConfigurationProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @date 2018/12/22 17:05
  * @since 1.8
  */
-@EnableConfigurationProperties(value = {MailService.class})
+@EnableConfigurationProperties(value = {MailConfigurationProperties.class})
 @SpringBootApplication
 @MapperScan("com.waner.primary.web.mapper")
 public class PrimaryApplication {

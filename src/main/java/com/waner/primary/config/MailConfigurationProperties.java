@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
@@ -16,14 +16,18 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @SpringBootConfiguration
 @ConfigurationProperties(prefix = "spring.mail")
 @Data
-public class MailService {
+public class MailConfigurationProperties {
     private String host;
     private Integer port;
     private String username;
     private String password;
 
+    /**
+     *
+     * @return JavaMailSender 作为Java邮件发送服务提供者
+     */
     @Bean
-    public MailSender mailSender() {
+    public JavaMailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
         mailSender.setPort(port);

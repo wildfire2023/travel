@@ -42,14 +42,14 @@ layui.define('form', function(exports){
   
   
   //发送短信验证码
-  admin.sendAuthCode({
-    elem: '#LAY-user-getsmscode'
-    ,elemPhone: '#LAY-user-login-cellphone'
-    ,elemVercode: '#LAY-user-login-vercode'
-    ,ajax: {
-      url: layui.setter.base + 'json/user/sms.js' //实际使用请改成服务端真实接口
-    }
-  });
+  // admin.sendAuthCode({
+  //   elem: '#LAY-user-getsmscode'
+  //   ,elemPhone: '#LAY-user-login-email'
+  //   ,elemVercode: '#LAY-user-login-vercode'
+  //   ,ajax: {
+  //     url: layui.setter.base + 'json/user/sms.js' //实际使用请改成服务端真实接口
+  //   }
+  // });
   
   
   

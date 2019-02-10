@@ -20,4 +20,11 @@ public interface UserService {
      * @return
      */
     Response<Boolean> register(SysUser sysUser);
+
+    /**
+     * vercode sending
+     * @return
+     */
+    Response<Boolean> sendVercode(String email);
+
 }

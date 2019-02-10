@@ -22,9 +22,10 @@
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone"
-                       for="LAY-user-login-cellphone"></label>
-                <input type="text" name="cellphone" id="LAY-user-login-cellphone" lay-verify="phone" placeholder="手机"
+                <!-- TODO 邮箱图标设置 -->
+                <label class="layadmin-user-login-icon layui-icon layui-icon-form"
+                       for="LAY-user-login-email"></label>
+                <input type="text" name="email" id="LAY-user-login-email" lay-verify="email" placeholder="邮箱"
                        class="layui-input">
             </div>
             <div class="layui-form-item">
@@ -73,7 +74,7 @@
 
                 <a href="/page/login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
                 <!--<a href="login.html"-->
-                   <!--class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>-->
+                <!--class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>-->
             </div>
         </div>
     </div>
@@ -96,6 +97,7 @@
             , router = layui.router();
 
         form.render();
+
 
         //提交
         form.on('submit(LAY-user-reg-submit)', function (obj) {
@@ -128,6 +130,64 @@
 
             return false;
         });
+
+        /**
+         * 验证码发送
+         * @type {{}}
+         */
+        var active = {
+            send: function () {
+
+            }
+        };
+
+        $('#LAY-user-getsmscode').on('click', function () {
+            var emailElem = $('#LAY-user-login-email');
+            var btn = $('#LAY-user-getsmscode');
+            var email = emailElem.val();
+            // 邮箱格式验证
+            if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)) {
+                emailElem.focus();
+                return layer.msg('请输入正确的邮箱');
+            }
+
+            var seconds = 60, timer, countDown = function(loop){
+                seconds--;
+                if(seconds < 0){
+                    btn.removeClass(DISABLED).html('获取验证码');
+                    seconds = 60;
+                    clearInterval(timer);
+                } else {
+                    btn.addClass(DISABLED).html(seconds + '秒后重获');
+                }
+
+                if(!loop){
+                    timer = setInterval(function(){
+                        countDown(true);
+                    }, 1000);
+                }
+            };
+
+            admin.req({
+                url: '/user/emailSend'
+                , type: 'post'
+                , data: {email: email}
+                , success: function(res){
+                    if (res.code === 200) {
+                        layer.msg('验证码已发送至你的手机，请注意查收', {
+                            icon: 1
+                            ,shade: 0
+                        });
+                        $('#LAY-user-login-vercode').focus();
+                        countDown();
+                        success && success(res);
+                    }
+                }
+
+            });
+
+        })
+
     });
 </script>
 </body>

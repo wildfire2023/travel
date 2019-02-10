@@ -2,6 +2,8 @@ package com.waner.primary.common.util;
 
 import org.springframework.util.DigestUtils;
 
+import java.util.UUID;
+
 /**
  * <p>编码工具类</p>
  *
@@ -20,8 +22,18 @@ public final class CodeUtil {
         return DigestUtils.md5DigestAsHex(string.getBytes());
     }
 
+
+    /**
+     * 随机6位验证码
+     * @return
+     */
+    public static String randomCode() {
+        return UUID.randomUUID().toString().replaceAll("-","").substring(0,6);
+    }
+
+
     public static void main(String[] args) {
-        String md5String = md5("123");
-        System.out.println(md5String.length());
+        String md5String = randomCode();
+        System.out.println(md5String);
     }
 }

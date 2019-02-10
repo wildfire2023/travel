@@ -41,10 +41,26 @@ public class UserController {
         return userService.passwordLogin(sysUser, session);
     }
 
+    /**
+     * 用户注册url
+     * @param sysUser
+     * @return
+     */
     @PostMapping("register")
     @ResponseBody
     public Response<Boolean> register(SysUser sysUser) {
+
         return userService.register(sysUser);
+    }
+
+    /**
+     * 发送邮箱随机数
+     * @return
+     */
+    @PostMapping("emailSend")
+    @ResponseBody
+    public Response<Boolean> emailSend(String email){
+        return  userService.sendVercode(email);
     }
 
 }

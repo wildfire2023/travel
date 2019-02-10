@@ -26,7 +26,8 @@ spring:
     host: smtp.163.com
     port: 25
     username: bengangxue@163.com
-    password: m2015214296
+    password: cq2015214296
+
   # Redis配置
   redis:
     database: 0
@@ -34,9 +35,9 @@ spring:
     port: 6379
     timeout: 30000
     pool:
-      max-active: 2000
-      max-wait: 6000
-      min-idle: 100
-      max-idle: 300
+      max-active: 200
+      max-wait: 600
+      min-idle: 10
+      max-idle: 30
 
 
