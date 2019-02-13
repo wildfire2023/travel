@@ -112,18 +112,25 @@
                 return layer.msg('你必须同意用户协议才能注册');
             }
 
+            $.extend(field, {password: hex_md5(field.password)});
+
             //请求接口
             admin.req({
                 url: '/user/register' //实际使用请改成服务端真实接口
+                , type: 'post'
                 , data: field
                 , done: function (res) {
-                    layer.msg('注册成功', {
-                        offset: '15px'
-                        , icon: 1
-                        , time: 1000
-                    }, function () {
-                        location.hash = '/page/login'; //跳转到登入页
-                    });
+                    if (res.code === 200) {
+                        layer.msg('注册成功', {
+                            offset: '15px'
+                            , icon: 1
+                            , time: 1000
+                        }, function () {
+                            location.href = '/page/login'; //跳转到登入页
+                        });
+                    } else {
+                        layer.msg(res.message);
+                    }
                 }
             });
 
@@ -150,36 +157,38 @@
                 return layer.msg('请输入正确的邮箱');
             }
 
-            var seconds = 60, timer, countDown = function(loop){
-                seconds--;
-                if(seconds < 0){
-                    btn.removeClass(DISABLED).html('获取验证码');
-                    seconds = 60;
-                    clearInterval(timer);
-                } else {
-                    btn.addClass(DISABLED).html(seconds + '秒后重获');
-                }
-
-                if(!loop){
-                    timer = setInterval(function(){
-                        countDown(true);
-                    }, 1000);
-                }
-            };
+            // var seconds = 60, timer, countDown = function(loop){
+            //     seconds--;
+            //     if(seconds < 0){
+            //         btn.removeClass(DISABLED).html('获取验证码');
+            //         seconds = 60;
+            //         clearInterval(timer);
+            //     } else {
+            //         btn.addClass(DISABLED).html(seconds + '秒后重获');
+            //     }
+            //
+            //     if(!loop){
+            //         timer = setInterval(function(){
+            //             countDown(true);
+            //         }, 1000);
+            //     }
+            // };
 
             admin.req({
                 url: '/user/emailSend'
                 , type: 'post'
                 , data: {email: email}
-                , success: function(res){
+                , success: function (res) {
                     if (res.code === 200) {
-                        layer.msg('验证码已发送至你的手机，请注意查收', {
+                        layer.msg('验证码已发送至你的邮箱，请注意在60秒内完成验证', {
                             icon: 1
-                            ,shade: 0
+                            , shade: 0
                         });
                         $('#LAY-user-login-vercode').focus();
-                        countDown();
-                        success && success(res);
+                        // countDown();
+                        // success && success(res);
+                    } else {
+                        layer.msg(res.message);
                     }
                 }
 

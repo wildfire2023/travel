@@ -37,7 +37,6 @@ public class Response<T> {
     private Response(Integer code, String message) {
         this.code = code;
         this.message = message;
-
     }
 
     /**
@@ -62,4 +61,14 @@ public class Response<T> {
         return new Response<>(codeMsg);
     }
 
+
+    /**
+     * 作为异常结果返回
+     * @param message
+     * @param <T>
+     * @return
+     */
+    public static <T> Response<T> fail(Integer code, String message) {
+        return new Response<>(code, message);
+    }
 }

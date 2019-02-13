@@ -17,9 +17,10 @@ public interface UserService {
     /**
      * register user info to db
      * @param sysUser
+     * @param vercode
      * @return
      */
-    Response<Boolean> register(SysUser sysUser);
+    Response<Boolean> register(SysUser sysUser, String vercode);
 
     /**
      * vercode sending

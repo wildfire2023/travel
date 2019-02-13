@@ -51,6 +51,19 @@ public class RedisUtil {
         return true;
     }
 
+    /**
+     * get 操作
+     * @param prefix
+     * @param key
+     * @param <T>
+     * @return
+     */
+    public <T> T get(KeyPrefix prefix, String key) {
+        String realKey = prefix.getPrefix() + key;
+        Object o = template.opsForValue().get(realKey);
+        return (T) o;
+    }
+
 
     /**
      * 实体类转为字符串

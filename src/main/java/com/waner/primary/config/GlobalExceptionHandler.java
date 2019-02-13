@@ -27,9 +27,9 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = GlobalException.class)
-    public Response<String> exceptionHandler(HttpServletRequest request, Exception e) {
+    public Response exceptionHandler(HttpServletRequest request, Exception e) {
         GlobalException ex = (GlobalException) e;
-        return Response.fail(ex.getCodeMsg());
+        return Response.fail(ex.getCode(), ex.getMessage());
     }
 
 }

@@ -23,9 +23,9 @@ public enum CodeMsg {
      */
     USER_NULL(500001, "空用户"),
     /**
-     * 密码错误
+     * 账号或密码错误
      */
-    PASS_ERROR(500002, "密码错误"),
+    USER_PASS_ERROR(500002, "账号或密码错误"),
     /**
      * 用户注册失败
      */
@@ -33,8 +33,27 @@ public enum CodeMsg {
     /**
      * 邮件发送失败
      */
-    MAIL_SEND_ERROR(500004, "邮件发送失败");
-    ;
+    MAIL_SEND_ERROR(500004, "邮件发送失败"),
+    /**
+     * 空邮箱
+     */
+    MAIL_NULL(500005, "邮箱为空"),
+    /**
+     * 用户邮箱已存在
+     */
+    USER_EXIST_EMAIL(500006, "用户邮箱已存在"),
+    /**
+     * 用户昵称已存在
+     */
+    USER_EXIST_NICKNAME(500007, "用户昵称已存在"),
+    /**
+     * 缓存超过限时
+     */
+    CODE_TIME_OUT(500008, "缓存失效"),
+    /**
+     * 验证码错误
+     */
+    VERCODE_ERROR(500009, "验证码错误");
     private Integer code;
     private String msg;
 

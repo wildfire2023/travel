@@ -33,7 +33,7 @@ public class MessageConsumer {
         try {
             mailService.sendAttachmentsMail(mailMessage.getTo(), mailMessage.getSubject(), mailMessage.getContent(), "");
         } catch (MessagingException e) {
-            throw new GlobalException(CodeMsg.MAIL_SEND_ERROR);
+            throw new GlobalException(CodeMsg.SERVER_ERROR.getMsg(), CodeMsg.SERVER_ERROR.getCode());
         }
     }
 }
