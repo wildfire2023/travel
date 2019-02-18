@@ -18,9 +18,23 @@ public class PageController {
      * 跳转后台控制台页面
      * @return
      */
+    @GetMapping("index")
+    public String toIndexPage() {
+        return "background/index";
+    }
+
+    /**
+     * 跳转到控制页面
+     * @return
+     */
     @GetMapping("console")
     public String toConsolePage() {
-        return "background/index";
+        return "background/home/console";
+    }
+
+    @GetMapping("home1")
+    public String toHome1Page() {
+        return "background/home/homepage1";
     }
 
     /**

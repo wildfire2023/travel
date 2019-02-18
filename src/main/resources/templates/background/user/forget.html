@@ -145,13 +145,13 @@
         //重置密码
         form.on('submit(LAY-user-forget-resetpass)', function (obj) {
             var field = obj.field;
-            var md5Password = hex_md5(field.password);
-            $.extend(field,  {password: md5Password});
-
             //确认密码
             if (field.password !== field.repass) {
                 return layer.msg('两次密码输入不一致');
             }
+
+            var md5Password = hex_md5(field.password);
+            $.extend(field,  {password: md5Password});
 
             //请求接口
             admin.req({
