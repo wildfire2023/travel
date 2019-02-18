@@ -15,4 +15,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
 }

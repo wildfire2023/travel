@@ -26,6 +26,7 @@ public interface UserService {
      * vercode sending
      * @return
      */
-    Response<Boolean> sendVercode(String email);
+    Response<Boolean> sendVercode(String email, String mode);
 
+    Response<Boolean> resetPass(SysUser sysUser, String vercode);
 }

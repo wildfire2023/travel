@@ -1,9 +1,7 @@
 package com.waner.primary.config;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

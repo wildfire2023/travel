@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * 注册用户
      *
      * @param sysUser
@@ -120,13 +119,14 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 调用邮件发送服务
+     * update 通用sendVercode
      *
      * @param email
      * @return
      */
     @Override
     @Transactional
-    public Response<Boolean> sendVercode(String email) {
+    public Response<Boolean> sendVercode(String email, String mode) {
         // 邮件主题设置
         String subject = "玩儿旅游推荐网站";
         String verCode = CodeUtil.randomCode();
@@ -143,7 +143,35 @@ public class UserServiceImpl implements UserService {
         Destination destination = new ActiveMQQueue("mail-queue");
         messageProducer.sendMessage(destination, mailMessage);
         // 缓存vercode至redis
-        return  redisUtil.set(UserKey.MAIL_KEY, "register", verCode) ? Response.success(true) : Response.fail(CodeMsg.SERVER_ERROR);
+        return redisUtil.set(UserKey.MAIL_KEY, mode, verCode) ? Response.success(true) : Response.fail(CodeMsg.SERVER_ERROR);
+    }
+
+
+    /**
+     * 重置密码
+     *
+     * @param sysUser
+     * @param vercode
+     * @return
+     */
+    @Override
+    @Transactional
+    public Response<Boolean> resetPass(SysUser sysUser, String vercode) {
+        String email = sysUser.getEmail();
+        String dbPass = CodeUtil.md5(sysUser.getPassword());
+        // 查询缓存
+        String cache = redisUtil.get(UserKey.MAIL_KEY, "forget");
+        if (!cache.equals(vercode)) {
+            return Response.fail(CodeMsg.VERCODE_ERROR);
+        }
+        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("email", email);
+        SysUser dbUser = sysUserMapper.selectOne(wrapper);
+        if (dbUser == null) {
+            return Response.fail(CodeMsg.USER_NULL);
+        }
+        dbUser.setPassword(dbPass);
+        return sysUserMapper.updateByPrimaryKeySelective(dbUser) > 0 ? Response.success(true) : Response.fail(CodeMsg.SERVER_ERROR);
     }
 
 

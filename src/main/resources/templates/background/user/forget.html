@@ -1,149 +1,217 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>忘记密码 - layuiAdmin</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
-  <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
-  <link rel="stylesheet" th:href="@{/layuiadmin/style/login.css}" media="all">
+    <meta charset="utf-8">
+    <title>忘记密码 - layuiAdmin</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/login.css}" media="all">
 </head>
+<body>
 
-  <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
-      <div class="layadmin-user-login-box layadmin-user-login-header">
-        <h2>layuiAdmin</h2>
-        <p>layui 官方出品的单页面后台管理模板系统</p>
-      </div>
-      <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
-      
-        <script type="text/html" template>
-          {{# if(layui.router().search.type === 'resetpass'){ }}
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>Waner - 密码找回</h2>
+            <p>Waner - 密码找回</p>
+        </div>
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+
+            <!--<script type="text/html" template>-->
+            <!--{{# if(layui.router().search.type === 'resetpass'){ }}-->
             <div class="layui-form-item">
-              <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-              <input type="password" name="password" id="LAY-user-login-password" lay-verify="pass" placeholder="新密码" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-form"
+                       for="LAY-user-login-email"></label>
+                <input type="text" name="email" id="LAY-user-login-email" lay-verify="email"
+                       placeholder="请输入注册时的邮箱" class="layui-input">
             </div>
             <div class="layui-form-item">
-              <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-repass"></label>
-              <input type="password" name="repass" id="LAY-user-login-repass" lay-verify="required" placeholder="确认密码" class="layui-input">
-            </div>
-            <div class="layui-form-item">
-              <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-forget-resetpass">重置新密码</button>
-            </div>
-          {{# } else { }}
-            <div class="layui-form-item">
-              <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone" for="LAY-user-login-cellphone"></label>
-              <input type="text" name="cellphone" id="LAY-user-login-cellphone" lay-verify="phone" placeholder="请输入注册时的手机号" class="layui-input">
-            </div>
-            <div class="layui-form-item">
-              <div class="layui-row">
-                <div class="layui-col-xs7">
-                  <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
-                  <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
+                <div class="layui-row">
+                    <div class="layui-col-xs7">
+                        <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"
+                               for="LAY-user-login-smscode"></label>
+                        <input type="text" name="vercode" id="LAY-user-login-smscode" lay-verify="required"
+                               placeholder="验证码" class="layui-input">
+                    </div>
+                    <div class="layui-col-xs5">
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid"
+                                    id="LAY-user-getsmscode">获取验证码
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="layui-col-xs5">
-                  <div style="margin-left: 10px;">
-                    <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="layui-form-item">
-              <div class="layui-row">
-                <div class="layui-col-xs7">
-                  <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-smscode"></label>
-                  <input type="text" name="vercode" id="LAY-user-login-smscode" lay-verify="required" placeholder="短信验证码" class="layui-input">
-                </div>
-                <div class="layui-col-xs5">
-                  <div style="margin-left: 10px;">
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid" id="LAY-user-getsmscode">获取验证码</button>
-                  </div>
-                </div>
-              </div>
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-password"></label>
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="pass"
+                       placeholder="新密码" class="layui-input">
             </div>
             <div class="layui-form-item">
-              <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-forget-submit">找回密码</button>
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-repass"></label>
+                <input type="password" name="repass" id="LAY-user-login-repass" lay-verify="required"
+                       placeholder="确认密码" class="layui-input">
             </div>
-          {{# } }}
-        </script>
-   
-      </div>
+            <!-- 重置新密码 -->
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-forget-resetpass">重置新密码
+                </button>
+            </div>
+            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                <label>登录?</label>
+
+                <a href="/page/login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
+                <!--<a href="login.html"-->
+                <!--class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>-->
+            </div>
+            <!--{{# } else { }}-->
+
+            <!-- 图形验证码 -->
+            <!--<div class="layui-form-item">-->
+            <!--<div class="layui-row">-->
+            <!--<div class="layui-col-xs7">-->
+            <!--<label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>-->
+            <!--<input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">-->
+            <!--</div>-->
+            <!--<div class="layui-col-xs5">-->
+            <!--<div style="margin-left: 10px;">-->
+            <!--<img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="layui-form-item">-->
+                <!--<button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-forget-submit">找回密码-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--{{# } }}-->
+            <!--</script>-->
+
+        </div>
     </div>
-    
-    <div class="layui-trans layadmin-user-login-footer">
-      
-      <p>© 2018 <a href="http://www.layui.com/" target="_blank">layui.com</a></p>
-      <p>
-        <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
-        <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
-        <span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>
-      </p>
-    </div>
 
-  </div>
+    <!--<div class="layui-trans layadmin-user-login-footer">-->
+    <!---->
+    <!--<p>© 2018 <a href="http://www.layui.com/" target="_blank">layui.com</a></p>-->
+    <!--<p>-->
+    <!--<span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>-->
+    <!--<span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>-->
+    <!--<span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>-->
+    <!--</p>-->
+    <!--</div>-->
 
-  <script th:src="@{/layuiadmin/layui/layui.js}"></script>
-  <script>
-  layui.config({
-    base: '../../layuiadmin/' //静态资源所在路径
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'user'], function(){
-    var $ = layui.$
-    ,setter = layui.setter
-    ,admin = layui.admin
-    ,form = layui.form
-    ,router = layui.router();
+</div>
 
-    form.render();
+<script th:src="@{/layuiadmin/layui/layui.js}"></script>
+<script th:src="@{/layuiadmin/myfile/md5.js}"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'user'], function () {
+        var $ = layui.$
+            , setter = layui.setter
+            , admin = layui.admin
+            , form = layui.form
+            , router = layui.router();
 
-    //找回密码下一步
-    form.on('submit(LAY-user-forget-submit)', function(obj){
-      var field = obj.field;
+        form.render();
 
-      //请求接口
-      admin.req({
-        url: layui.setter.base + 'json/user/forget.js' //实际使用请改成服务端真实接口
-        ,data: field
-        ,done: function(res){        
-          location.hash = '/type=resetpass';
-          location.reload();
-        }
-      });
-      
-      return false;
+        //找回密码下一步
+        /*form.on('submit(LAY-user-forget-submit)', function (obj) {
+            var field = obj.field;
+
+            //请求接口
+            admin.req({
+                url: layui.setter.base + 'json/user/forget.js' //实际使用请改成服务端真实接口
+                , data: field
+                , done: function (res) {
+                    location.hash = '/type=resetpass';
+                    location.reload();
+                }
+            });
+
+            return false;
+        });*/
+
+        //重置密码
+        form.on('submit(LAY-user-forget-resetpass)', function (obj) {
+            var field = obj.field;
+            var md5Password = hex_md5(field.password);
+            $.extend(field,  {password: md5Password});
+
+            //确认密码
+            if (field.password !== field.repass) {
+                return layer.msg('两次密码输入不一致');
+            }
+
+            //请求接口
+            admin.req({
+                url: '/user/pass-reset' //实际使用请改成服务端真实接口
+                , type: 'post'
+                , data: field
+                , done: function (res) {
+                    if (res.code === 200) {
+
+                        layer.msg('密码已成功重置', {
+                            offset: '15px'
+                            , icon: 1
+                            , time: 1000
+                        }, function () {
+                            location.href = '/page/login'; //跳转到登入页
+                        });
+                    } else {
+                        layer.msg(res.message);
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        /**
+         * 验证码发送
+         */
+        $('#LAY-user-getsmscode').on('click', function () {
+            var emailElem = $('#LAY-user-login-email');
+            var email = emailElem.val();
+            // 邮箱格式验证
+            if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)) {
+                emailElem.focus();
+                return layer.msg('请输入正确的邮箱');
+            }
+
+            admin.req({
+                url: '/user/email-send'
+                , type: 'post'
+                , data: {email: email, mode: "forget"}
+                , success: function (res) {
+                    if (res.code === 200) {
+                        layer.msg('验证码已发送至你的邮箱，请注意在60秒内完成验证', {
+                            icon: 1
+                            , shade: 0
+                        });
+                        $('#LAY-user-login-vercode').focus();
+                        // countDown();
+                        // success && success(res);
+                    } else {
+                        layer.msg(res.message);
+                    }
+                }
+
+            });
+
+        });
+
     });
-    
-    //重置密码
-    form.on('submit(LAY-user-forget-resetpass)', function(obj){
-      var field = obj.field;
-      
-      //确认密码
-      if(field.password !== field.repass){
-        return layer.msg('两次密码输入不一致');
-      }
-
-      //请求接口
-      admin.req({
-        url: layui.setter.base + 'json/user/resetpass.js' //实际使用请改成服务端真实接口
-        ,data: field
-        ,done: function(res){        
-          layer.msg('密码已成功重置', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = 'login.html'; //跳转到登入页
-          });
-        }
-      });
-      
-      return false;
-    });
-    
-  });
-  </script>
+</script>
 </body>
 </html>

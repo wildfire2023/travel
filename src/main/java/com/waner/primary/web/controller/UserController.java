@@ -1,5 +1,6 @@
 package com.waner.primary.web.controller;
 
+import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.SysUser;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.time.chrono.IsoChronology;
+import java.util.Optional;
 
 /**
  * <p>用户控制器</p>
@@ -74,14 +77,28 @@ public class UserController {
      * 发送邮箱随机数
      * @return
      */
-    @PostMapping("emailSend")
+    @PostMapping("email-send")
     @ResponseBody
-    public Response<Boolean> emailSend(String email){
+    public Response<Boolean> emailSend(String email, String mode){
         // 邮箱为空
         if (StringUtils.isEmpty(email)) {
             return Response.fail(CodeMsg.MAIL_NULL);
         }
-        return  userService.sendVercode(email);
+        return  userService.sendVercode(email, mode);
+    }
+
+    /**
+     * 密码重置
+     * @param sysUser
+     * @return
+     */
+    @PostMapping("pass-reset")
+    @ResponseBody
+    public Response<Boolean> resetPass(SysUser sysUser,String vercode) {
+        if (StringUtils.isEmpty(sysUser.getEmail()) || StringUtils.isEmpty(sysUser.getPassword())) {
+            throw new GlobalException("空参数", 501000);
+        }
+        return userService.resetPass(sysUser, vercode);
     }
 
 }

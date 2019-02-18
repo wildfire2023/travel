@@ -50,4 +50,7 @@ spring:
     packages:
       trust-all: true
 
-
+# mybatis 配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.wanner.primary.web.entity
