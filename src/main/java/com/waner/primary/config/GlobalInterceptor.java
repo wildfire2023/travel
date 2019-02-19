@@ -1,5 +1,6 @@
 package com.waner.primary.config;
 
+import com.waner.primary.web.entity.SysUser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -28,9 +29,15 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
-
+        if (uri.contains("front") || uri.contains("user")) {
+            return true;
+        }
         HttpSession session = request.getSession();
-
-        return super.preHandle(request, response, handler);
+        SysUser sysUser = (SysUser) session.getAttribute("userInfo");
+        if (sysUser != null) {
+            return true;
+        }
+        request.getRequestDispatcher("/front/page/login").forward(request,response);
+        return false;
     }
 }
