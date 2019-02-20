@@ -39,4 +39,10 @@ public class FrontPageController {
     public String forget() {
         return "forget";
     }
+
+
+    @GetMapping("index")
+    public String index() {
+        return "front/index";
+    }
 }

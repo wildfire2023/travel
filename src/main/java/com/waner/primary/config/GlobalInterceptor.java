@@ -29,6 +29,10 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
+        // 主页放过
+        if ("/".equals(uri)) {
+            return true;
+        }
         if (uri.contains("front") || uri.contains("user")) {
             return true;
         }
