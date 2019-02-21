@@ -2,6 +2,7 @@ package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.SysUser;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,4 +30,6 @@ public interface UserService {
     Response<Boolean> sendVercode(String email, String mode);
 
     Response<Boolean> resetPass(SysUser sysUser, String vercode);
+
+    void queryBaseInfo(Model model, HttpSession session);
 }

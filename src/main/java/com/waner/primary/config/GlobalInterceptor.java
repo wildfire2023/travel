@@ -37,7 +37,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         HttpSession session = request.getSession();
-        SysUser sysUser = (SysUser) session.getAttribute("userInfo");
+        SysUser sysUser = (SysUser) session.getAttribute("sessionUser");
         if (sysUser != null) {
             return true;
         }

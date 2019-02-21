@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("front/page")
 public class FrontPageController {
+
     /**
      * 跳转登录页面
      * @return

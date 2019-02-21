@@ -28,7 +28,7 @@
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insertSysUserMapper" parameterType="com.waner.primary.web.entity.SysUser">
+    <insert id="insertSysUserMapper" parameterType="com.waner.primary.web.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
     insert into sys_user (id, username, password, 
       nickname, email, phone, 
       status, remark, operator, 
@@ -38,7 +38,8 @@
       #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
       #{operatorTime,jdbcType=TIMESTAMP}, #{operatorIp,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.waner.primary.web.entity.SysUser">
+    <!-- 设置插入返回主键 -->
+    <insert id="insertSelective" parameterType="com.waner.primary.web.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

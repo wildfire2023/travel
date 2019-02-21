@@ -6,7 +6,9 @@ import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.SysUser;
 import com.waner.primary.web.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +55,7 @@ public class UserController {
     @ResponseBody
     public Response<Boolean> logout(HttpSession session) {
         if (session != null) {
-            session.removeAttribute("userInfo");
+            session.removeAttribute("sessionUser");
             session.invalidate();
         }
         return Response.success(true);
@@ -99,6 +101,18 @@ public class UserController {
             throw new GlobalException("空参数", 501000);
         }
         return userService.resetPass(sysUser, vercode);
+    }
+
+    /**
+     * 用户信息
+     * @param model
+     * @param session
+     * @return
+     */
+    @GetMapping("base-info")
+    public String baseInfo(Model model, HttpSession session) {
+        userService.queryBaseInfo(model,session);
+        return "background/set/user/info";
     }
 
 }
