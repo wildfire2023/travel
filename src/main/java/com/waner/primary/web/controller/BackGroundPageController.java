@@ -37,6 +37,11 @@ public class BackGroundPageController {
         return "background/home/homepage1";
     }
 
+    @GetMapping("reset-pass")
+    public String resetPassPage() {
+        return "background/set/user/password";
+    }
+
 
 
 

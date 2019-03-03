@@ -89,7 +89,7 @@ public class UserController {
     }
 
     /**
-     * 密码重置
+     * 密码重置 ---> According to SysUser and vercode
      *
      * @param sysUser
      * @return

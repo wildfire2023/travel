@@ -72,20 +72,20 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">手机</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="phone" th:value="${userInfo.phone}" lay-verify="phone" autocomplete="off"
+                                <input type="text" name="phone" th:value="${session.sessionUser.phone}" lay-verify="phone" autocomplete="off"
                                        class="layui-input">
                             </div>
                         </div>
-                        <!--<div class="layui-form-item layui-form-text">-->
-                            <!--<label class="layui-form-label">备注</label>-->
-                            <!--<div class="layui-input-block">-->
-                                <!--<textarea name="remark" placeholder="请输入内容" th:value="${session.sessionUser.remark}" class="layui-textarea"></textarea>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea name="remark" placeholder="请输入内容" th:text="${session.sessionUser.remark}" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
                                 <button class="layui-btn" lay-submit lay-filter="setmyinfo">确认修改</button>
-                                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+                                <!--<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>-->
                             </div>
                         </div>
                     </div>

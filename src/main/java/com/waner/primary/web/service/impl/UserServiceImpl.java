@@ -175,7 +175,7 @@ public class UserServiceImpl implements UserService {
     public Response<Boolean> resetPass(SysUser sysUser, String vercode) {
         String email = sysUser.getEmail();
         String dbPass = CodeUtil.md5(sysUser.getPassword());
-        // 查询缓存
+        // Query cache
         String cache = redisUtil.get(UserKey.MAIL_KEY, "forget");
         if (!cache.equals(vercode)) {
             return Response.fail(CodeMsg.VERCODE_ERROR);
@@ -253,6 +253,9 @@ public class UserServiceImpl implements UserService {
         travelUser.setNickname(nickname);
         travelUser.setSex(sex.byteValue());
         int sysRet = sysUserMapper.updateByPrimaryKeySelective(sysUser);
+        // Reset session
+        SysUser dbSessionUser = sysUserMapper.selectByPrimaryKey(sessionUser.getId());
+        session.setAttribute("sessionUser", dbSessionUser);
         int travelRet = travelUserMapper.updateByPrimaryKeySelective(travelUser);
         return sysRet > 0 && travelRet > 0;
     }
