@@ -53,7 +53,11 @@ public enum CodeMsg {
     /**
      * 验证码错误
      */
-    VERCODE_ERROR(500009, "验证码错误");
+    VERCODE_ERROR(500009, "验证码错误"),
+    /**
+     * 空文件
+     */
+    EMPTY_FILE(500010, "空文件");
     private Integer code;
     private String msg;
 

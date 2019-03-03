@@ -33,4 +33,17 @@ public interface UserService {
     Response<Boolean> resetPass(SysUser sysUser, String vercode);
 
     void queryBaseInfo(Model model, HttpSession session);
+
+    void saveImg(String imgUrl, HttpSession session);
+
+    /**
+     * modify user info
+     * @param nickname
+     * @param sex
+     * @param phone
+     * @param remark
+     * @param session
+     * @return
+     */
+    boolean modifyUserInfo(String nickname, Integer sex, String phone, String remark, HttpSession session);
 }

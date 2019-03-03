@@ -1,5 +1,10 @@
 # Spring 配置
 spring:
+  # 文件上传大小限制
+  http:
+    multipart:
+      max-file-size: 5MB
+  # 数据库配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/travel
@@ -49,6 +54,7 @@ spring:
     password: admin
     packages:
       trust-all: true
+
 
 # mybatis 配置
 mybatis-plus:

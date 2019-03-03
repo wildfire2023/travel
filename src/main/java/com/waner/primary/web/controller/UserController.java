@@ -9,10 +9,7 @@ import com.waner.primary.web.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -117,6 +114,24 @@ public class UserController {
     public String baseInfo(Model model, HttpSession session) {
         userService.queryBaseInfo(model, session);
         return "background/set/user/info";
+    }
+
+
+    /**
+     * 修改用户信息
+     *
+     * @return
+     */
+    @PutMapping("modify-info")
+    @ResponseBody
+    public Response<Boolean> modifyInfo(String nickname, Integer sex,
+                                        String phone, String remark, HttpSession session) {
+
+        boolean ret = userService.modifyUserInfo(nickname, sex, phone, remark, session);
+        if (!ret) {
+            return Response.fail(CodeMsg.SERVER_ERROR);
+        }
+        return Response.success(true);
     }
 
 }

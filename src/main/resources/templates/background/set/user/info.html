@@ -50,8 +50,9 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">性别</label>
                             <div class="layui-input-block">
-                                <input type="radio" name="sex" value="男" title="男" th:checked="${userInfo.sex == 1}">
-                                <input type="radio" name="sex" value="女" title="女" th:checked="${userInfo.sex == 2}">
+                                <!-- 后台使用整型接受：男->1 女->2 -->
+                                <input type="radio" name="sex" value="1" title="男" th:checked="${userInfo.sex == 1}">
+                                <input type="radio" name="sex" value="2" title="女" th:checked="${userInfo.sex == 2}">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -71,16 +72,16 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">手机</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="cellphone" th:value="${session.sessionUser.phone}" lay-verify="phone" autocomplete="off"
+                                <input type="text" name="phone" th:value="${userInfo.phone}" lay-verify="phone" autocomplete="off"
                                        class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">备注</label>
-                            <div class="layui-input-block">
-                                <textarea name="remarks" placeholder="请输入内容" th:value="${session.sessionUser.remark}" class="layui-textarea"></textarea>
-                            </div>
-                        </div>
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">备注</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<textarea name="remark" placeholder="请输入内容" th:value="${session.sessionUser.remark}" class="layui-textarea"></textarea>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="layui-form-item">
                             <div class="layui-input-block">
                                 <button class="layui-btn" lay-submit lay-filter="setmyinfo">确认修改</button>

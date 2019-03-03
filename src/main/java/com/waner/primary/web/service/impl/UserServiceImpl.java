@@ -16,7 +16,6 @@ import com.waner.primary.web.mapper.SysUserMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
 import com.waner.primary.web.service.UserService;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -210,6 +209,52 @@ public class UserServiceImpl implements UserService {
         if (!Objects.isNull(userInfo)) {
             model.addAttribute("userInfo", userInfo);
         }
+    }
+
+    /**
+     * 图片地址存储
+     * @param imgUrl
+     * @param session
+     */
+    @Override
+    public void saveImg(String imgUrl, HttpSession session) {
+        SysUser sessionUser = (SysUser) session.getAttribute("sessionUser");
+        Integer userId = sessionUser.getId();
+        // 设置待更新用户信息
+        TravelUser travelUser = new TravelUser();
+        travelUser.setSysUserId(userId);
+        travelUser.setImgUrl(imgUrl);
+        // 更新TravelUser
+        int ret = travelUserMapper.updateByPrimaryKeySelective(travelUser);
+    }
+
+    /**
+     * 更改用户信息
+     * @param nickname
+     * @param sex
+     * @param phone
+     * @param remark
+     * @param session
+     * @return
+     */
+    @Override
+    @Transactional
+    public boolean modifyUserInfo(String nickname, Integer sex, String phone, String remark, HttpSession session) {
+        // SysUser set
+        SysUser sessionUser = (SysUser) session.getAttribute("sessionUser");
+        SysUser sysUser = new SysUser();
+        sysUser.setId(sessionUser.getId());
+        sysUser.setNickname(nickname);
+        sysUser.setPhone(phone);
+        sysUser.setRemark(remark);
+        // TravelUser set
+        TravelUser travelUser = new TravelUser();
+        travelUser.setSysUserId(sessionUser.getId());
+        travelUser.setNickname(nickname);
+        travelUser.setSex(sex.byteValue());
+        int sysRet = sysUserMapper.updateByPrimaryKeySelective(sysUser);
+        int travelRet = travelUserMapper.updateByPrimaryKeySelective(travelUser);
+        return sysRet > 0 && travelRet > 0;
     }
 
 

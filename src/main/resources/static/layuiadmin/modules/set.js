@@ -85,18 +85,19 @@ layui.define(['form', 'upload'], function (exports) {
 
     //设置我的资料
     form.on('submit(setmyinfo)', function (obj) {
-        layer.msg(JSON.stringify(obj.field));
+        // layer.msg(JSON.stringify(obj.field));
 
         //提交修改
-        /*
         admin.req({
-          url: ''
-          ,data: obj.field
-          ,success: function(){
-
-          }
+            url: '/user/modify-info'
+            , type: 'put'
+            , data: obj.field
+            , success: function (res) {
+                if (res.code === 200) {
+                    location.reload();
+                }
+            }
         });
-        */
         return false;
     });
 
@@ -106,10 +107,13 @@ layui.define(['form', 'upload'], function (exports) {
         url: '/file/upload'
         , elem: '#LAY_avatarUpload'
         , done: function (res) {
-            if (res.status === 200) {
-                avatarSrc.val(res.url);
+            if (res.code === 200) {
+                avatarSrc.val(res.data);
+                // 刷新当前页面
+                // location.reload();
+                layer.msg(res.message);
             } else {
-                layer.msg(res.msg, {icon: 5});
+                layer.msg(res.message, {icon: 5});
             }
         }
     });
