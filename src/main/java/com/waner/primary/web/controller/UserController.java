@@ -3,6 +3,7 @@ package com.waner.primary.web.controller;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.entity.SysRole;
 import com.waner.primary.web.entity.SysUser;
 import com.waner.primary.web.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.time.chrono.IsoChronology;
-import java.util.Optional;
 
 /**
  * <p>用户控制器</p>
@@ -36,11 +35,11 @@ public class UserController {
 
     /**
      * @param sysUser 表单输入用户
-     * @return
+     * @return 用户角色
      */
     @PostMapping("login")
     @ResponseBody
-    public Response<Boolean> login(SysUser sysUser, HttpSession session) {
+    public Response<SysRole> login(SysUser sysUser, HttpSession session) {
         if (sysUser == null) {
             return Response.fail(CodeMsg.USER_NULL);
         }
@@ -49,6 +48,7 @@ public class UserController {
 
     /**
      * 用户登出
+     *
      * @return
      */
     @PostMapping("logout")
@@ -63,6 +63,7 @@ public class UserController {
 
     /**
      * 用户注册url
+     *
      * @param sysUser
      * @return
      */
@@ -77,26 +78,28 @@ public class UserController {
 
     /**
      * 发送邮箱随机数
+     *
      * @return
      */
     @PostMapping("email-send")
     @ResponseBody
-    public Response<Boolean> emailSend(String email, String mode){
+    public Response<Boolean> emailSend(String email, String mode) {
         // 邮箱为空
         if (StringUtils.isEmpty(email)) {
             return Response.fail(CodeMsg.MAIL_NULL);
         }
-        return  userService.sendVercode(email, mode);
+        return userService.sendVercode(email, mode);
     }
 
     /**
      * 密码重置
+     *
      * @param sysUser
      * @return
      */
     @PostMapping("pass-reset")
     @ResponseBody
-    public Response<Boolean> resetPass(SysUser sysUser,String vercode) {
+    public Response<Boolean> resetPass(SysUser sysUser, String vercode) {
         if (StringUtils.isEmpty(sysUser.getEmail()) || StringUtils.isEmpty(sysUser.getPassword())) {
             throw new GlobalException("空参数", 501000);
         }
@@ -105,13 +108,14 @@ public class UserController {
 
     /**
      * 用户信息
+     *
      * @param model
      * @param session
      * @return
      */
     @GetMapping("base-info")
     public String baseInfo(Model model, HttpSession session) {
-        userService.queryBaseInfo(model,session);
+        userService.queryBaseInfo(model, session);
         return "background/set/user/info";
     }
 

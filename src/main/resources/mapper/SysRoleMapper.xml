@@ -24,6 +24,9 @@
     delete from sys_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+    <insert id="insertSysUserRole">
+      insert into sys_user_role(user_id, role_id) VALUES (#{userId}, #{roleId})
+    </insert>
     <insert id="insertSysRoleMapper" parameterType="com.waner.primary.web.entity.SysRole">
     insert into sys_role (id, name, type, 
       status, remark, operator, 
@@ -130,4 +133,5 @@
     from sys_role
     where id = (select role_id from sys_user_role where user_id = #{userId})
   </select>
+
 </mapper>

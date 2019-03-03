@@ -98,7 +98,11 @@
                             , icon: 1
                             , time: 1000
                         }, function () {
-                            location.href = '/background/page/index'; //后台主页
+                            if (res.data.name === '管理员') {
+                                location.href = '/background/page/index'; //后台主页
+                            }else {
+                                location.href = '/front/page/index';
+                            }
                         });
 
                     } else {

@@ -1,6 +1,7 @@
 package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.entity.SysRole;
 import com.waner.primary.web.entity.SysUser;
 import org.springframework.ui.Model;
 
@@ -13,7 +14,7 @@ public interface UserService {
      * @param sysUser form user
      * @return REST api
      */
-    Response<Boolean> passwordLogin(SysUser sysUser, HttpSession session);
+    Response<SysRole> passwordLogin(SysUser sysUser, HttpSession session);
 
     /**
      * register user info to db

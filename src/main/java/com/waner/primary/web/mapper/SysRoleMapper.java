@@ -18,4 +18,6 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     int updateByPrimaryKey(SysRole record);
 
     SysRole queryRoleByUserId(@Param("userId") Integer userId);
+
+    int insertSysUserRole(@Param("userId") int userId,@Param("roleId") int roleId);
 }

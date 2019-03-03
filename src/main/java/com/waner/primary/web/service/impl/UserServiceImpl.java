@@ -56,14 +56,13 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 密码登录
-     * TODO 用户信息存储
      * 用户信息存储在session中
      *
      * @param sysUser
      */
     @Override
     @Transactional
-    public Response<Boolean> passwordLogin(SysUser sysUser, HttpSession session) {
+    public Response<SysRole> passwordLogin(SysUser sysUser, HttpSession session) {
         // 根据用户邮箱进行查询
         String email = sysUser.getEmail();
         String md5FormPass = CodeUtil.md5(sysUser.getPassword());
@@ -79,7 +78,9 @@ public class UserServiceImpl implements UserService {
         session.setAttribute("sessionUser", dbUser);
         // 设定session存储时长
         session.setMaxInactiveInterval(60 * 60 * 24);
-        return Response.success(true);
+        // 查询用户角色
+        SysRole sysRole = sysRoleMapper.queryRoleByUserId(dbUser.getId());
+        return Response.success(sysRole);
     }
 
     /**
@@ -123,7 +124,9 @@ public class UserServiceImpl implements UserService {
         TravelUser travelUser = new TravelUser();
         travelUser.setNickname(sysUser.getNickname());
         travelUser.setSysUserId(sysUser.getId());
-        int ret = travelUserMapper.insertSelective(travelUser);
+        int travelUserRet = travelUserMapper.insertSelective(travelUser);
+        // 插入用户对应角色 TODO 硬编码角色为用户
+        int sysUserRoleRet = sysRoleMapper.insertSysUserRole(sysUser.getId(), 2);
 
         if (!insertResult) {
             return Response.fail(CodeMsg.USER_REGISTER_ERROR);
@@ -189,7 +192,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 查询用户信息
+     * 查询用户信息，供其他进行调用
      *
      * @param model
      * @param session
