@@ -1,7 +1,6 @@
 package com.waner.primary.config;
 
 import com.waner.primary.common.exception.GlobalException;
-import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

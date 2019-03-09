@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 全局拦截器
+ *
  * @author Monster
  * @date 2019/2/13 11:14
  * @since 1.8
@@ -20,6 +21,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * 前置处理器
+     *
      * @param request
      * @param response
      * @param handler
@@ -33,7 +35,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
         if ("/".equals(uri)) {
             return true;
         }
-        if (uri.contains("front") || uri.contains("user")||uri.contains("file")) {
+        if (uri.contains("front") || uri.contains("user") || uri.contains("file") || uri.contains("recommend")) {
             return true;
         }
         HttpSession session = request.getSession();
@@ -41,7 +43,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
         if (sysUser != null) {
             return true;
         }
-        request.getRequestDispatcher("/front/page/login").forward(request,response);
+        request.getRequestDispatcher("/front/page/login").forward(request, response);
         return false;
     }
 }

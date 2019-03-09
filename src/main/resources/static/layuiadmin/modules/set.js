@@ -137,10 +137,9 @@ layui.define(['form', 'upload'], function (exports) {
 
     //设置密码
     form.on('submit(setmypass)', function (obj) {
-        layer.msg(JSON.stringify(obj.field));
+        // layer.msg(JSON.stringify(obj.field));
 
         //提交修改
-        /*
         admin.req({
           url: ''
           ,data: obj.field
@@ -148,8 +147,7 @@ layui.define(['form', 'upload'], function (exports) {
 
           }
         });
-        */
-        return false;
+        return true;
     });
 
     //对外暴露的接口
