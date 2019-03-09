@@ -1,5 +1,6 @@
 package com.waner.primary.web.service.impl;
 
+import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
 import org.springframework.stereotype.Service;
 
@@ -11,5 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RecommendServiceImpl implements RecommendService{
+
+    private final TravelRecommendMapper travelRecommendMapper;
+
+    public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper) {
+        this.travelRecommendMapper = travelRecommendMapper;
+    }
+
 
 }

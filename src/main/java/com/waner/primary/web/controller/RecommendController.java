@@ -26,4 +26,10 @@ public class RecommendController {
         return "background/app/content/list";
     }
 
+
+    @GetMapping("add-page")
+    public String recommendAddPage() {
+        return "background/app/content/listform";
+    }
+
 }
