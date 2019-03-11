@@ -101,7 +101,7 @@ layui.define(['form', 'upload'], function (exports) {
         return false;
     });
 
-    //上传头像
+    //上传图片
     var avatarSrc = $('#LAY_avatarSrc');
     upload.render({
         url: '/file/upload'

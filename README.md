@@ -12,6 +12,10 @@
 ## 图片存储
 图片使用七牛云提供的对象存储方式存储在云端
 
+## layedit富文本编辑器使用
+layui/lay/modules/layedit.js
+
+
 
 
 
