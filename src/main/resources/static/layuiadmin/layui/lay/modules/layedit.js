@@ -7,7 +7,8 @@
             t.index = 0, t.config = {
                 tool: ["strong", "italic", "underline", "del", "|", "left", "center", "right", "|", "link", "unlink", "face", "image"],
                 hideTool: [],
-                height: 280
+                // 富文本编辑器高度设置
+                height: 900
             }
         };
     c.prototype.set = function (t) {
@@ -54,7 +55,7 @@
         var l = this, n = t.find("iframe");
         n.css({height: a.height}).on("load", function () {
             var o = n.contents(), r = n.prop("contentWindow"), c = o.find("head"),
-                s = e(["<style>", "*{margin: 0; padding: 0;}", "body{padding: 10px; line-height: 20px; overflow-x: hidden; word-wrap: break-word; font: 14px Helvetica Neue,Helvetica,PingFang SC,Microsoft YaHei,Tahoma,Arial,sans-serif; -webkit-box-sizing: border-box !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;}", "a{color:#01AAED; text-decoration:none;}a:hover{color:#c00}", "p{margin-bottom: 10px;}", "img{display: inline-block; border: none; vertical-align: middle;}", "pre{margin: 10px 0; padding: 10px; line-height: 20px; border: 1px solid #ddd; border-left-width: 6px; background-color: #F2F2F2; color: #333; font-family: Courier New; font-size: 12px;}", "</style>"].join("")),
+                s = e(["<style>", "*{margin: 0; padding: 0;}", "body{padding: 10px; line-height: 20px; overflow-x: hidden; word-wrap: break-word; font: 14px Helvetica Neue,Helvetica,PingFang SC,Microsoft YaHei,Tahoma,Arial,sans-serif; -webkit-box-sizing: border-box !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;}", "a{color:#01AAED; text-decoration:none;}a:hover{color:#c00}", "p{margin-bottom: 10px;}", "img{max-width:95%; display: inline-block; border: none; vertical-align: middle;}", "pre{margin: 10px 0; padding: 10px; line-height: 20px; border: 1px solid #ddd; border-left-width: 6px; background-color: #F2F2F2; color: #333; font-family: Courier New; font-size: 12px;}", "</style>"].join("")),
                 u = o.find("body");
             c.append(s), u.attr("contenteditable", "true").css({"min-height": a.height}).html(i.value || ""), y.apply(l, [r, n, i, a]), g.call(l, r, t, a)
         })
@@ -138,9 +139,11 @@
                     var r = l.uploadImage || {};
                     o.render({
                         url: r.url, method: r.type, elem: e(n).find("input")[0], done: function (e) {
-                            0 == e.code ? (e.data = e.data || {}, v.call(t, "img", {
-                                src: e.data.src,
-                                alt: e.data.title
+                            200 == e.code ? (e.data = e.data || {}, v.call(t, "img", {
+                                src: e.data
+                                // 图片名称
+                                // ,
+                                // alt: e.data.title
                             }, a)) : i.msg(e.msg || "上传失败")
                         }
                     })

@@ -20,50 +20,32 @@
                    class="layui-input">
         </div>
     </div>
-    <!--<div class="layui-form-item">-->
-    <!--<label class="layui-form-label">文章头图</label>-->
-    <!--<div class="layui-input-inline">-->
-    <!--<input type="text" name="head_img_url" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="layui-form-item">
         <label class="layui-form-label">文章头图</label>
         <div class="layui-input-inline">
-            <input name="headImgUrl" lay-verify="required" id="LAY_avatarSrc" placeholder=""
+            <input name="headImgUrl" lay-verify="required" id="LAY_headImgSrc" placeholder=""
                    value="" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline layui-btn-container" style="width: auto;">
-            <button type="button" class="layui-btn layui-btn-primary" id="LAY_avatarUpload">
+            <button type="button" class="layui-btn layui-btn-primary" id="LAY_headImgUpload">
                 <i class="layui-icon">&#xe67c;</i>上传图片
             </button>
-            <button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片
+            <button class="layui-btn layui-btn-primary" layadmin-event="headImgPreview">查看图片
             </button>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">文章内容</label>
-        <div class="layui-input-inline" style="width: 80%">
-            <textarea id="editor"  name="content" lay-verify="required" style="display: none;"
+        <div class="layui-input-inline" style="width: 80%; ">
+            <textarea id="editor" name="content" style="display: none;"
                       class="layui-textarea"></textarea>
         </div>
     </div>
-    <!--<div class="layui-form-item">-->
-    <!--<label class="layui-form-label">标签</label>-->
-    <!--<div class="layui-input-inline">-->
-    <!--<select name="label" lay-verify="required">-->
-    <!--<option value="">请选择标签</option>-->
-    <!--<option value="美食">美食</option>-->
-    <!--<option value="新闻">新闻</option>-->
-    <!--<option value="八卦">八卦</option>-->
-    <!--<option value="体育">体育</option>-->
-    <!--<option value="音乐">音乐</option>-->
-    <!--</select>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="layui-form-item">
         <label class="layui-form-label">发布状态</label>
         <div class="layui-input-inline">
-            <input type="checkbox" lay-verify="required" lay-filter="status" name="status" lay-skin="switch"
+            <input type="checkbox" id="push" lay-filter="status" name="pushFlag" checked="checked"
+                   lay-skin="switch"
                    lay-text="已发布|待修改">
         </div>
     </div>
@@ -87,15 +69,46 @@
             , form = layui.form
             , layedit = layui.layedit;
 
+
+        // layedit set
+        layedit.set({
+            uploadImage: {
+                url: '/file/upload'
+                , type: 'post'
+            }
+        });
         //富文本编辑器
-        layedit.build('editor');
-        //监听提交
+        var index = layedit.build('editor');
+        // 同步textarea内容
+        layedit.sync(index);
+
+        //监听表单提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {
             var field = data.field; //获取提交的字段
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
+            if (field.pushFlag === "on") {
+                field.pushFlag = "1";
+            }else {
+                field.pushFlag = "0";
+            }
+            // jquery 转 dom 对象
+            // console.log(data.field.pushFlag);
+            // var pushFlag = $('#push').get(0);
+            // var text = pushFlag.value;
+            // console.log(text);
+            // $.extend(field, {pushFlag: text});
+
             //提交 Ajax 成功后，关闭当前弹层并重载表格
-            //$.ajax({});
+            $.ajax({
+                url: '/recommend/add'
+                , type: 'post'
+                , data: JSON.stringify(field)
+                , contentType: 'application/json'
+                , success: function (res) {
+                    layer.msg(res.message, {icon: 5});
+                }
+            });
             parent.layui.table.reload('LAY-app-content-list'); //重载表格
             parent.layer.close(index); //再执行关闭
         });

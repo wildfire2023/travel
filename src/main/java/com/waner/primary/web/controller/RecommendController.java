@@ -1,19 +1,25 @@
 package com.waner.primary.web.controller;
 
+import com.waner.primary.common.result.Response;
+import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.service.RecommendService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 推荐内容控制器
  * @author Monster
- * @date 2019/2/21 16:32
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Controller
 @RequestMapping("recommend")
 public class RecommendController {
+
+    private final RecommendService recommendService;
+
+    public RecommendController(RecommendService recommendService) {
+        this.recommendService = recommendService;
+    }
 
 
     /**
@@ -32,4 +38,13 @@ public class RecommendController {
         return "background/app/content/listform";
     }
 
+    /**
+     * 推荐内容发表
+     * @return
+     */
+    @PostMapping("add")
+    @ResponseBody
+    public Response<String> addRecommend(@RequestBody TravelRecommend recommend) {
+        return Response.success("添加成功");
+    }
 }

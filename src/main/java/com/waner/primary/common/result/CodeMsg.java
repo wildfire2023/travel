@@ -2,8 +2,7 @@ package com.waner.primary.common.result;
 
 /**
  * @author Monster
- * @date 2019/1/13 15:49
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public enum CodeMsg {
     /**

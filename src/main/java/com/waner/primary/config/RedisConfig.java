@@ -21,8 +21,7 @@ import javax.sql.DataSource;
  * Redis配置
  *
  * @author Monster
- * @date 2019/2/4 8:09
- * @since 1.7
+ * @since 1.0.0-SNAPSHOT
  */
 @SpringBootConfiguration
 @EnableCaching

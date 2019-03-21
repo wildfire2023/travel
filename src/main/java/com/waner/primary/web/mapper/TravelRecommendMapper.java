@@ -6,8 +6,7 @@ import com.waner.primary.web.entity.TravelRecommend;
 /**
  * 推荐内容Mapper映射
  * @author Monster
- * @date 2019/3/9 16:55
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public interface TravelRecommendMapper extends BaseMapper<TravelRecommend> {
 }

@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 /**
- * <p>用户控制器</p>
+ * 用户控制器
  *
  * @author Monster
- * @date 2018/12/21 13:03
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Controller
 @RequestMapping("user")

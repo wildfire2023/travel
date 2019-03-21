@@ -12,8 +12,7 @@ import javax.mail.MessagingException;
  * 消息消费
  *
  * @author Monster
- * @date 2019/2/10 21:30
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Component
 public class MessageConsumer {

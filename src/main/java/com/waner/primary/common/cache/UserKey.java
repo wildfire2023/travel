@@ -3,8 +3,7 @@ package com.waner.primary.common.cache;
 /**
  * 用户存储前缀
  * @author Monster
- * @date 2019/2/7 15:23
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public class UserKey extends BasePrefix {
     protected UserKey(String prefix, int seconds) {

@@ -12,8 +12,7 @@ import javax.servlet.http.HttpSession;
  * 全局拦截器
  *
  * @author Monster
- * @date 2019/2/13 11:14
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Component
 public class GlobalInterceptor extends HandlerInterceptorAdapter {

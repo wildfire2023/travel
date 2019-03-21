@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * <p>后台页面请求控制器</p>
+ * 后台页面请求控制器
  * @author Monster
- * @date 2019/1/10 16:42
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Controller
 @RequestMapping("background/page")

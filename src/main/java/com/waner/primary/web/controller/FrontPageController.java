@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 前台页面跳转控制
+ * 前台控制页面
  * @author Monster
- * @date 2019/2/18 14:29
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Controller
 @RequestMapping("front/page")

@@ -3,11 +3,10 @@ package com.waner.primary.common.exception;
 import lombok.Getter;
 
 /**
- * <p>全局异常返回</p>
+ * 全局异常返回
  *
  * @author Monster
- * @date 2019/1/4 14:46
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Getter
 public class GlobalException extends RuntimeException {

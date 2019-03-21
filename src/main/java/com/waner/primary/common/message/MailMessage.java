@@ -7,8 +7,7 @@ import java.io.Serializable;
 /**
  * 邮件消息对象
  * @author Monster
- * @date 2019/2/10 21:23
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Data
 public class MailMessage implements Serializable {

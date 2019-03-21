@@ -101,14 +101,31 @@ layui.define(['form', 'upload'], function (exports) {
         return false;
     });
 
-    //上传图片
+    //上传头像图片
     var avatarSrc = $('#LAY_avatarSrc');
     upload.render({
-        url: '/file/upload'
+        url: '/file/upload?way="user"'
         , elem: '#LAY_avatarUpload'
         , done: function (res) {
             if (res.code === 200) {
                 avatarSrc.val(res.data);
+                // 刷新当前页面
+                // location.reload();
+                layer.msg(res.message);
+            } else {
+                layer.msg(res.message, {icon: 5});
+            }
+        }
+    });
+
+    //上传文章头图
+    var headImgSrc = $('#LAY_headImgSrc');
+    upload.render({
+        url: '/file/upload?way="article"'
+        , elem: '#LAY_headImgUpload'
+        , done: function (res) {
+            if (res.code === 200) {
+                headImgSrc.val(res.data);
                 // 刷新当前页面
                 // location.reload();
                 layer.msg(res.message);
@@ -124,6 +141,22 @@ layui.define(['form', 'upload'], function (exports) {
         layer.photos({
             photos: {
                 "title": "查看头像" //相册标题
+                , "data": [{
+                    "src": src //原图地址
+                }]
+            }
+            , shade: 0.01
+            , closeBtn: 1
+            , anim: 5
+        });
+    };
+
+    // 查看头图
+    admin.events.headImgPreview = function (othis) {
+        var src = headImgSrc.val();
+        layer.photos({
+            photos: {
+                "title": "查看头图" //相册标题
                 , "data": [{
                     "src": src //原图地址
                 }]

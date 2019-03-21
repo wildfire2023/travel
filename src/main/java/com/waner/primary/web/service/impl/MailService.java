@@ -16,8 +16,7 @@ import java.io.File;
  * 邮件发送服务
  *
  * @author Monster
- * @date 2019/2/7 14:10
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Service
 public class MailService {

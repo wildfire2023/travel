@@ -9,8 +9,7 @@ import java.nio.charset.Charset;
 /**
  * 自实现的Fastjson转储redis序列化方式
  * @author Monster
- * @date 2019/2/5 17:23
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public class Fastjson2JsonRedisSerializer<T> implements RedisSerializer<T> {
 

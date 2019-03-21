@@ -4,8 +4,7 @@ package com.waner.primary.common.cache;
  * Redis key公共前缀
  *
  * @author Monster
- * @date 2019/2/5 17:35
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public abstract class BasePrefix implements KeyPrefix {
     private int seconds;

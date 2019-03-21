@@ -10,8 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 /**
  * 邮件服务提供
  * @author Monster
- * @date 2019/2/2 22:29
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @SpringBootConfiguration
 @ConfigurationProperties(prefix = "spring.mail")

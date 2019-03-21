@@ -3,11 +3,10 @@ package com.waner.primary.common.result;
 import lombok.Data;
 
 /**
- * <p>全局结果返回</p>
+ * 全局异常返回
  *
  * @author Monster
- * @date 2019/1/4 14:46
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Data
 public class Response<T> {
@@ -71,4 +70,5 @@ public class Response<T> {
     public static <T> Response<T> fail(Integer code, String message) {
         return new Response<>(code, message);
     }
+
 }

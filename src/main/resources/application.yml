@@ -18,6 +18,7 @@ spring:
     mode: LEGACYHTML5
     encoding: utf-8
     content-type: text/html
+    # 设置模板缓存
     cache: false
   # 静态资源配置
   resources:
@@ -55,8 +56,11 @@ spring:
     packages:
       trust-all: true
 
-
 # mybatis 配置
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.wanner.primary.web.entity
+# 控制台输出日志
+logging:
+  level:
+    com.waner.primary.web.mapper: debug

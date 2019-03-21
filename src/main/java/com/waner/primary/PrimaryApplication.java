@@ -8,11 +8,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.jms.annotation.EnableJms;
 
 /**
- * <p>程序启动类</p>
+ * 程序启动类<
  *
  * @author Monster
- * @date 2018/12/22 17:05
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @EnableConfigurationProperties(value = {MailConfigurationProperties.class})
 @EnableJms

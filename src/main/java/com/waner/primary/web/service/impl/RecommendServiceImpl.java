@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * 推荐内容服务实现类
+ *
  * @author Monster
- * @date 2019/3/9 14:38
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Service
 public class RecommendServiceImpl implements RecommendService{

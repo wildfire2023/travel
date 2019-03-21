@@ -3,8 +3,7 @@ package com.waner.primary.common.cache;
 /**
  * 不同类型Redis key 提供统一前缀
  * @author Monster
- * @date 2019/2/5 17:33
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 public interface KeyPrefix {
     /**
