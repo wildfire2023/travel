@@ -4,6 +4,7 @@ import com.waner.primary.common.constants.Constants;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
+import com.waner.primary.common.util.COSClientUtil;
 import com.waner.primary.common.util.QiniuFileUploadUtil;
 import com.waner.primary.web.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,8 @@ public class FileManagementController {
         }
         String imgUrl;
         try {
-            imgUrl = QiniuFileUploadUtil.uploadImg(file);
-            imgUrl = Constants.QINIU_PROTOCOL + Constants.QINIU_HEAD_IMG_BUCKET_URL + "/" + imgUrl;
+            imgUrl = COSClientUtil.uploadFile2Cos(file);
+            imgUrl = Constants.COS_PROTOCOL + Constants.COS_CDN_URL + "/" + imgUrl;
             if ("user".equals(way)) {
                 // 图片地址存储
                 userService.saveImg(imgUrl, session);

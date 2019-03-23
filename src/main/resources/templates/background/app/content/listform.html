@@ -77,27 +77,27 @@
                 , type: 'post'
             }
         });
+
         //富文本编辑器
-        var index = layedit.build('editor');
-        // 同步textarea内容
-        layedit.sync(index);
+        var id = layedit.build('editor');
+
+
 
         //监听表单提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {
             var field = data.field; //获取提交的字段
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
+            // 设置field内容
+            field.content = layedit.getContent(id);
+
             if (field.pushFlag === "on") {
                 field.pushFlag = "1";
             }else {
                 field.pushFlag = "0";
             }
-            // jquery 转 dom 对象
-            // console.log(data.field.pushFlag);
-            // var pushFlag = $('#push').get(0);
-            // var text = pushFlag.value;
-            // console.log(text);
-            // $.extend(field, {pushFlag: text});
+
+
 
             //提交 Ajax 成功后，关闭当前弹层并重载表格
             $.ajax({

@@ -104,7 +104,7 @@ layui.define(['form', 'upload'], function (exports) {
     //上传头像图片
     var avatarSrc = $('#LAY_avatarSrc');
     upload.render({
-        url: '/file/upload?way="user"'
+        url: '/file/upload?way=user'
         , elem: '#LAY_avatarUpload'
         , done: function (res) {
             if (res.code === 200) {
@@ -121,7 +121,7 @@ layui.define(['form', 'upload'], function (exports) {
     //上传文章头图
     var headImgSrc = $('#LAY_headImgSrc');
     upload.render({
-        url: '/file/upload?way="article"'
+        url: '/file/upload?way=article'
         , elem: '#LAY_headImgUpload'
         , done: function (res) {
             if (res.code === 200) {

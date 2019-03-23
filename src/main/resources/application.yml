@@ -3,7 +3,7 @@ spring:
   # 文件上传大小限制
   http:
     multipart:
-      max-file-size: 5MB
+      max-file-size: 10MB
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
