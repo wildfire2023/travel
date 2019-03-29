@@ -12,8 +12,9 @@ import java.util.List;
 public interface RecommendService {
     int addRecommend(TravelRecommend recommend);
 
-    List<TravelRecommend> getList(String checkStatus, int limit, int page);
+    List<TravelRecommend> getList(String checkStatus, TravelRecommend travelRecommend, int limit, int page);
 
-    int getCount(String checkStatus);
+    int getCount(String checkStatus, TravelRecommend travelRecommend);
 
+    int remove(TravelRecommend[] recommend);
 }

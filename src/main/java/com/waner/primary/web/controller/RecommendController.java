@@ -51,7 +51,9 @@ public class RecommendController {
     @GetMapping("table-data")
     @ResponseBody
     public TableResult<List<TravelRecommend>> getTableData(@RequestParam(value = "role", required = false) String role,
-                                                           int limit, int page) {
+                                                           TravelRecommend travelRecommend,
+                                                           int limit,
+                                                           int page) {
         String checkStatus = "";
         if (RecommendServiceImpl.USER.equals(role)) {
             // 已发布推荐内容
@@ -61,8 +63,8 @@ public class RecommendController {
             checkStatus = "all";
         }
         // 分页查询
-        List<TravelRecommend> recommends = recommendService.getList(checkStatus, limit, page);
-        int count = recommendService.getCount(checkStatus);
+        List<TravelRecommend> recommends = recommendService.getList(checkStatus,travelRecommend, limit, page);
+        int count = recommendService.getCount(checkStatus,travelRecommend);
         return new TableResult<>(0, "", count, recommends);
     }
 
@@ -86,6 +88,25 @@ public class RecommendController {
         int ret = recommendService.addRecommend(recommend);
         if (ret > 0) {
             return Response.success("添加成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
+    /**
+     * 批量删除
+     * @param recommend
+     * @return
+     */
+    @PostMapping("batch-delete")
+    @ResponseBody
+    public Response<String> removeRecommend(@RequestBody TravelRecommend[] recommend) {
+        if (ObjectUtils.isEmpty(recommend)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = recommendService.remove(recommend);
+        if (ret > 0) {
+            return Response.success("删除成功");
         } else {
             return Response.fail(CodeMsg.FAIL);
         }

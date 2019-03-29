@@ -111,6 +111,8 @@
                 }
             });
             parent.layui.table.reload('LAY-app-content-list'); //重载表格
+            // 测试弹出信息
+            parent.layer.msg('添加成功');
             parent.layer.close(index); //再执行关闭
         });
     })

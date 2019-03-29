@@ -1,9 +1,9 @@
 package com.waner.primary.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 推荐内容服务实现类
@@ -19,7 +20,7 @@ import java.util.List;
  * @since 1.0.0-SNAPSHOT
  */
 @Service
-public class RecommendServiceImpl implements RecommendService{
+public class RecommendServiceImpl implements RecommendService {
 
     public final static String USER = "user";
     public final static String ADMINISTRATOR = "administrator";
@@ -33,6 +34,7 @@ public class RecommendServiceImpl implements RecommendService{
 
     /**
      * 新增推荐内容
+     *
      * @param recommend
      * @return 新增推荐成功标志
      */
@@ -43,8 +45,31 @@ public class RecommendServiceImpl implements RecommendService{
         return insertRet;
     }
 
+    /**
+     * 删除指定推荐内容
+     *
+     * @param recommends
+     * @return
+     */
     @Override
-    public List<TravelRecommend> getList(String checkStatus, int limit, int page) {
+    public int remove(TravelRecommend[] recommends) {
+        List<Integer> ids =Lists.newArrayList(recommends).parallelStream()
+                .map(TravelRecommend::getId)
+                .collect(Collectors.toList());
+        return travelRecommendMapper.deleteBatchIds(ids);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param checkStatus
+     * @param travelRecommend
+     * @param limit
+     * @param page
+     * @return
+     */
+    @Override
+    public List<TravelRecommend> getList(String checkStatus, TravelRecommend travelRecommend, int limit, int page) {
         // 分页
         Page<TravelRecommend> pageHelper = new Page<>();
         pageHelper.setSize(limit);
@@ -55,23 +80,29 @@ public class RecommendServiceImpl implements RecommendService{
 
         // 已发表推荐
         if ("pushed".equals(checkStatus)) {
-            pageVo = travelRecommendMapper.selectPageVo(pageHelper, 1);
-        }else {
-            pageVo = travelRecommendMapper.selectPageVo(pageHelper, null);
+            pageVo = travelRecommendMapper.selectPageVo(pageHelper, 1, travelRecommend.getTitle());
+        } else {
+            pageVo = travelRecommendMapper.selectPageVo(pageHelper, null, travelRecommend.getTitle());
         }
         return pageVo.getRecords();
     }
 
     /**
      * 查询未删除的推荐数量
+     *
      * @param checkStatus
+     * @param travelRecommend
      * @return
      */
     @Override
-    public int getCount(String checkStatus) {
+    public int getCount(String checkStatus, TravelRecommend travelRecommend) {
         QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
         // 设置未删除查询条件
         wrapper.eq("del_flag", 0);
+        // 搜索
+        if (travelRecommend.getTitle() != null) {
+            wrapper.like("title", travelRecommend.getTitle());
+        }
         if ("pushed".equals(checkStatus)) {
             wrapper.eq("push_flag", 1);
         }

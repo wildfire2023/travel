@@ -13,6 +13,14 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TravelRecommendMapper extends BaseMapper<TravelRecommend> {
 
-    IPage<TravelRecommend> selectPageVo(Page page, @Param("checkStatus") Integer checkStatus);
+    /**
+     * 分页搜索查询
+     * @param page
+     * @param checkStatus
+     * @param title
+     * @return
+     */
+    IPage<TravelRecommend> selectPageVo(Page page, @Param("checkStatus") Integer checkStatus,
+                                                   @Param("title") String title);
 
 }

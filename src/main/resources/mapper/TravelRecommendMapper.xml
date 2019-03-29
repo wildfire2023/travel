@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
-        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="content_img_url" property="contentImgUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
@@ -15,12 +15,16 @@
       id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag
     </sql>
     <select id="selectPageVo" resultMap="BaseResultMap">
-      select * from travel_recommend
-      <where>
-          del_flag = 0
-          <if test="checkStatus != null">
-              and push_flag = #{checkStatus}
-          </if>
-      </where>
+        select * from travel_recommend
+        <where>
+            del_flag = 0
+            <if test="checkStatus != null">
+                and push_flag = #{checkStatus}
+            </if>
+            <if test="title != null and title != ''">
+                <bind name="pattern" value="'%' + title + '%'"/>
+                and title like #{pattern}
+            </if>
+        </where>
     </select>
 </mapper>
