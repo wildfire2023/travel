@@ -9,4 +9,5 @@ import com.waner.primary.web.entity.TravelRecommend;
  * @since 1.0.0-SNAPSHOT
  */
 public interface TravelRecommendMapper extends BaseMapper<TravelRecommend> {
+
 }

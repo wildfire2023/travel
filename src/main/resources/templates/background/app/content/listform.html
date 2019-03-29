@@ -81,8 +81,6 @@
         //富文本编辑器
         var id = layedit.build('editor');
 
-
-
         //监听表单提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {
             var field = data.field; //获取提交的字段
@@ -93,11 +91,9 @@
 
             if (field.pushFlag === "on") {
                 field.pushFlag = "1";
-            }else {
+            } else {
                 field.pushFlag = "0";
             }
-
-
 
             //提交 Ajax 成功后，关闭当前弹层并重载表格
             $.ajax({
@@ -106,7 +102,12 @@
                 , data: JSON.stringify(field)
                 , contentType: 'application/json'
                 , success: function (res) {
-                    layer.msg(res.message, {icon: 5});
+                    if (res.code === 200) {
+                        layer.msg(res.data, {
+                            icon: 5
+                            , time: 1000
+                        });
+                    }
                 }
             });
             parent.layui.table.reload('LAY-app-content-list'); //重载表格

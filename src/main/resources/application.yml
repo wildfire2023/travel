@@ -60,6 +60,8 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.wanner.primary.web.entity
+  configuration:
+    use-generated-keys: true
 # 控制台输出日志
 logging:
   level:

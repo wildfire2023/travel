@@ -1,9 +1,12 @@
 package com.waner.primary.web.controller;
 
+import com.waner.primary.common.exception.GlobalException;
+import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.service.RecommendService;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,12 +42,20 @@ public class RecommendController {
     }
 
     /**
-     * 推荐内容发表
+     * 发表推荐内容
      * @return
      */
     @PostMapping("add")
     @ResponseBody
     public Response<String> addRecommend(@RequestBody TravelRecommend recommend) {
-        return Response.success("添加成功");
+        if (ObjectUtils.isEmpty(recommend)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = recommendService.addRecommend(recommend);
+        if (ret > 0) {
+            return Response.success("添加成功");
+        }else {
+            return Response.fail(CodeMsg.FAIL);
+        }
     }
 }

@@ -5,7 +5,6 @@ import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.common.util.COSClientUtil;
-import com.waner.primary.common.util.QiniuFileUploadUtil;
 import com.waner.primary.web.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

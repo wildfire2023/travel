@@ -41,6 +41,10 @@ public class FrontPageController {
     }
 
 
+    /**
+     * 前台主页面
+     * @return
+     */
     @GetMapping("index")
     public String index() {
         return "front/index";
