@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 程序启动类<
@@ -15,6 +16,7 @@ import org.springframework.jms.annotation.EnableJms;
  */
 @EnableConfigurationProperties(value = {MailConfigurationProperties.class})
 @EnableJms
+@EnableTransactionManagement
 @SpringBootApplication
 @MapperScan("com.waner.primary.web.mapper")
 public class PrimaryApplication {

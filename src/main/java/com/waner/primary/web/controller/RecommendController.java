@@ -1,16 +1,23 @@
 package com.waner.primary.web.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.service.RecommendService;
+import com.waner.primary.web.service.impl.RecommendServiceImpl;
+import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 推荐内容控制器
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -26,13 +33,37 @@ public class RecommendController {
 
 
     /**
-     * 推荐内容列表
+     * 推荐内容列表页面
+     *
      * @return
      */
     @GetMapping("list")
-    public String toRecommendList(@RequestParam(value = "role", required = false) String role){
-
+    public String toRecommendList() {
         return "background/app/content/list";
+    }
+
+    /**
+     * 表格请求接口
+     *
+     * @param role
+     * @return
+     */
+    @GetMapping("table-data")
+    @ResponseBody
+    public TableResult<List<TravelRecommend>> getTableData(@RequestParam(value = "role", required = false) String role,
+                                                           int limit, int page) {
+        String checkStatus = "";
+        if (RecommendServiceImpl.USER.equals(role)) {
+            // 已发布推荐内容
+            checkStatus = "pushed";
+        } else if (RecommendServiceImpl.ADMINISTRATOR.equals(role)) {
+            // 所有推荐内容
+            checkStatus = "all";
+        }
+        // 分页查询
+        List<TravelRecommend> recommends = recommendService.getList(checkStatus, limit, page);
+        int count = recommendService.getCount(checkStatus);
+        return new TableResult<>(0, "", count, recommends);
     }
 
 
@@ -43,6 +74,7 @@ public class RecommendController {
 
     /**
      * 发表推荐内容
+     *
      * @return
      */
     @PostMapping("add")
@@ -54,8 +86,9 @@ public class RecommendController {
         int ret = recommendService.addRecommend(recommend);
         if (ret > 0) {
             return Response.success("添加成功");
-        }else {
+        } else {
             return Response.fail(CodeMsg.FAIL);
         }
     }
+
 }

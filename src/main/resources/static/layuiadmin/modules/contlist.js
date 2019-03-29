@@ -6,8 +6,6 @@
  @License：LPPL
     
  */
-
-
 layui.define(['table', 'form'], function(exports){
   var $ = layui.$
   ,table = layui.table
@@ -16,15 +14,15 @@ layui.define(['table', 'form'], function(exports){
   //文章管理
   table.render({
     elem: '#LAY-app-content-list'
-    ,url: layui.setter.base + 'json/content/list.js' //模拟接口
+    ,url: '/recommend/table-data?role=administrator' //模拟接口
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
       ,{field: 'id', width: 100, title: '文章ID', sort: true}
-      ,{field: 'label', title: '文章标签', minWidth: 100}
+      // ,{field: 'label', title: '文章标签', minWidth: 100}
       ,{field: 'title', title: '文章标题'}
-      ,{field: 'author', title: '作者'}
-      ,{field: 'uploadtime', title: '上传时间', sort: true}
-      ,{field: 'status', title: '发布状态', templet: '#buttonTpl', minWidth: 80, align: 'center'}
+      // ,{field: 'author', title: '作者'}
+      ,{field: 'createTime', title: '上传时间', sort: true}
+      ,{field: 'pushFlag', title: '发布状态', templet: '#buttonTpl', minWidth: 80, align: 'center'}
       ,{title: '操作', minWidth: 150, align: 'center', fixed: 'right', toolbar: '#table-content-list'}
     ]]
     ,page: true

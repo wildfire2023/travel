@@ -22,12 +22,12 @@
                         <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">作者</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+                <!--<div class="layui-inline">-->
+                    <!--<label class="layui-form-label">作者</label>-->
+                    <!--<div class="layui-input-inline">-->
+                        <!--<input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="layui-inline">
                     <label class="layui-form-label">标题</label>
                     <div class="layui-input-inline">
@@ -62,7 +62,7 @@
             </div>
             <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
             <script type="text/html" id="buttonTpl">
-                {{#  if(d.status){ }}
+                {{#  if(d.pushFlag == 1){ }}
                 <button class="layui-btn layui-btn-xs">已发布</button>
                 {{#  } else { }}
                 <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>

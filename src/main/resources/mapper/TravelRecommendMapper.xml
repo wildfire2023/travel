@@ -14,4 +14,13 @@
     <sql id="Base_Column_List">
       id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag
     </sql>
+    <select id="selectPageVo" resultMap="BaseResultMap">
+      select * from travel_recommend
+      <where>
+          del_flag = 0
+          <if test="checkStatus != null">
+              and push_flag = #{checkStatus}
+          </if>
+      </where>
+    </select>
 </mapper>
