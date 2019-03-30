@@ -1,6 +1,5 @@
 package com.waner.primary.web.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
@@ -9,7 +8,6 @@ import com.waner.primary.web.service.RecommendService;
 import com.waner.primary.web.service.impl.RecommendServiceImpl;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,12 +61,17 @@ public class RecommendController {
             checkStatus = "all";
         }
         // 分页查询
-        List<TravelRecommend> recommends = recommendService.getList(checkStatus,travelRecommend, limit, page);
-        int count = recommendService.getCount(checkStatus,travelRecommend);
+        List<TravelRecommend> recommends = recommendService.getList(checkStatus, travelRecommend, limit, page);
+        int count = recommendService.getCount(checkStatus, travelRecommend);
         return new TableResult<>(0, "", count, recommends);
     }
 
 
+    /**
+     * 文章添加、修改页面
+     *
+     * @return
+     */
     @GetMapping("add-page")
     public String recommendAddPage() {
         return "background/app/content/listform";
@@ -94,7 +97,27 @@ public class RecommendController {
     }
 
     /**
+     * 修改推荐内容
+     *
+     * @return
+     */
+    @PostMapping("modify")
+    @ResponseBody
+    public Response<String> modifyRecommend(TravelRecommend recommend) {
+        if (ObjectUtils.isEmpty(recommend)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = recommendService.modifyRecommend(recommend);
+        if (ret > 0) {
+            return Response.success("添加成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
+    /**
      * 批量删除
+     *
      * @param recommend
      * @return
      */

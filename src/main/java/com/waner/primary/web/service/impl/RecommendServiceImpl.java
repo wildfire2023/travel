@@ -60,6 +60,23 @@ public class RecommendServiceImpl implements RecommendService {
     }
 
     /**
+     * 获取单条推荐内容
+     * @return
+     * @param id
+     */
+    @Override
+    public TravelRecommend getOneRecommend(Integer id) {
+        QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
+        wrapper.eq("id", id);
+        return travelRecommendMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public int modifyRecommend(TravelRecommend recommend) {
+        return travelRecommendMapper.updateById(recommend);
+    }
+
+    /**
      * 分页查询
      *
      * @param checkStatus

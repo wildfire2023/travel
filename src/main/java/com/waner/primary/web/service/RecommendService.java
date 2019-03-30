@@ -17,4 +17,8 @@ public interface RecommendService {
     int getCount(String checkStatus, TravelRecommend travelRecommend);
 
     int remove(TravelRecommend[] recommend);
+
+    TravelRecommend getOneRecommend(Integer id);
+
+    int modifyRecommend(TravelRecommend recommend);
 }

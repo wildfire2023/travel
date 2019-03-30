@@ -16,7 +16,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">文章标题</label>
         <div class="layui-input-inline">
-            <input type="text" name="title" lay-verify="required" placeholder="请输入文章标题" autocomplete="off"
+            <input type="text" name="title" id="title" lay-verify="required" placeholder="请输入文章标题" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -24,7 +24,7 @@
         <label class="layui-form-label">文章头图</label>
         <div class="layui-input-inline">
             <input name="headImgUrl" lay-verify="required" id="LAY_headImgSrc" placeholder=""
-                   value="" autocomplete="off" class="layui-input">
+                   autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline layui-btn-container" style="width: auto;">
             <button type="button" class="layui-btn layui-btn-primary" id="LAY_headImgUpload">
@@ -37,14 +37,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">文章内容</label>
         <div class="layui-input-inline" style="width: 80%; ">
-            <textarea id="editor" name="content" style="display: none;"
-                      class="layui-textarea"></textarea>
+            <textarea id="content" name="content" style="display: none;"
+                      class="layui-textarea" lay-verify="content"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">发布状态</label>
         <div class="layui-input-inline">
-            <input type="checkbox" id="push" lay-filter="status" name="pushFlag" checked="checked"
+            <input type="checkbox" id="pushFlag" lay-filter="status" name="pushFlag"
                    lay-skin="switch"
                    lay-text="已发布|待修改">
         </div>
@@ -76,10 +76,18 @@
                 url: '/file/upload'
                 , type: 'post'
             }
+            , height: 900
         });
 
         //富文本编辑器
-        var id = layedit.build('editor');
+        var id = layedit.build('content');
+
+        form.verify({
+            content: function (value) {
+                return layedit.sync(id);
+            }
+        });
+
 
         //监听表单提交
         form.on('submit(layuiadmin-app-form-submit)', function (data) {
@@ -87,7 +95,8 @@
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             // 设置field内容
-            field.content = layedit.getContent(id);
+
+            // field.content = layedit.getContent(id);
 
             if (field.pushFlag === "on") {
                 field.pushFlag = "1";

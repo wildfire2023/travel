@@ -8,7 +8,7 @@
                 tool: ["strong", "italic", "underline", "del", "|", "left", "center", "right", "|", "link", "unlink", "face", "image"],
                 hideTool: [],
                 // 富文本编辑器高度设置
-                height: 900
+                height: 280
             }
         };
     c.prototype.set = function (t) {

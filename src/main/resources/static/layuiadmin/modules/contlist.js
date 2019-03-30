@@ -12,6 +12,8 @@ layui.define(['table', 'form'], function (exports) {
         , form = layui.form
         , admin = layui.admin;
 
+
+
     //文章管理
     table.render({
         elem: '#LAY-app-content-list'
@@ -35,6 +37,7 @@ layui.define(['table', 'form'], function (exports) {
     //监听工具条
     table.on('tool(LAY-app-content-list)', function (obj) {
         var data = obj.data;
+
         if (obj.event === 'del') {
             layer.confirm('确定删除此文章？', function (index) {
                 obj.del();
@@ -52,9 +55,9 @@ layui.define(['table', 'form'], function (exports) {
             layer.open({
                 type: 2
                 , title: '编辑文章'
-                , content: '../../../views/app/content/listform.html?id=' + data.id
+                , content: '/recommend/add-page'
                 , maxmin: true
-                , area: ['550px', '550px']
+                , area: ['700px', '600px']
                 , btn: ['确定', '取消']
                 , yes: function (index, layero) {
                     var iframeWindow = window['layui-layer-iframe' + index]
@@ -64,13 +67,23 @@ layui.define(['table', 'form'], function (exports) {
                     iframeWindow.layui.form.on('submit(layuiadmin-app-form-edit)', function (data) {
                         var field = data.field; //获取提交的字段
 
+                        if (field.pushFlag === "on") {
+                            field.pushFlag = "1";
+                        } else {
+                            field.pushFlag = "0";
+                        }
+
+                        field.id = obj.data.id;
+
                         //提交 Ajax 成功后，静态更新表格中的数据
-                        //$.ajax({});
+                        $.ajax({
+                            url: "/recommend/modify"
+                            , type: "post"
+                            , data: field
+                        });
                         obj.update({
-                            label: field.label
-                            , title: field.title
-                            , author: field.author
-                            , status: field.status
+                            title: field.title
+                            , pushFlag: field.pushFlag
                         }); //数据更新
 
                         form.render();
@@ -78,6 +91,21 @@ layui.define(['table', 'form'], function (exports) {
                     });
 
                     submit.trigger('click');
+                }, success: function (layero, index) {
+                    // 表单赋值
+                    var contents = layero.find('iframe').contents().find("#layuiadmin-app-form-list");
+                    // 标题赋值
+                    contents.find("#title").val(data.title);
+                    // 头图赋值
+                    contents.find("#LAY_headImgSrc").val(data.headImgUrl);
+                    // 内容赋值
+                    contents.find("#content").html(data.content);
+                    // 发布状态赋值
+                    var switchButton = contents.find("#pushFlag");
+                    if (data.pushFlag === 1) {
+                        switchButton.attr("checked", "checked");
+                    }
+
                 }
             });
         }
