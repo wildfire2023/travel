@@ -63,7 +63,7 @@ public class RecommendController {
         // 分页查询
         List<TravelRecommend> recommends = recommendService.getList(checkStatus, travelRecommend, limit, page);
         int count = recommendService.getCount(checkStatus, travelRecommend);
-        return new TableResult<>(0, "", count, recommends);
+        return new TableResult<>(200, "", count, recommends);
     }
 
 

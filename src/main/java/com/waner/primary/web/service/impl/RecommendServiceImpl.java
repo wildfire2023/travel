@@ -8,6 +8,7 @@ import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,7 @@ public class RecommendServiceImpl implements RecommendService {
      * @return
      */
     @Override
+    @Transactional
     public int remove(TravelRecommend[] recommends) {
         List<Integer> ids =Lists.newArrayList(recommends).parallelStream()
                 .map(TravelRecommend::getId)

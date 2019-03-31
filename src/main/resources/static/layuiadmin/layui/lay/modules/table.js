@@ -57,7 +57,7 @@
             limitName: "limit"
         }, a.request), a.response = t.extend({
             statusName: "code",
-            statusCode: 0,
+            statusCode: 200,
             msgName: "msg",
             dataName: "data",
             countName: "count"
