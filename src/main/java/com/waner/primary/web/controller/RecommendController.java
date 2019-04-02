@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,7 +30,6 @@ public class RecommendController {
         this.recommendService = recommendService;
     }
 
-
     /**
      * 推荐内容列表页面
      *
@@ -38,6 +38,18 @@ public class RecommendController {
     @GetMapping("list")
     public String toRecommendList() {
         return "background/app/content/list";
+    }
+
+    /**
+     * 返回前台推荐详情
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("detail-page")
+    public String toRecommendDetail(Integer id, HttpServletRequest request) {
+        request.setAttribute("id", id);
+        return "front/recommend-details";
     }
 
     /**
@@ -64,6 +76,19 @@ public class RecommendController {
         List<TravelRecommend> recommends = recommendService.getList(checkStatus, travelRecommend, limit, page);
         int count = recommendService.getCount(checkStatus, travelRecommend);
         return new TableResult<>(200, "", count, recommends);
+    }
+
+    /**
+     * 返回单条详情页面所需推荐内容
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("detail")
+    @ResponseBody
+    public Response<TravelRecommend> getOneTravelRecommend(Integer id) {
+        TravelRecommend recommend = recommendService.getOneRecommend(id);
+        return Response.success(recommend);
     }
 
 

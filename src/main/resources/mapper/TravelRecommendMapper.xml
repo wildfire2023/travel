@@ -12,7 +12,14 @@
         <result column="push_flag" property="pushFlag" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-      id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag
+        id,
+        title,
+        head_img_url,
+        content,
+        content_img_url,
+        create_time,
+        del_flag,
+        push_flag
     </sql>
     <select id="selectPageVo" resultMap="BaseResultMap">
         select * from travel_recommend
@@ -26,5 +33,6 @@
                 and title like #{pattern}
             </if>
         </where>
+        order by create_time desc
     </select>
 </mapper>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>微新闻</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-  <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
   <div class="micronews-header-wrap">
     <div class="micronews-header w1000 layui-clear">
       <h1 class="logo">
         <a href="index.html">
-          <img src="../res/static/images/LOGO.png" alt="logo">
-          <span class="layui-hide">LOGO</span>
+          <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+          <span class="layui-hide">logo</span>
         </a>
       </h1>
       <p class="nav">
@@ -32,7 +32,7 @@
         </form>
       </div>
       <div class="login">
-        <a href="login.html">  
+        <a href="/front/page/login">
           登录
         </a>
        <!-- <a href="login.html"> -->
@@ -201,7 +201,7 @@
               </div>
               <div class="layui-card-body">
                 <ul class="list-box">
-                  <a href="details.html"><img src="../res/static/images/news_img15.jpg" width="100%"> </a>
+                  <a href="recommend-details.html"><img src="../res/static/images/news_img15.jpg" width="100%"> </a>
                   <li class="list">
                   
                       <a href="#">南非金砖会议再造十年辉煌</a>
@@ -222,7 +222,7 @@
                       <a href="#">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
               
                   </li>
-                  <a href="details.html"><img src="../res/static/images/news_img16.jpg" width="100%"></a>
+                  <a href="recommend-details.html"><img src="../res/static/images/news_img16.jpg" width="100%"></a>
                   <li class="list">
             
                       <a href="#">韩国送的200吨橘子该怎么分？</a>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Waner - 旅游推荐</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
+</head>
+<body class="micronews">
+<div class="micronews-header-wrap">
+    <div class="micronews-header w1000 layui-clear">
+        <h1 class="logo">
+            <a href="/">
+                <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+                <span class="layui-hide">logo</span>
+            </a>
+        </h1>
+        <p class="nav">
+            <a href="/front/page/index" class="active">推荐</a>
+            <a href="#">游记</a>
+            <a href="#">问答</a>
+        </p>
+        <div class="search-bar">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
+                        <button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="login">
+            <a th:if="${session.sessionUser == null}" href="/front/page/login">
+                登录
+            </a>
+            <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+            <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;" lay-filter="component-nav">
+                <li class="layui-nav-item" >
+                    <a href="javascript:;" style="font-size: 16px;color: #222;">写游记</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="javascript:;" style="font-size: 16px;color: #222;"><img th:src="@{/layuiadmin/myfile/images/header.png}"
+                                                class="layui-nav-img">我</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">个人资料</a></dd>
+                        <dd layadmin-event="logout" style="text-align: center;"><a>退出登录</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-icon">
+            <i class="layui-icon layui-icon-more-vertical"></i>
+        </div>
+        <!--<div class="mobile-nav">-->
+        <!--<ul class="layui-nav" lay-filter="">-->
+        <!--<li class="layui-nav-item"><a href="index.html">最新</a></li>-->
+        <!--<li class="layui-nav-item  layui-this"><a href="list.html">娱乐</a></li>-->
+        <!--<li class="layui-nav-item"><a href="list.html">生活</a></li>-->
+        <!--<li class="layui-nav-item"><a href="list.html">财经</a></li>-->
+        <!--<li class="layui-nav-item"><a href="list.html">科技</a></li>-->
+        <!--<li class="layui-nav-item"><a href="list.html">军事</a></li>-->
+        <!--</ul>-->
+        <!--</div>  -->
+    </div>
+</div>
+
+
+<div class="micronews-container micronews-details-container w1000">
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md8">
+                <div class="main">
+                    <div class="title">
+                        <h3 id="title"></h3>
+                        <div class="b-txt">
+                            <span class="label">推荐</span>
+                            <span class="icon">
+                  <i class="layui-icon layui-icon-radio"></i>
+                  <b>3002</b>人
+                </span>
+                            <a href="#message">
+                <span class="icon message">
+                  <i class="layui-icon layui-icon-dialogue"></i>
+                  <b>500</b>条
+                </span>
+                            </a>
+                            <span class="icon time">
+                  <i class="layui-icon layui-icon-log"></i>
+                  <span id="createTime"></span>
+                            </span>
+                            <!-- 登录查看收藏等 -->
+                            <span th:if="${session.sessionUser != null}" class="share-title">
+                                <button class="layui-btn Collection">
+                                    ❤<span>已收藏</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="article">
+                        <!--<div th:text="${recommend.content}"></div>-->
+                        <div id="content"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 留言模版引擎 -->
+            <script type="text/html" id="messageTpl">
+                <div class="liCont">
+                    <a href="">
+                        <img src="{{d.avatar}}">
+                    </a>
+                    <div class="item-cont">
+                        <div class="cont">
+                            <p><span class="name">{{d.name}}</span><span class="time">1小时前</span></p>
+                            <p class="text">{{d.cont}}</p>
+                        </div>
+                    </div>
+                </div>
+            </script>
+
+
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                <div class="popular-info popular-info-tog">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>资讯推荐</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <ul class="list-box">
+                                <a href="recommend-details.html"><img src="../res/static/images/news_img15.jpg"
+                                                                      width="100%"> </a>
+                                <li class="list">
+
+                                    <a href="#">南非金砖会议再造十年辉煌</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">中流击水 奋楫者进_中共十九大</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">你好！新时代_2018全国两会</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
+
+                                </li>
+                                <a href="recommend-details.html"><img src="../res/static/images/news_img16.jpg"
+                                                                      width="100%"></a>
+                                <li class="list">
+
+                                    <a href="#">韩国送的200吨橘子该怎么分？</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">中流击水 奋楫者进_中共十九大</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">你好！新时代_2018全国两会</a>
+
+                                </li>
+                                <li class="list">
+
+                                    <a href="#">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="micronews-footer-wrap">
+    <div class="micronews-footer w1000">
+        <div class="ft-nav">
+            <a href="#">关于我们</a>
+            <a href="#">合作伙伴</a>
+            <a href="#">广告服务</a>
+            <a href="#">常见问题</a>
+        </div>
+        <div class="Copyright">
+            <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
+        </div>
+        <div class="f-icon">
+            <a href="#" class="w-icon">
+                <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
+            </a>
+            <a href="#" class="wb-icon">
+                <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+    layui.config({
+        base: '/layuiadmin/'
+    }).extend({
+        index: 'lib/index'
+    }).use(['index', 'news'], function () {
+        var news = layui.news
+            , $ = layui.$
+            , admin = layui.admin
+            , element = layui.element;
+        // 导航渲染
+        element.render('nav', 'component-nav');
+
+        news.EnterMessage();
+        // index.Page('micronews-details-test', 50);
+        var collOff = true;
+        $('.Collection').on('click', function () {
+            if (collOff) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+            collOff = !collOff
+        });
+        news.seachBtn();
+        news.onInput();
+        news.arrowutil();
+
+        // 渲染页面主体内容
+        getDetail(GetQueryString('id'));
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        // 加载页面内容
+        function getDetail(id) {
+            admin.req({
+                url: '/recommend/detail'
+                , data: {id: id}
+                , success: function (res) {
+                    var data = res.data;
+                    $("#title").text(data.title);
+                    $("#createTime").text(data.createTime);
+                    $("#content").html(data.content);
+                }
+            });
+        }
+
+
+    });
+</script>
+</body>
+</html>

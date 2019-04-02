@@ -1,6 +1,7 @@
 package com.waner.primary.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.waner.primary.common.cache.UserKey;
 import com.waner.primary.common.message.MailMessage;
 import com.waner.primary.common.message.MessageProducer;
@@ -23,6 +24,7 @@ import org.springframework.util.StringUtils;
 
 import javax.jms.Destination;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -78,6 +80,11 @@ public class UserServiceImpl implements UserService {
         session.setMaxInactiveInterval(60 * 60 * 24);
         // 查询用户角色
         SysRole sysRole = sysRoleMapper.queryRoleByUserId(dbUser.getId());
+        SysUser updateUser = new SysUser();
+        updateUser.setId(dbUser.getId());
+        updateUser.setOperatorTime(new Date());
+        // 更新用户操作时间
+        sysUserMapper.updateByPrimaryKeySelective(updateUser);
         return Response.success(sysRole);
     }
 

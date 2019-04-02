@@ -36,6 +36,11 @@ public class BackGroundPageController {
         return "background/home/homepage1";
     }
 
+    /**
+     * 弃用内部修改密码，转为实现登录界面实现邮箱密码修改
+     * @return
+     */
+    @Deprecated
     @GetMapping("reset-pass")
     public String resetPassPage() {
         return "background/set/user/password";

@@ -29,6 +29,16 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    /**
+     * 到前台用户个人信息页面
+     * @return
+     */
+    @GetMapping("person-info")
+    public String toPersonInfoPage() {
+        return "front/persinfo";
+    }
+
     /**
      * @param sysUser 表单输入用户
      * @return 用户角色
