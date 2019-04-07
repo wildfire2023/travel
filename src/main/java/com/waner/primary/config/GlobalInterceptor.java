@@ -34,7 +34,8 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
         if ("/".equals(uri)) {
             return true;
         }
-        if (uri.contains("front") || uri.contains("user") || uri.contains("file") || uri.contains("recommend")) {
+        if (uri.contains("front") || uri.contains("user") || uri.contains("file") || uri.contains("recommend")
+                || uri.contains("travel-essay")) {
             return true;
         }
         HttpSession session = request.getSession();

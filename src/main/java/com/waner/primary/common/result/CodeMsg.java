@@ -56,7 +56,11 @@ public enum CodeMsg {
     /**
      * 空文件
      */
-    EMPTY_FILE(500010, "空文件");
+    EMPTY_FILE(500010, "空文件"),
+    /**
+     * 游记发表失败
+     */
+    ESSAY_PUSH_FAIL(500011,"游记发表失败");
     private Integer code;
     private String msg;
 

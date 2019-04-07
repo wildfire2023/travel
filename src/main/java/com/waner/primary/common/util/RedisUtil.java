@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis缓存操作工具类
+ *
  * @author Monster
- * @date 2019/2/7 11:23
- * @since 1.8
+ * @since 1.0.0-SNAPSHOT
  */
 @Component
 public class RedisUtil {

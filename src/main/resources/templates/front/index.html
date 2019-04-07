@@ -40,7 +40,7 @@
             <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
             <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;" lay-filter="component-nav">
                 <li class="layui-nav-item" >
-                    <a href="javascript:;" style="font-size: 16px;color: #222;">写游记</a>
+                    <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
@@ -50,8 +50,8 @@
                                                                                      class="layui-nav-img">我</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">修改信息</a></dd>
-                        <dd><a href="javascript:;">个人资料</a></dd>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出登录</a></dd>
+                        <dd><a href="/user/person-info">个人资料</a></dd>
+                        <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
                     </dl>
                 </li>
             </ul>

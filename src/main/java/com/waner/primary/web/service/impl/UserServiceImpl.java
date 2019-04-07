@@ -28,7 +28,9 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * 用户服务实现类
+ * 用户服务实现类,提供用户服务接口实现
+ *
+ * <p>该类提供用户登录、注册、密码重置等基本服务
  *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
