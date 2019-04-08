@@ -1,7 +1,12 @@
 package com.waner.primary.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.web.entity.TravelEssay;
+import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.vo.EssayWithUser;
+import org.apache.ibatis.annotations.Param;
 
 public interface TravelEssayMapper extends BaseMapper<TravelEssay> {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +22,8 @@ public interface TravelEssayMapper extends BaseMapper<TravelEssay> {
     int updateByPrimaryKeyWithBLOBs(TravelEssay record);
 
     int updateByPrimaryKey(TravelEssay record);
+
+    IPage<EssayWithUser> selectPageVo(Page pageHelper, @Param("essay") TravelEssay essay, @Param("checkStatus") Integer checkStatus);
+
+    int count(@Param("essay")EssayWithUser essay, @Param("checkStatus")Integer checkPushFlag);
 }

@@ -14,6 +14,9 @@
   <resultMap id="ResultMapWithBLOBs" type="com.waner.primary.web.entity.TravelEssay" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <resultMap id="EssayWithUser" type="com.waner.primary.web.vo.EssayWithUser">
+
+  </resultMap>
   <sql id="Base_Column_List" >
     id, sys_user_id, title, head_img_url, content_img_url, create_time, del_flag,push_flag
   </sql>
@@ -154,4 +157,53 @@
       push_flag = #{pushFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectPageVo" resultMap="EssayWithUser" >
+      select essay.*,user.nickname, user.img_url from travel_essay essay inner join travel_user user
+      on essay.sys_user_id = user.sys_user_id
+      <where>
+        essay.del_flag = 0
+        <if test="checkStatus != null">
+          and essay.push_flag = #{checkStatus}
+        </if>
+        <!-- 后台管理员调用 -->
+        <if test="checkStatus == null">
+          <if test="essay.pushFlag != null and essay.pushFlag != ''">
+            and essay.push_flag = #{essay.pushFlag}
+          </if>
+        </if>
+        <if test="essay.title != null and essay.title != ''">
+          <bind name="title" value="'%' + essay.title + '%'"/>
+          and essay.title like #{title}
+        </if>
+        <if test="essay.nickname != null and essay.nickname != ''">
+          <bind name="nickname" value="'%' + essay.nickname + '%'"/>
+          and user.nickname like #{nickname}
+        </if>
+      </where>
+      order by essay.create_time desc
+    </select>
+  <select id="count" resultType="int" >
+    select count(1) from travel_essay essay inner join travel_user user
+      on essay.sys_user_id = user.sys_user_id
+      <where>
+        essay.del_flag = 0
+        <if test="checkStatus != null">
+          and essay.push_flag = #{checkStatus}
+        </if>
+        <!-- 后台管理员调用 -->
+        <if test="checkStatus == null">
+          <if test="essay.pushFlag != null and essay.pushFlag != ''">
+            and essay.push_flag = #{essay.pushFlag}
+          </if>
+        </if>
+        <if test="essay.title != null and essay.title != ''">
+          <bind name="title" value="'%' + essay.title + '%'"/>
+          and essay.title like #{title}
+        </if>
+        <if test="essay.nickname != null and essay.nickname != ''">
+          <bind name="nickname" value="'%' + essay.nickname + '%'"/>
+          and user.nickname like #{nickname}
+        </if>
+      </where>
+  </select>
 </mapper>

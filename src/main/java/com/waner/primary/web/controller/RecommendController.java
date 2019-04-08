@@ -37,7 +37,7 @@ public class RecommendController {
      */
     @GetMapping("list")
     public String toRecommendList() {
-        return "background/app/content/list";
+        return "background/app/content/recommend-list";
     }
 
     /**
@@ -99,7 +99,7 @@ public class RecommendController {
      */
     @GetMapping("add-page")
     public String recommendAddPage() {
-        return "background/app/content/listform";
+        return "background/app/content/recommend-listform";
     }
 
     /**

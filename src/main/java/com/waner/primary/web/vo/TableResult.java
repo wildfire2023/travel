@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class TableResult<T> {
     /**
-     * 返回代码，0：成功
+     * 返回代码，200：成功
      */
     private int code;
     /**

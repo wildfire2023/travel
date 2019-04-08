@@ -1,5 +1,6 @@
 package com.waner.primary.web.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class TravelEssay {
 
     private String contentImgUrl;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Byte delFlag;

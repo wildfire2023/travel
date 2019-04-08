@@ -16,15 +16,15 @@ layui.define(['table', 'form'], function(exports){
   //帖子管理
   table.render({
     elem: '#LAY-app-forum-list'
-    ,url: layui.setter.base + 'json/forum/list.js' //模拟接口
+    ,url: '/travel-essay/table-data?role=administrator' //模拟接口
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
       ,{field: 'id', width: 100, title: 'ID', sort: true}
-      ,{field: 'poster', title: '发帖人'}
-      ,{field: 'avatar', title: '头像', width: 100, templet: '#imgTpl'}
-      ,{field: 'content', title: '发帖内容'}
-      ,{field: 'posttime', title: '发帖时间', sort: true}
-      ,{field: 'top', title: '置顶', templet: '#buttonTpl', minWidth: 80, align: 'center'}
+      ,{field: 'imgUrl', title: '头像', width: 100, templet: '#imgTpl'}
+      ,{field: 'nickname', title: '发帖人'}
+      ,{field: 'title', title: '发帖内容'}
+      ,{field: 'createTime', title: '发帖时间', sort: true}
+      ,{field: 'pushFlag', title: '审核状态', templet: '#buttonTpl', minWidth: 80, align: 'center'}
       ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-forum-list'}
     ]]
     ,page: true

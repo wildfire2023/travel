@@ -212,7 +212,6 @@ layui.define(function(exports){
         {type: 'numbers', fixed: 'left'}
         ,{field: 'title', title: '标题', minWidth: 300, templet: '<div><a href="{{ d.href }}" target="_blank" class="layui-table-link">{{ d.title }}</div>'}
         ,{field: 'username', title: '发帖者'}
-        ,{field: 'channel', title: '类别'}
         ,{field: 'crt', title: '点击率', sort: true}
       ]]
       ,skin: 'line'
