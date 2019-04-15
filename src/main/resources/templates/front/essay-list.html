@@ -44,11 +44,10 @@
             <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
           </li>
           <li class="layui-nav-item" lay-unselect="">
-            <a href="javascript:;" style="font-size: 16px;color: #222;"><img th:src="@{/layuiadmin/myfile/images/header.png}"
-                                                                             class="layui-nav-img">我</a>
+            <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
             <dl class="layui-nav-child">
-              <dd><a href="javascript:;">修改信息</a></dd>
-              <dd><a href="/user/person-info">个人资料</a></dd>
+              <dd style="text-align: center;"><a href="javascript:;" >修改信息</a></dd>
+              <dd style="text-align: center;"><a href="/user/person-info" >个人资料</a></dd>
               <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
             </dl>
           </li>
@@ -78,7 +77,7 @@
           <div class="popular-info popular-info-tog">
             <div class="layui-card">
               <div class="layui-card-header">
-                <h3>资讯推荐</h3>
+                <h3>游记推荐</h3>
               </div>
               <div class="layui-card-body">
                 <ul class="list-box">
@@ -137,13 +136,13 @@
   {{#  layui.each(d, function(index, item){ }}
     <div class="item">
       {{# if(item.headImgUrl){ }}
-      <a href="recommend-details.html">
+      <a href="/travel-essay/detail-page?id={{item.id}}">
       <img src="{{item.headImgUrl}}" style="height: 100px; width: 160px;" />
       </a>
       {{#  } }}
 
       <div class="item-info">
-        <h4><a href="recommend-details.html">{{item.title}}</a></h4>
+        <h4><a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}}</a></h4>
         <div class="b-txt">
           <!--<span class="label">{{item.label}}</span>-->
 

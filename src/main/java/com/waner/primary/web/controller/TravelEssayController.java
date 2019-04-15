@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class TravelEssayController {
     public TravelEssayController(TravelEssayService essayService) {
         this.essayService = essayService;
     }
+
 
     /**
      * 返回到前端游记列表
@@ -148,6 +150,27 @@ public class TravelEssayController {
         } else {
             return Response.fail(CodeMsg.FAIL);
         }
+    }
+
+    /**
+     * 获取游记详情
+     * @param id
+     * @return
+     */
+    @GetMapping("detail")
+    @ResponseBody
+    public Response<EssayWithUser> getEssayDetail(@RequestParam("id") Integer id) {
+        return essayService.getEssayDetail(id);
+    }
+
+    /**
+     * 返回游记详情页面
+     * @return
+     */
+    @GetMapping("detail-page")
+    public String toDetailPage(@RequestParam("id") Integer id, HttpServletRequest request) {
+        request.setAttribute("id", id);
+        return "front/essay-details";
     }
 
 

@@ -17,9 +17,9 @@
         </a>
       </h1>
       <p class="nav">
-        <a href="/front/page/index" class="active">推荐</a>
-        <a href="/travel-essay/list-page">游记</a>
-        <a href="list.html">问答</a>
+        <a href="/front/page/index" >推荐</a>
+        <a href="/travel-essay/list-page" class="active">游记</a>
+        <a href="#">问答</a>
       </p>
       <div class="search-bar">
         <form class="layui-form" action="">
@@ -32,26 +32,30 @@
         </form>
       </div>
       <div class="login">
-        <a href="/front/page/login">
+        <a th:if="${session.sessionUser == null}" href="/front/page/login">
           登录
         </a>
-       <!-- <a href="login.html"> -->
-        <!-- <img src="../res/static/images/header.png" style="width: 36px; height: 36px;"> -->
-       <!-- </a> -->
+        <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+        <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;" lay-filter="component-nav">
+          <li class="layui-nav-item" >
+            <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
+          </li>
+          <li class="layui-nav-item" lay-unselect="">
+            <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
+            <dl class="layui-nav-child">
+              <dd style="text-align: center;"><a href="javascript:;" >修改信息</a></dd>
+              <dd style="text-align: center;"><a href="/user/person-info" >个人资料</a></dd>
+              <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+            </dl>
+          </li>
+        </ul>
       </div>
       <div class="menu-icon">
         <i class="layui-icon layui-icon-more-vertical"></i>
       </div>
-      <!--<div class="mobile-nav">-->
-        <!--<ul class="layui-nav" lay-filter="">-->
-          <!--<li class="layui-nav-item"><a href="index.html">最新</a></li>-->
-          <!--<li class="layui-nav-item  layui-this"><a href="list.html">娱乐</a></li>-->
-          <!--<li class="layui-nav-item"><a href="list.html">生活</a></li>-->
-          <!--<li class="layui-nav-item"><a href="list.html">财经</a></li>-->
-          <!--<li class="layui-nav-item"><a href="list.html">科技</a></li>-->
-          <!--<li class="layui-nav-item"><a href="list.html">军事</a></li>-->
-        <!--</ul>-->
-      <!--</div>  -->
     </div>
   </div>
 
@@ -82,28 +86,7 @@
               </div>
             </div>
             <div class="article">
-              <p class="source">来源：<span>澎湃新闻网</span></p>
-              <p class="original-tit mt30">原标题：<span>王健林29亿元出售美国加州地块，万达海外只剩一个地产项目</span></p>
-              <p>王健林又卖掉了万达在海外的一个项目。11月16日，据《华尔街日报》报道，大连万达集团同意出售位于美国加州比弗利山庄一块地块。伦敦房地产公司Cain International的首席执行长Jonathan Goldstein称，该公司和Alagem Capital Group的合资企业已经同意收购这块八英亩的地皮，据知情人士，买家已经同意支付逾4.2亿美元（约合29.1亿元）。</p>
-              <div class="img-box"><img onclick="javascript:window.open(this.src)" src="../res/static/images/news_imgbig.jpg"></div>
-              <p class="mt30">今年年初，万达聘请仲量联行帮助出售该地块。据《华尔街日报》当时的报道，潜在的投标者最初被告知，万达希望的最低报价为6亿美元，但这一指导价后来降至5亿-6亿美元。由于报价达不到万达的要求，万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-              <p class="mt30">经纪商称，这宗地块被万达称为比佛利山庄一号的空置地块时洛杉矶地区高档开发地块之一。</p>
-              <p class="mt30">大连万达集团的官网上曾在2015年7月9日发表过一篇关于洛杉矶比弗利山项目的报道。当时引用了《洛杉矶时报》的报道称，该报对万达集团这一新项目给予了积极的评价，“万达洛杉矶比弗利山项目将作为其进军好莱坞重要的第一步，有望帮助中国进入好莱坞的电影业，并在国际范围推广中国文化。”</p>
-              <div class="share-title">
-                <span class="txt">分享:</span>
-                <a href="#">
-                  <i class="icon layui-icon layui-icon-login-wechat"></i>
-                </a>
-                <a href="#">
-                  <i class="icon layui-icon layui-icon-login-weibo"></i>
-                </a>
-                <a href="#">
-                  <i class="icon layui-icon layui-icon-login-qq"></i>
-                </a>
-                <button class="layui-btn Collection">
-                  ❤<span>已收藏</span>
-                </button>
-              </div>
+              <div id="content"></div>
             </div>
             <div class="leave-message" id="message">
               <div class="tit-box">
@@ -131,34 +114,8 @@
                     </div>
                   </form>
                 </div>
+
                 <div class="ulCommentList">
-                  <div class="liCont">
-                    <a href="#"><img src="../res/static/images/header_img1.png"></a>
-                    <div class="item-cont">
-                      <div class="cont">
-                        <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-                        <p class="text">万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="liCont">
-                    <a href="#"><img src="../res/static/images/header_img1.png"></a>
-                    <div class="item-cont">
-                      <div class="cont">
-                        <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-                        <p class="text">万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="liCont">
-                    <a href="#"><img src="../res/static/images/header_img1.png"></a>
-                    <div class="item-cont">
-                      <div class="cont">
-                        <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-                        <p class="text">万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-                      </div>
-                    </div>
-                  </div>
                   <div class="liCont">
                     <a href="#"><img src="../res/static/images/header_img1.png"></a>
                     <div class="item-cont">
@@ -233,16 +190,6 @@
                       <a href="#">中流击水 奋楫者进_中共十九大</a>
               
                   </li>
-                  <li class="list">
-            
-                      <a href="#">你好！新时代_2018全国两会</a>
-              
-                  </li>
-                  <li class="list">
-            
-                      <a href="#">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
-              
-                  </li>
                 </ul>
               </div>
             </div>
@@ -251,7 +198,7 @@
       </div>
     </div>
   </div>
-  
+
 
 
 
@@ -264,43 +211,76 @@
         <a href="#">常见问题</a>
       </div>
       <div class="Copyright">
-        <span>Copyright&nbsp;</span>&nbsp;&copy;<span>新闻网&nbsp;&nbsp;</span><span>赣ICP备12345678号</span>
+        <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
       </div>
       <div class="f-icon">
         <a href="#" class="w-icon">
-          <img src="../res/static/images/wechat_ic.png">
+          <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
         </a>
         <a href="#" class="wb-icon">
-          <img src="../res/static/images/qq_ic.png">
+          <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
         </a>
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" src="../res/layui/layui.js"></script>
+  <script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
   <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script>
     layui.config({
-      base: '../res/static/js/' 
-    }).use('index',function(){
-      var index = layui.index,$ = layui.$;
-      index.EnterMessage()
-      index.Page('micronews-details-test',50)
+      base: '/layuiadmin/'
+    }).extend({
+      index: 'lib/index'
+    }).use(['index', 'news'], function () {
+      var news = layui.news
+              , $ = layui.$
+              , admin = layui.admin
+              , element = layui.element;
+
+      // index.Page('micronews-details-test',50);
+      // 导航渲染
+      element.render('nav', 'component-nav');
+
+      news.EnterMessage();
+      // index.Page('micronews-details-test', 50);
       var collOff = true;
-      $('.Collection').on('click',function(){
-        if(collOff){
+      $('.Collection').on('click', function () {
+        if (collOff) {
           $(this).addClass('active')
-        }else{
+        } else {
           $(this).removeClass('active')
         }
         collOff = !collOff
-      })
-      index.seachBtn()
-      index.onInput()
-      index.arrowutil()
+      });
+      news.seachBtn();
+      news.onInput();
+      news.arrowutil();
+
+      // 渲染页面主体内容
+      getDetail(GetQueryString('id'));
+
+      function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      }
+
+      // 加载页面内容
+      function getDetail(id) {
+        admin.req({
+          url: '/travel-essay/detail'
+          , data: {id: id}
+          , success: function (res) {
+            var data = res.data;
+            $("#title").text(data.title);
+            $("#createTime").text(data.createTime);
+            $("#content").html(data.content);
+          }
+        });
+      }
     });
   </script>
 </body>

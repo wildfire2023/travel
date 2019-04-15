@@ -13,7 +13,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class EssayWithUser extends TravelEssay {
+
     private String nickname;
 
     private String imgUrl;
+
 }

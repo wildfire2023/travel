@@ -1,15 +1,20 @@
 package com.waner.primary.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.databind.BeanProperty;
 import com.google.common.collect.Lists;
+import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelEssay;
-import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.entity.TravelUser;
 import com.waner.primary.web.mapper.TravelEssayMapper;
+import com.waner.primary.web.mapper.TravelUserMapper;
 import com.waner.primary.web.service.TravelEssayService;
 import com.waner.primary.web.vo.EssayWithUser;
+import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +23,11 @@ import java.util.stream.Collectors;
 public class TravelEssayServiceImpl implements TravelEssayService {
 
     private final TravelEssayMapper essayMapper;
+    private final TravelUserMapper userMapper;
 
-    public TravelEssayServiceImpl(TravelEssayMapper essayMapper) {
+    public TravelEssayServiceImpl(TravelEssayMapper essayMapper, TravelUserMapper userMapper) {
         this.essayMapper = essayMapper;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -99,5 +106,23 @@ public class TravelEssayServiceImpl implements TravelEssayService {
                 .map(TravelEssay::getId)
                 .collect(Collectors.toList());
         return essayMapper.deleteBatchIds(ids);
+    }
+
+    /**
+     * 根据游记主键获取游记详情信息
+     * @param id
+     * @return
+     */
+    @Override
+    @Transactional
+    public Response<EssayWithUser> getEssayDetail(Integer id) {
+        TravelEssay travelEssay = essayMapper.selectByPrimaryKey(id);
+        int userId = travelEssay.getSysUserId();
+        TravelUser travelUser = userMapper.selectByPrimaryKey(userId);
+        EssayWithUser essayWithUser = new EssayWithUser();
+        // 复制properties
+        BeanUtils.copyProperties(travelEssay, essayWithUser);
+        BeanUtils.copyProperties(travelUser, essayWithUser);
+        return Response.success(essayWithUser);
     }
 }

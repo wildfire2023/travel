@@ -1,5 +1,6 @@
 package com.waner.primary.web.service;
 
+import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.vo.EssayWithUser;
 
@@ -15,4 +16,6 @@ public interface TravelEssayService {
     int modify(TravelEssay essay);
 
     int remove(TravelEssay[] essays);
+
+    Response<EssayWithUser> getEssayDetail(Integer id);
 }
