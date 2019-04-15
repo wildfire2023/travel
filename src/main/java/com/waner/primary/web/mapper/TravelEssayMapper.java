@@ -23,7 +23,7 @@ public interface TravelEssayMapper extends BaseMapper<TravelEssay> {
 
     int updateByPrimaryKey(TravelEssay record);
 
-    IPage<EssayWithUser> selectPageVo(Page pageHelper, @Param("essay") TravelEssay essay, @Param("checkStatus") Integer checkStatus);
+    IPage<EssayWithUser> selectPageVo(Page pageHelper, @Param("essay") EssayWithUser essay, @Param("checkStatus") Integer checkStatus);
 
     int count(@Param("essay")EssayWithUser essay, @Param("checkStatus")Integer checkPushFlag);
 }

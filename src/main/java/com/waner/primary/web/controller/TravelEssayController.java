@@ -32,6 +32,15 @@ public class TravelEssayController {
     }
 
     /**
+     * 返回到前端游记列表
+     * @return
+     */
+    @GetMapping("list-page")
+    public String frontEssayListPage() {
+        return "front/essay-list";
+    }
+
+    /**
      * 返回前端编写游记页面
      * @return
      */
@@ -90,7 +99,56 @@ public class TravelEssayController {
         List<EssayWithUser> essays =  essayService.getList(essay, limit, page, checkPushFlag);
         int count = essayService.getCount(essay, checkPushFlag);
         return new TableResult<>(200, "" ,count, essays);
-
     }
+
+    /**
+     * 返回到游记审核详情页面
+     * @return
+     */
+    @GetMapping("edit-page")
+    public String editPage() {
+        return "/background/app/content/essay-listform";
+    }
+
+
+    /**
+     * 游记发表审核--->状态扭转
+     * @param essay
+     * @return
+     */
+    @PostMapping("audit")
+    @ResponseBody
+    public Response<String> audit(TravelEssay essay) {
+        if (ObjectUtils.isEmpty(essay)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = essayService.modify(essay);
+        if (ret > 0) {
+            return Response.success("审核成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
+
+    /**
+     * 批量删除实现
+     * @param essays
+     * @return
+     */
+    @PostMapping("batch-delete")
+    @ResponseBody
+    public Response<String> removeRecommend(@RequestBody TravelEssay[] essays) {
+        if (ObjectUtils.isEmpty(essays)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = essayService.remove(essays);
+        if (ret > 0) {
+            return Response.success("删除成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
 
 }

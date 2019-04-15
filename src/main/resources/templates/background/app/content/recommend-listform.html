@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>文章添加</title>
+    <title>文章表单</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -114,8 +114,7 @@
                     if (res.code === 200) {
                         layer.msg(res.data, {
                             time: 1000
-                        })
-                        ;
+                        });
                     }
                 }
             });

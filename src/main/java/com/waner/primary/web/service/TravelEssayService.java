@@ -11,4 +11,8 @@ public interface TravelEssayService {
     List<EssayWithUser> getList(EssayWithUser essay, int limit, int page, boolean checkPushFlag);
 
     int getCount(EssayWithUser essay, boolean checkPushFlag);
+
+    int modify(TravelEssay essay);
+
+    int remove(TravelEssay[] essays);
 }

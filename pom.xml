@@ -9,6 +9,7 @@
     <name>primary</name>
     <description>A travel recommended site</description>
 
+
     <!-- spring4 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -96,11 +97,6 @@
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
             <version>5.4.10</version>
-        </dependency>
-        <!-- 热更新-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
 

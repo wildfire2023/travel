@@ -1,14 +1,18 @@
 package com.waner.primary.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
 import com.waner.primary.web.entity.TravelEssay;
+import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelEssayMapper;
 import com.waner.primary.web.service.TravelEssayService;
 import com.waner.primary.web.vo.EssayWithUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TravelEssayServiceImpl implements TravelEssayService {
@@ -70,5 +74,30 @@ public class TravelEssayServiceImpl implements TravelEssayService {
         } else {
             return essayMapper.count(essay, null);
         }
+    }
+
+    /**
+     * 审核游记
+     * @param essay
+     * @return
+     */
+    @Override
+    public int modify(TravelEssay essay) {
+        // 设置发表标志位1
+        essay.setPushFlag((byte) 1);
+        return essayMapper.updateByPrimaryKeySelective(essay);
+    }
+
+    /**
+     * 批量删除游记
+     * @param essays
+     * @return
+     */
+    @Override
+    public int remove(TravelEssay[] essays) {
+        List<Integer> ids = Lists.newArrayList(essays).parallelStream()
+                .map(TravelEssay::getId)
+                .collect(Collectors.toList());
+        return essayMapper.deleteBatchIds(ids);
     }
 }

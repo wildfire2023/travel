@@ -167,7 +167,7 @@
         </if>
         <!-- 后台管理员调用 -->
         <if test="checkStatus == null">
-          <if test="essay.pushFlag != null and essay.pushFlag != ''">
+          <if test="essay.pushFlag != null">
             and essay.push_flag = #{essay.pushFlag}
           </if>
         </if>
@@ -192,7 +192,7 @@
         </if>
         <!-- 后台管理员调用 -->
         <if test="checkStatus == null">
-          <if test="essay.pushFlag != null and essay.pushFlag != ''">
+          <if test="essay.pushFlag != null">
             and essay.push_flag = #{essay.pushFlag}
           </if>
         </if>

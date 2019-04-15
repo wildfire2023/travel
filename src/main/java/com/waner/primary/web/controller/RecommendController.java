@@ -134,7 +134,7 @@ public class RecommendController {
         }
         int ret = recommendService.modifyRecommend(recommend);
         if (ret > 0) {
-            return Response.success("添加成功");
+            return Response.success("修改成功");
         } else {
             return Response.fail(CodeMsg.FAIL);
         }
