@@ -11,4 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("question")
 public class QuestionResolverController {
+
+
 }
