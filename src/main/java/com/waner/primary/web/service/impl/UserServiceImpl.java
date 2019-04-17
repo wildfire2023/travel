@@ -16,7 +16,9 @@ import com.waner.primary.web.mapper.SysRoleMapper;
 import com.waner.primary.web.mapper.SysUserMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
 import com.waner.primary.web.service.UserService;
+import com.waner.primary.web.vo.SessionUser;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -76,8 +78,12 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(dbUser)) {
             return Response.fail(CodeMsg.USER_PASS_ERROR);
         }
+        TravelUser travelUser = travelUserMapper.selectByPrimaryKey(dbUser.getId());
+        SessionUser sessionUser = new SessionUser();
+        BeanUtils.copyProperties(dbUser, sessionUser);
+        sessionUser.setImgUrl(travelUser.getImgUrl());
         // 添加用户信息
-        session.setAttribute("sessionUser", dbUser);
+        session.setAttribute("sessionUser", sessionUser);
         // 设定session存储时长
         session.setMaxInactiveInterval(60 * 60 * 24);
         // 查询用户角色

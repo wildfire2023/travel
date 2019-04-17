@@ -1,5 +1,7 @@
 package com.waner.primary.web.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.web.entity.TravelComment;
 import com.waner.primary.web.mapper.TravelCommentMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
@@ -23,6 +25,7 @@ public class EssayCommentServiceImpl implements EssayCommentService {
 
     /**
      * 插入评论--->事务操作
+     *
      * @param essayId
      * @param userId
      * @param content
@@ -40,18 +43,36 @@ public class EssayCommentServiceImpl implements EssayCommentService {
         // 插入评论表
         int commentRet = commentMapper.insertTravelCommentMapper(travelComment);
         // 插入文章-评论表
-        int relativeRet =  commentMapper.insertEssayCommentRelative(essayId, travelComment.getId());
+        int relativeRet = commentMapper.insertEssayCommentRelative(essayId, travelComment.getId());
         return commentRet + relativeRet;
     }
 
     /**
      * 查询文章对应的评论列表信息
+     *
+     * @param essayId
+     * @param limit
+     * @param page
+     * @return
+     */
+    @Override
+    public List<CommentWithUser> listComments(Integer essayId, int limit, Integer page) {
+        Page<CommentWithUser> pageHelper = new Page<>();
+        pageHelper.setSize(limit);
+        pageHelper.setCurrent(page);
+
+        IPage<CommentWithUser> pageVo = commentMapper.queryCommentsWithUser(pageHelper, essayId);
+        return pageVo.getRecords();
+    }
+
+    /**
+     * 查询文章对应的评论列表总数
+     *
      * @param essayId
      * @return
      */
     @Override
-    public List<CommentWithUser> listComments(Integer essayId) {
-        
-        return null;
+    public int getCommentsCountWithEssay(Integer essayId) {
+        return commentMapper.queryCommentsWithUserCount(essayId);
     }
 }

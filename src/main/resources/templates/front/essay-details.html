@@ -76,7 +76,7 @@
                 <a href="#message">
                 <span class="icon message" >
                   <i class="layui-icon layui-icon-dialogue"></i>
-                  <b>500</b>条
+                  <b class="comment-num"></b>条
                 </span>
                 </a>
                 <span class="icon time">
@@ -91,11 +91,15 @@
             <div class="leave-message" id="message">
               <div class="tit-box">
                 <span class="tit">网友跟帖</span>
-                <span class="num"><b>500</b>条</span>
+                <span class="num"><b class="comment-num"></b>条</span>
               </div>
               <div class="content-box">
                 <div class="tear-box">
-                  <a href="#"><img src="../res/static/images/header_img1.png"></a>
+
+                  <a th:if="${session.sessionUser != null}" href="#">
+                    <img th:if="${session.sessionUser.imgUrl != null}" style="width: 28px;height: 28px;" th:src="${session.sessionUser.imgUrl}" />
+                  </a>
+
                   <form class="layui-form">
                     <div class="layui-form-item layui-form-text">
                       <div class="layui-input-block">
@@ -116,17 +120,11 @@
                 </div>
 
                 <div class="ulCommentList">
-                  <div class="liCont">
-                    <a href="#"><img src="../res/static/images/header_img1.png"></a>
-                    <div class="item-cont">
-                      <div class="cont">
-                        <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-                        <p class="text">万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-                      </div>
-                    </div>
+                  <div class="liCont" id="view">
+
                   </div>
                 </div>
-                <div id="micronews-details-test" style="text-align: center;"></div>
+                <div id="page" style="text-align: center"></div>
               </div>
             </div>
           </div>
@@ -135,17 +133,21 @@
 
         <!-- 留言模版引擎 -->
         <script type="text/html" id="messageTpl">
+          {{#  layui.each(d, function(index, item){ }}
           <div class="liCont">
+            {{# if(item.imgUrl){ }}
             <a href="">
-              <img src="{{d.headImgUrl}}">
+              <img src="{{item.imgUrl}}" />
             </a>
+            {{#  } }}
             <div class="item-cont">
               <div class="cont">
-                <p><span class="name">{{d.nickname}}</span><span class="time">1小时前</span></p>
-                <p class="text">{{d.content}}</p>
+                <p><span class="name">{{item.nickname}}</span><span class="time">{{item.createTime}}</span></p>
+                <p class="text">{{item.content}}</p>
               </div>
             </div>
           </div>
+          {{#  }); }}
         </script>
 
 
@@ -199,6 +201,9 @@
       // 获取sessionUser信息
       var user = [[${session.sessionUser}]];
       var essayId = GetQueryString('id');
+
+      // 加载留言列表
+      news.MessageList(essayId);
 
       news.EnterMessage(user,essayId);
       // index.Page('micronews-details-test', 50);

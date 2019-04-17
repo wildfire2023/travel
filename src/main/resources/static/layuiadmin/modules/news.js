@@ -91,7 +91,6 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
         EnterMessage: function (user, essayId) {
             $('.micronews-details-Publish').on('click', function (e) {
                 var event = e || event;
-                var img = $(this).parents('form').siblings('a').find('img').attr('src');
                 var messagetext = $(this).siblings('.message-text').find('.txt');
                 var textarea = $(this).parents('.layui-form-item').siblings('.layui-form-text').children('.layui-input-block').children('textarea');
                 if (user == null) {
@@ -103,11 +102,23 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
                     return;
                 }
                 var name = $(textarea).val();
-                var data = {
-                    headImgUrl: img,
-                    nickname: '我是锦鲤',
-                    content: name
-                };
+                var data;
+                // var img = $(this).parents('form').siblings('a').find('img').attr('src');
+                var img = user.imgUrl;
+                if (img === "" || img == null) {
+                    data = [{
+                        nickname: user.nickname,
+                        createTime: '刚刚',
+                        content: name
+                    }];
+                } else {
+                    data = [{
+                        imgUrl: user.imgUrl,
+                        nickname: user.nickname,
+                        createTime: '刚刚',
+                        content: name
+                    }];
+                }
                 // 执行留言方法
                 admin.req({
                     url: '/travel-essay/add-comment'
@@ -123,6 +134,61 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
                 textarea.val("");
                 return false;
             })
+        },
+        // 留言列表
+        MessageList: function (essayId) {
+            var page = 1;
+            var limit = 10;
+
+            admin.req({
+                url: '/travel-essay/list-comments'
+                , type: 'post'
+                , data: {limit: limit, page: page, essayId: essayId}
+                , success: function (res) {
+                    // 获取节点
+                    var html = messageTpl.innerHTML;
+                    // 执行tpl渲染
+                    laytpl(html).render(res.data, function (html) {
+                        document.getElementById('view').innerHTML = html;
+                    });
+                    // 设置留言条数
+                    $('.comment-num').text(res.count);
+                    laypage.render({
+                        elem: 'page'
+                        , count: res.count
+                        , first: '首页'
+                        , last: '尾页'
+                        , prev: '<em>←</em>'
+                        , next: '<em>→</em>'
+                        , limit: limit
+                        , jump: function (obj, first) {
+                            page = obj.curr;
+                            limit = obj.limit;
+                            if (!first) {
+                                // loadData();
+                                admin.req({
+                                    url: '/travel-essay/list-comments'
+                                    , type: 'post'
+                                    , async: false
+                                    , data: {
+                                        limit: limit
+                                        , page: page
+                                        , essayId: essayId
+                                    }, success: function (res) {
+                                        // 获取节点
+                                        var html = messageTpl.innerHTML;
+                                        // 执行tpl渲染
+                                        laytpl(html).render(res.data, function (html) {
+                                            document.getElementById('view').innerHTML = html;
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
         },
         onInput: function () {
             // if (!("oninput" in document.body)) {

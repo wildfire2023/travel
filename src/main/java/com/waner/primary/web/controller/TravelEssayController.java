@@ -205,15 +205,22 @@ public class TravelEssayController {
         }
     }
 
+    /**
+     * 游记留言列表
+     * @param essayId
+     * @return
+     */
     @PostMapping("list-comments")
     @ResponseBody
-    public Response<List<CommentWithUser>> listComments(Integer essayId) {
+    public TableResult<List<CommentWithUser>> listComments(Integer essayId, int limit,
+                                                        int page) {
         if (essayId == null) {
             throw new GlobalException("空参数", 500100);
         }
-        List<CommentWithUser> comments = commentService.listComments(essayId);
+        List<CommentWithUser> comments = commentService.listComments(essayId, limit, page);
+        int count = commentService.getCommentsCountWithEssay(essayId);
         // 返回成功响应的数据
-        return Response.success(comments);
+        return new TableResult<>(200, "", count, comments);
     }
 
 }
