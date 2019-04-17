@@ -5,12 +5,14 @@ import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.SysUser;
 import com.waner.primary.web.entity.TravelEssay;
-import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.TravelEssayService;
+import com.waner.primary.web.vo.CommentWithUser;
 import com.waner.primary.web.vo.EssayWithUser;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +29,16 @@ import java.util.List;
 public class TravelEssayController {
 
     private final TravelEssayService essayService;
+    private final EssayCommentService commentService;
 
-    public TravelEssayController(TravelEssayService essayService) {
+    public TravelEssayController(TravelEssayService essayService, EssayCommentService commentService) {
         this.essayService = essayService;
+        this.commentService = commentService;
     }
 
+    //-------------------------------------------------------------------------
+    // 游记相关方法
+    //-------------------------------------------------------------------------
 
     /**
      * 返回到前端游记列表
@@ -173,5 +180,40 @@ public class TravelEssayController {
         return "front/essay-details";
     }
 
+    //-------------------------------------------------------------------------
+    // 评论相关方法
+    //-------------------------------------------------------------------------
+
+    /**
+     * 新增评论
+     * @param essayId
+     * @param userId
+     * @param content
+     * @return
+     */
+    @PostMapping("add-comment")
+    @ResponseBody
+    public Response<String> addComment(Integer essayId, Integer userId, String content) {
+        if (essayId == null || userId == null || StringUtils.isEmpty(content)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = commentService.add(essayId, userId, content);
+        if (ret > 1) {
+            return Response.success("评论成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
+    @PostMapping("list-comments")
+    @ResponseBody
+    public Response<List<CommentWithUser>> listComments(Integer essayId) {
+        if (essayId == null) {
+            throw new GlobalException("空参数", 500100);
+        }
+        List<CommentWithUser> comments = commentService.listComments(essayId);
+        // 返回成功响应的数据
+        return Response.success(comments);
+    }
 
 }

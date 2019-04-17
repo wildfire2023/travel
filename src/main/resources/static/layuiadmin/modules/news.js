@@ -11,7 +11,8 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
         , element = layui.element
         , laypage = layui.laypage
         , form = layui.form
-        , util = layui.util;
+        , util = layui.util
+        , admin = layui.admin;
 
 
     // 模拟首页数据
@@ -87,24 +88,34 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
 
 
         // 输入留言
-        EnterMessage: function () {
+        EnterMessage: function (user, essayId) {
             $('.micronews-details-Publish').on('click', function (e) {
                 var event = e || event;
                 var img = $(this).parents('form').siblings('a').find('img').attr('src');
                 var messagetext = $(this).siblings('.message-text').find('.txt');
                 var textarea = $(this).parents('.layui-form-item').siblings('.layui-form-text').children('.layui-input-block').children('textarea');
+                if (user == null) {
+                    messagetext.text('请登录后发表评论');
+                    return;
+                }
                 if (!textarea.val()) {
                     messagetext.text('请输入留言');
                     return;
                 }
                 var name = $(textarea).val();
-                var view = $('.ulCommentList');
-                var html = messageTpl.innerHTML;
                 var data = {
-                    avatar: img,
-                    name: '我是锦鲤',
-                    cont: name,
+                    headImgUrl: img,
+                    nickname: '我是锦鲤',
+                    content: name
                 };
+                // 执行留言方法
+                admin.req({
+                    url: '/travel-essay/add-comment'
+                    , type: 'post'
+                    , data: {essayId: essayId, userId: user.id, content: name}
+                });
+                var html = messageTpl.innerHTML;
+                var view = $('.ulCommentList');
                 $('.message-text .txt').text('');
                 laytpl(html).render(data, function (html) {
                     view.prepend(html)

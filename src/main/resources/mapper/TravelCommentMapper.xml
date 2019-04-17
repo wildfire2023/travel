@@ -22,7 +22,7 @@
     delete from travel_comment
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insertTravelCommentMapper" parameterType="com.waner.primary.web.entity.TravelComment" >
+  <insert id="insertTravelCommentMapper" parameterType="com.waner.primary.web.entity.TravelComment" useGeneratedKeys="true" keyProperty="id">
     insert into travel_comment (id, parent_id, sys_user_id, 
       content, create_time, del_flag
       )
@@ -103,4 +103,8 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <insert id="insertEssayCommentRelative">
+        insert into travel_essay_comment(travel_essay_id,travel_comment_id) values (#{essayId}, #{commentId})
+
+    </insert>
 </mapper>
