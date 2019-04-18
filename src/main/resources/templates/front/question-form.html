@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Waner - 游记撰写</title>
+    <title>Waner - 问题提出</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
@@ -75,22 +75,9 @@
 <div class="micronews-container micronews-details-container w1000">
     <div class="layui-form" lay-filter="essay-form" id="essay-form">
         <div class="layui-form-item">
-            <div class="layui-input-inline" style="width: 70%">
-                <input name="headImgUrl" id="LAY_headImgSrc" placeholder="请上传游记头图"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-input-inline layui-btn-container" style="width: auto;">
-                <button type="button" class="layui-btn layui-btn-primary" id="LAY_headImgUpload">
-                    <i class="layui-icon">&#xe67c;</i>上传图片
-                </button>
-                <button class="layui-btn layui-btn-primary" layadmin-event="headImgPreview">查看图片
-                </button>
-            </div>
-        </div>
-        <div class="layui-form-item">
             <!--            <label class="layui-form-label">文章标题</label>-->
             <div class="layui-input-inline" style="width: 100%;">
-                <input type="text" name="title" id="title" lay-verify="required" placeholder="请输入游记标题"
+                <input type="text" name="title" id="title" lay-verify="required" placeholder="请输入问题标题"
                        autocomplete="off"
                        class="layui-input">
             </div>
@@ -107,7 +94,7 @@
         <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-inline" style="width:100%;text-align: center;">
                 <button type="button" class="layui-btn" style="background-color: #6294b5;width: 160px;" lay-submit=""
-                        lay-filter="essay-form-submit">发表游记
+                        lay-filter="question-form-submit">提出问题
                 </button>
             </div>
         </div>
@@ -126,12 +113,10 @@
             , admin = layui.admin
             , layedit = layui.layedit
             , form = layui.form;
-
-        // 版图渲染
-        news.banner();
+        
         // 搜索按钮
         news.seachBtn();
-        //
+        // 右侧小箭头
         news.arrowutil();
 
         // layedit set
@@ -140,7 +125,7 @@
                 url: '/file/upload'
                 , type: 'post'
             }
-            , height: 900
+            , height: 280
         });
 
         //富文本编辑器
@@ -155,10 +140,10 @@
         /**
          * 监听表格提交
          */
-        form.on('submit(essay-form-submit)', function (data) {
+        form.on('submit(question-form-submit)', function (data) {
             var field = data.field;
             admin.req({
-                url: '/travel-essay/post'
+                url: '/question/add'
                 , data: field
                 , type: 'post'
                 , success: function (res) {
@@ -166,16 +151,15 @@
                         layer.msg(res.data, {
                             time: 1000
                         });
-                        // TODO 执行跳转
+                        // TODO 执行跳转到问题列表
                     } else {
-
+                        layer.msg(res.message);
                     }
 
                 }
             });
 
         });
-
 
     });
 </script>

@@ -1,249 +1,259 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>微新闻</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
+	<meta charset="UTF-8">
+	<title>微新闻</title>
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
-  <div class="micronews-header-wrap">
-    <div class="micronews-header w1000 layui-clear">
-      <h1 class="logo">
-        <a href="/">
-          <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
-          <span class="layui-hide">logo</span>
-        </a>
-      </h1>
-      <p class="nav">
-        <a href="/front/page/index" >推荐</a>
-        <a href="/travel-essay/list-page" class="active">游记</a>
-        <a href="#">问答</a>
-      </p>
-      <div class="search-bar">
-        <form class="layui-form" action="">
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <input type="text" name="title"  placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
-              <button class="layui-btn search-btn"  formnovalidate><i class="layui-icon layui-icon-search"></i></button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="login">
-        <a th:if="${session.sessionUser == null}" href="/front/page/login">
-          登录
-        </a>
-        <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
-        <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;" lay-filter="component-nav">
-          <li class="layui-nav-item" >
-            <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
-          </li>
-          <li class="layui-nav-item">
-            <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
-          </li>
-          <li class="layui-nav-item" lay-unselect="">
-            <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
-            <dl class="layui-nav-child">
-              <dd style="text-align: center;"><a href="javascript:;" >修改信息</a></dd>
-              <dd style="text-align: center;"><a href="/user/person-info" >个人资料</a></dd>
-              <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
-            </dl>
-          </li>
-        </ul>
-      </div>
-      <div class="menu-icon">
-        <i class="layui-icon layui-icon-more-vertical"></i>
-      </div>
-    </div>
-  </div>
+<div class="micronews-header-wrap">
+	<div class="micronews-header w1000 layui-clear">
+		<h1 class="logo">
+			<a href="/">
+				<img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+				<span class="layui-hide">logo</span>
+			</a>
+		</h1>
+		<p class="nav">
+			<a href="/front/page/index">推荐</a>
+			<a href="/travel-essay/list-page" class="active">游记</a>
+			<a href="#">问答</a>
+		</p>
+		<div class="search-bar">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
+						<button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="login">
+			<a th:if="${session.sessionUser == null}" href="/front/page/login">
+				登录
+			</a>
+			<!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+			<ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
+			    lay-filter="component-nav">
+				<li class="layui-nav-item">
+					<a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;" style="font-size: 16px;color: #222;"><span
+							th:text="${session.sessionUser.nickname}"></span></a>
+					<dl class="layui-nav-child">
+						<dd style="text-align: center;"><a href="javascript:;">修改信息</a></dd>
+						<dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
+						<dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<div class="menu-icon">
+			<i class="layui-icon layui-icon-more-vertical"></i>
+		</div>
+	</div>
+</div>
 
 
-  <div class="micronews-container micronews-details-container w1000">
-    <div class="layui-fluid">
-      <div class="layui-row">
-        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-          <div class="main">
-            <div class="title">
-              <h3 id="title"></h3>
-              <div class="b-txt">
-                <span class="label">财经</span>
-                <span class="icon">
+<div class="micronews-container micronews-details-container w1000">
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+				<div class="main">
+					<div class="title">
+						<h3 id="title"></h3>
+						<div class="b-txt">
+                <span class="icon message">
+            <i class="layui-icon layui-icon-user"></i>
+                <b><span id="user-nickname"></span></b>
+                </span>
+							<span class="icon">
                   <i class="layui-icon layui-icon-radio"></i>
                   <b>3002</b>人
                 </span>
-                <a href="#message">
-                <span class="icon message" >
+							<a href="#message">
+                <span class="icon message">
                   <i class="layui-icon layui-icon-dialogue"></i>
                   <b class="comment-num"></b>条
                 </span>
-                </a>
-                <span class="icon time">
+							</a>
+							<span class="icon time">
                   <i class="layui-icon layui-icon-log"></i>
                   <span id="createTime"></span>
                 </span>
-              </div>
-            </div>
-            <div class="article">
-              <div id="content"></div>
-            </div>
-            <div class="leave-message" id="message">
-              <div class="tit-box">
-                <span class="tit">网友跟帖</span>
-                <span class="num"><b class="comment-num"></b>条</span>
-              </div>
-              <div class="content-box">
-                <div class="tear-box">
+						</div>
+					</div>
+					<div class="article">
+						<div id="content"></div>
+					</div>
+					<div class="leave-message" id="message">
+						<div class="tit-box">
+							<span class="tit">网友跟帖</span>
+							<span class="num"><b class="comment-num"></b>条</span>
+						</div>
+						<div class="content-box">
+							<div class="tear-box">
 
-                  <a th:if="${session.sessionUser != null}" href="#">
-                    <img th:if="${session.sessionUser.imgUrl != null}" style="width: 28px;height: 28px;" th:src="${session.sessionUser.imgUrl}" />
-                  </a>
+								<a th:if="${session.sessionUser != null}" href="#">
+									<img th:if="${session.sessionUser.imgUrl != null}" style="width: 28px;height: 28px;"
+									     th:src="${session.sessionUser.imgUrl}"/>
+								</a>
 
-                  <form class="layui-form">
-                    <div class="layui-form-item layui-form-text">
-                      <div class="layui-input-block">
-                        <textarea id="onInput"  placeholder="请输入内容" class="layui-textarea"></textarea>
-                      </div>
-                    </div>
-                    <div class="layui-form-item">
-                      <div class="layui-input-block" style="text-align: right;">
-                        <div class="message-text">
-                          <div class="txt">
-                            
-                          </div>
-                        </div>
-                        <button type="button" class="layui-btn micronews-details-Publish">发表</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+								<form class="layui-form">
+									<div class="layui-form-item layui-form-text">
+										<div class="layui-input-block">
+											<textarea id="onInput" placeholder="请输入内容"
+											          class="layui-textarea"></textarea>
+										</div>
+									</div>
+									<div class="layui-form-item">
+										<div class="layui-input-block" style="text-align: right;">
+											<div class="message-text">
+												<div class="txt">
 
-                <div class="ulCommentList">
-                  <div class="liCont" id="view">
+												</div>
+											</div>
+											<button type="button" class="layui-btn micronews-details-Publish">发表
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
 
-                  </div>
-                </div>
-                <div id="page" style="text-align: center"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+							<div class="ulCommentList">
+								<div class="liCont" id="view">
 
-
-        <!-- 留言模版引擎 -->
-        <script type="text/html" id="messageTpl">
-          {{#  layui.each(d, function(index, item){ }}
-          <div class="liCont">
-            {{# if(item.imgUrl){ }}
-            <a href="">
-              <img src="{{item.imgUrl}}" />
-            </a>
-            {{#  } }}
-            <div class="item-cont">
-              <div class="cont">
-                <p><span class="name">{{item.nickname}}</span><span class="time">{{item.createTime}}</span></p>
-                <p class="text">{{item.content}}</p>
-              </div>
-            </div>
-          </div>
-          {{#  }); }}
-        </script>
+								</div>
+							</div>
+							<div id="page" style="text-align: center"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
-      </div>
-    </div>
-  </div>
+			<!-- 留言模版引擎 -->
+			<script type="text/html" id="messageTpl">
+				{{#  layui.each(d, function(index, item){ }}
+				<div class="liCont">
+					{{# if(item.imgUrl){ }}
+					<a href="">
+						<img src="{{item.imgUrl}}"/>
+					</a>
+					{{# } }}
+					<div class="item-cont">
+						<div class="cont">
+							<p><span class="name">{{item.nickname}}</span><span class="time">{{item.createTime}}</span>
+							</p>
+							<p class="text">{{item.content}}</p>
+						</div>
+					</div>
+				</div>
+				{{#  }); }}
+			</script>
 
 
+		</div>
+	</div>
+</div>
 
 
-  <div class="micronews-footer-wrap">
-    <div class="micronews-footer w1000">
-      <div class="ft-nav">
-        <a href="#">关于我们</a>
-        <a href="#">合作伙伴</a>
-        <a href="#">广告服务</a>
-        <a href="#">常见问题</a>
-      </div>
-      <div class="Copyright">
-        <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
-      </div>
-      <div class="f-icon">
-        <a href="#" class="w-icon">
-          <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
-        </a>
-        <a href="#" class="wb-icon">
-          <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
-        </a>
-      </div>
-    </div>
-  </div>
-  <script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
-  <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <script th:inline="javascript">
+<div class="micronews-footer-wrap">
+	<div class="micronews-footer w1000">
+		<div class="ft-nav">
+			<a href="#">关于我们</a>
+			<a href="#">合作伙伴</a>
+			<a href="#">广告服务</a>
+			<a href="#">常见问题</a>
+		</div>
+		<div class="Copyright">
+			<span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
+		</div>
+		<div class="f-icon">
+			<a href="#" class="w-icon">
+				<img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
+			</a>
+			<a href="#" class="wb-icon">
+				<img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
+			</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script th:inline="javascript">
     layui.config({
-      base: '/layuiadmin/'
+        base: '/layuiadmin/'
     }).extend({
-      index: 'lib/index'
+        index: 'lib/index'
     }).use(['index', 'news'], function () {
-      var news = layui.news
-              , $ = layui.$
-              , admin = layui.admin
-              , element = layui.element;
+        var news = layui.news
+            , $ = layui.$
+            , admin = layui.admin
+            , element = layui.element;
 
-      // index.Page('micronews-details-test',50);
-      // 导航渲染
-      element.render('nav', 'component-nav');
-      // 获取sessionUser信息
-      var user = [[${session.sessionUser}]];
-      var essayId = GetQueryString('id');
+        // index.Page('micronews-details-test',50);
+        // 导航渲染
+        element.render('nav', 'component-nav');
+        // 获取sessionUser信息
+        var user = [[${session.sessionUser}]];
+        var essayId = GetQueryString('id');
 
-      // 加载留言列表
-      news.MessageList(essayId);
+        // 加载留言列表
+        news.MessageList(essayId);
 
-      news.EnterMessage(user,essayId);
-      // index.Page('micronews-details-test', 50);
-      var collOff = true;
-      $('.Collection').on('click', function () {
-        if (collOff) {
-          $(this).addClass('active')
-        } else {
-          $(this).removeClass('active')
-        }
-        collOff = !collOff
-      });
-      news.seachBtn();
-      news.onInput();
-      news.arrowutil();
-
-      // 渲染页面主体内容
-      getDetail(essayId);
-
-      function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-      }
-
-      // 加载页面内容
-      function getDetail(id) {
-        admin.req({
-          url: '/travel-essay/detail'
-          , data: {id: id}
-          , success: function (res) {
-            var data = res.data;
-            $("#title").text(data.title);
-            $("#createTime").text(data.createTime);
-            $("#content").html(data.content);
-          }
+        news.EnterMessage(user, essayId);
+        // index.Page('micronews-details-test', 50);
+        var collOff = true;
+        $('.Collection').on('click', function () {
+            if (collOff) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+            collOff = !collOff
         });
-      }
+        news.seachBtn();
+        news.onInput();
+        news.arrowutil();
+
+        // 渲染页面主体内容
+        getDetail(essayId);
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        // 加载页面内容
+        function getDetail(id) {
+            admin.req({
+                url: '/travel-essay/detail'
+                , data: {id: id}
+                , success: function (res) {
+                    var data = res.data;
+                    $("#title").text(data.title);
+                    $("#createTime").text(data.createTime);
+                    $("#content").html(data.content);
+                    $("#user-nickname").text(data.nickname);
+                }
+            });
+        }
     });
-  </script>
+</script>
 </body>
 </html>

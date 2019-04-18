@@ -103,7 +103,7 @@
         var $ = layui.$, active = {
             batchdel: function () {
                 var checkStatus = table.checkStatus('LAY-app-content-list')
-                    , checkData = checkStatus.data; //得到选中的数据
+                        , checkData = checkStatus.data; //得到选中的数据
 
                 if (checkData.length === 0) {
                     return layer.msg('请选择数据');

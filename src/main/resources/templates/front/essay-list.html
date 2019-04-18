@@ -41,7 +41,7 @@
             <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;" style="font-size: 16px;color: #222;">提问</a>
+            <a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
           </li>
           <li class="layui-nav-item" lay-unselect="">
             <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
@@ -146,10 +146,10 @@
         <div class="b-txt">
           <!--<span class="label">{{item.label}}</span>-->
 
-          <!--<span class="icon message">-->
-            <!--<i class="layui-icon layui-icon-dialogue"></i>-->
-            <!--{{item.message}}-->
-          <!--</span>-->
+          <span class="icon message">
+            <i class="layui-icon layui-icon-user"></i>
+            {{item.nickname}}
+          </span>
           <span class="icon time">
             <i class="layui-icon layui-icon-log"></i>
              {{item.createTime}}
