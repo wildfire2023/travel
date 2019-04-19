@@ -5,19 +5,19 @@ import com.waner.primary.web.entity.SysRole;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMapper extends BaseMapper<SysRole> {
-    int deleteByPrimaryKey(Integer id);
+  int deleteByPrimaryKey(Integer id);
 
-    int insertSysRoleMapper(SysRole record);
+  int insertSysRoleMapper(SysRole record);
 
-    int insertSelective(SysRole record);
+  int insertSelective(SysRole record);
 
-    SysRole selectByPrimaryKey(Integer id);
+  SysRole selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(SysRole record);
+  int updateByPrimaryKeySelective(SysRole record);
 
-    int updateByPrimaryKey(SysRole record);
+  int updateByPrimaryKey(SysRole record);
 
-    SysRole queryRoleByUserId(@Param("userId") Integer userId);
+  SysRole queryRoleByUserId(@Param("userId") Integer userId);
 
-    int insertSysUserRole(@Param("userId") int userId,@Param("roleId") int roleId);
+  int insertSysUserRole(@Param("userId") int userId, @Param("roleId") int roleId);
 }

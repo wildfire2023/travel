@@ -21,10 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.waner.primary.web.mapper")
 public class PrimaryApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(PrimaryApplication.class, args);
-    }
-
-
+  public static void main(String[] args) {
+    SpringApplication.run(PrimaryApplication.class, args);
+  }
 }
-

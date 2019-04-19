@@ -1,272 +1,276 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>微新闻</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
+	<meta charset="UTF-8">
+	<title>微新闻</title>
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
-  <div class="micronews-header-wrap">
-    <div class="micronews-header w1000 layui-clear">
-      <h1 class="logo">
-        <a href="/">
-          <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
-          <span class="layui-hide">logo</span>
-        </a>
-      </h1>
-      <p class="nav">
-        <a href="/front/page/index" >推荐</a>
-        <a href="/travel-essay/list-page" class="active">游记</a>
-        <a href="#">问答</a>
-      </p>
-      <div class="search-bar">
-        <form class="layui-form" action="">
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <input type="text" name="title"  placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
-              <button class="layui-btn search-btn"  formnovalidate><i class="layui-icon layui-icon-search"></i></button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="login">
-        <a th:if="${session.sessionUser == null}" href="/front/page/login">
-          登录
-        </a>
-        <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
-        <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;" lay-filter="component-nav">
-          <li class="layui-nav-item" >
-            <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
-          </li>
-          <li class="layui-nav-item">
-            <a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
-          </li>
-          <li class="layui-nav-item" lay-unselect="">
-            <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
-            <dl class="layui-nav-child">
-              <dd style="text-align: center;"><a href="javascript:;" >修改信息</a></dd>
-              <dd style="text-align: center;"><a href="/user/person-info" >个人资料</a></dd>
-              <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
-            </dl>
-          </li>
-        </ul>
-      </div>
-      <div class="menu-icon">
-        <i class="layui-icon layui-icon-more-vertical"></i>
-      </div>
-    </div>
-  </div>
+<div class="micronews-header-wrap">
+	<div class="micronews-header w1000 layui-clear">
+		<h1 class="logo">
+			<a href="/">
+				<img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+				<span class="layui-hide">logo</span>
+			</a>
+		</h1>
+		<p class="nav">
+			<a href="/front/page/index">推荐</a>
+			<a href="/travel-essay/list-page" class="active">游记</a>
+			<a href="#">问答</a>
+		</p>
+		<div class="search-bar">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
+						<button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="login">
+			<a th:if="${session.sessionUser == null}" href="/front/page/login">
+				登录
+			</a>
+			<!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+			<ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
+			    lay-filter="component-nav">
+				<li class="layui-nav-item">
+					<a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;" style="font-size: 16px;color: #222;"><span
+							th:text="${session.sessionUser.nickname}"></span></a>
+					<dl class="layui-nav-child">
+						<dd style="text-align: center;"><a href="javascript:;">修改信息</a></dd>
+						<dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
+						<dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<div class="menu-icon">
+			<i class="layui-icon layui-icon-more-vertical"></i>
+		</div>
+	</div>
+</div>
 
-  <div class="micronews-container micronews-list-container w1000">
-    <!--<h3>娱乐资讯</h3>-->
-      <div class="layui-fluid">
-      <div class="layui-row">
-        <div class="layui-col-xs12 layui-col-sm12 layui-col-md8">
-          <div class="main">
-            <!-- 存放视图div -->
-            <div class="list-item" id="view">
+<div class="micronews-container micronews-list-container w1000">
+	<!--<h3>娱乐资讯</h3>-->
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<div class="layui-col-xs12 layui-col-sm12 layui-col-md8">
+				<div class="main">
+					<!-- 存放视图div -->
+					<div class="list-item" id="view">
 
-            </div>
+					</div>
 
-            <div id="page" style="text-align: center"></div>
-          </div>
-        </div>
-        <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-          <div class="popular-info popular-info-tog">
-            <div class="layui-card">
-              <div class="layui-card-header">
-                <h3>游记推荐</h3>
-              </div>
-              <div class="layui-card-body">
-                <ul class="list-box">
-                  <a href="recommend-details.html"><img src="../res/static/images/news_img15.jpg" width="100%"> </a>
-                  <li class="list">
+					<div id="page" style="text-align: center"></div>
+				</div>
+			</div>
+			<div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+				<div class="popular-info popular-info-tog">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<h3>游记推荐</h3>
+						</div>
+						<div class="layui-card-body">
+							<ul class="list-box">
+								<a href="recommend-details.html"><img src="../res/static/images/news_img15.jpg"
+								                                      width="100%"> </a>
+								<li class="list">
 
-                      <a href="recommend-details.html">南非金砖会议再造十年辉煌</a>
+									<a href="recommend-details.html">南非金砖会议再造十年辉煌</a>
 
-                  </li>
-                  <li class="list">
+								</li>
+								<li class="list">
 
-                      <a href="recommend-details.html">中流击水 奋楫者进_中共十九大</a>
+									<a href="recommend-details.html">中流击水 奋楫者进_中共十九大</a>
 
-                  </li>
-                  <li class="list">
+								</li>
+								<li class="list">
 
-                      <a href="recommend-details.html">你好！新时代_2018全国两会</a>
+									<a href="recommend-details.html">你好！新时代_2018全国两会</a>
 
-                  </li>
-                  <li class="list">
+								</li>
+								<li class="list">
 
-                      <a href="recommend-details.html">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
+									<a href="recommend-details.html">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
 
-                  </li>
-                  <a href="recommend-details.html"><img src="../res/static/images/news_img16.jpg" width="100%"></a>
-                  <li class="list">
+								</li>
+								<a href="recommend-details.html"><img src="../res/static/images/news_img16.jpg"
+								                                      width="100%"></a>
+								<li class="list">
 
-                      <a href="recommend-details.html">韩国送的200吨橘子该怎么分？</a>
+									<a href="recommend-details.html">韩国送的200吨橘子该怎么分？</a>
 
-                  </li>
-                  <li class="list">
+								</li>
+								<li class="list">
 
-                      <a href="recommend-details.html">中流击水 奋楫者进_中共十九大</a>
+									<a href="recommend-details.html">中流击水 奋楫者进_中共十九大</a>
 
-                  </li>
-                  <li class="list">
-                      <a href="recommend-details.html">你好！新时代_2018全国两会</a>
+								</li>
+								<li class="list">
+									<a href="recommend-details.html">你好！新时代_2018全国两会</a>
 
-                  </li>
-                  <li class="list">
+								</li>
+								<li class="list">
 
-                      <a href="recommend-details.html">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
+									<a href="recommend-details.html">“日销40万”外卖料包厂被曝光，制作过程令人作呕</a>
 
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-  <!-- content-laytpl -->
-  <script id="travelEssayList" type="text/html">
-  {{#  layui.each(d, function(index, item){ }}
-    <div class="item">
-      {{# if(item.headImgUrl){ }}
-      <a href="/travel-essay/detail-page?id={{item.id}}">
-      <img src="{{item.headImgUrl}}" style="height: 100px; width: 160px;" />
-      </a>
-      {{#  } }}
+<!-- content-laytpl -->
+<script id="travelEssayList" type="text/html">
+	{{#  layui.each(d, function(index, item){ }}
+	<div class="item">
+		{{# if(item.headImgUrl){ }}
+		<a href="/travel-essay/detail-page?id={{item.id}}">
+			<img src="{{item.headImgUrl}}" style="height: 100px; width: 160px;"/>
+		</a>
+		{{# } }}
 
-      <div class="item-info">
-        <h4><a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}}</a></h4>
-        <div class="b-txt">
-          <!--<span class="label">{{item.label}}</span>-->
+		<div class="item-info">
+			<h4><a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}}</a></h4>
+			<div class="b-txt">
+				<!--<span class="label">{{item.label}}</span>-->
 
-          <span class="icon message">
+				<span class="icon message">
             <i class="layui-icon layui-icon-user"></i>
             {{item.nickname}}
           </span>
-          <span class="icon time">
+				<span class="icon time">
             <i class="layui-icon layui-icon-log"></i>
              {{item.createTime}}
           </span>
-        </div>
-      </div>
-    </div>
-  {{#  }); }}
-  </script>
-  <!-- end-content-laytpl-->
+			</div>
+		</div>
+	</div>
+	{{#  }); }}
+</script>
+<!-- end-content-laytpl-->
 
-  <div class="micronews-footer-wrap">
-    <div class="micronews-footer w1000">
-      <div class="ft-nav">
-        <a href="#">关于我们</a>
-        <a href="#">合作伙伴</a>
-        <a href="#">广告服务</a>
-        <a href="#">常见问题</a>
-      </div>
-      <div class="Copyright">
-        <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
-      </div>
-      <div class="f-icon">
-        <a href="#" class="w-icon">
-          <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
-        </a>
-        <a href="#" class="wb-icon">
-          <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
-        </a>
-      </div>
-    </div>
-  </div>
+<div class="micronews-footer-wrap">
+	<div class="micronews-footer w1000">
+		<div class="ft-nav">
+			<a href="#">关于我们</a>
+			<a href="#">合作伙伴</a>
+			<a href="#">广告服务</a>
+			<a href="#">常见问题</a>
+		</div>
+		<div class="Copyright">
+			<span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
+		</div>
+		<div class="f-icon">
+			<a href="#" class="w-icon">
+				<img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
+			</a>
+			<a href="#" class="wb-icon">
+				<img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
+			</a>
+		</div>
+	</div>
+</div>
 
-  <script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
-  <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <script>
-    layui.config({
-      base: '/layuiadmin/'
-    }).extend({
-      index: 'lib/index' //主入口模块
-    }).use(['index', 'news', 'laypage', 'laytpl','layedit'], function () {
-      var index = layui.news
-              , laypage = layui.laypage
-              , admin = layui.admin
-              , laytpl = layui.laytpl
-              , layedit = layui.layedit;
+<script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+	layui.config({
+		base: '/layuiadmin/'
+	}).extend({
+		index: 'lib/index' //主入口模块
+	}).use(['index', 'news', 'laypage', 'laytpl', 'layedit'], function () {
+		var index = layui.news
+				, laypage = layui.laypage
+				, admin = layui.admin
+				, laytpl = layui.laytpl
+				, layedit = layui.layedit;
 
-       // 模拟数据
-      index.seachBtn();
-      index.arrowutil();
+		// 模拟数据
+		index.seachBtn();
+		index.arrowutil();
 
-      // 设置首页页码
-      var page = 1;
-      var limit = 10;
+		// 设置首页页码
+		var page = 1;
+		var limit = 10;
 
-      // 加载数据
-      loadData();
-
-
-      function loadData() {
-        admin.req({
-          url: '/travel-essay/table-data?role=user'
-          , type: 'get'
-          , data: {
-            limit: limit,
-            page: page
-          }, success: function (res) {
-            // 获取节点
-            var getTpl = document.getElementById('travelEssayList').innerHTML;
-            // 执行tpl渲染
-            laytpl(getTpl).render(res.data, function (html) {
-              document.getElementById('view').innerHTML = html;
-            });
-            // 执行分页
-            laypage.render({
-              elem: 'page'
-              , count: res.count
-              , first: '首页'
-              , last: '尾页'
-              , prev: '<em>←</em>'
-              , next: '<em>→</em>'
-              , limit: limit
-              , jump: function (obj, first) {
-                page = obj.curr;
-                limit = obj.limit;
-                if (!first) {
-                  // loadData();
-                  admin.req({
-                    url: '/travel-essay/table-data?role=user'
-                    , type: 'get'
-                    , async: false
-                    , data: {
-                      limit: limit,
-                      page: page
-                    }, success: function (res) {
-                      // 获取节点
-                      var getTpl = document.getElementById('travelEssayList').innerHTML;
-                      // 执行tpl渲染
-                      laytpl(getTpl).render(res.data, function (html) {
-                        document.getElementById('view').innerHTML = html;
-                      });
-                    }
-                  });
-                }
-              }
-            });
-          }
-        });
-      }
+		// 加载数据
+		loadData();
 
 
+		function loadData() {
+			admin.req({
+				url: '/travel-essay/table-data?role=user'
+				, type: 'get'
+				, data: {
+					limit: limit,
+					page: page
+				}, success: function (res) {
+					// 获取节点
+					var getTpl = document.getElementById('travelEssayList').innerHTML;
+					// 执行tpl渲染
+					laytpl(getTpl).render(res.data, function (html) {
+						document.getElementById('view').innerHTML = html;
+					});
+					// 执行分页
+					laypage.render({
+						elem: 'page'
+						, count: res.count
+						, first: '首页'
+						, last: '尾页'
+						, prev: '<em>←</em>'
+						, next: '<em>→</em>'
+						, limit: limit
+						, jump: function (obj, first) {
+							page = obj.curr;
+							limit = obj.limit;
+							if (!first) {
+								// loadData();
+								admin.req({
+									url: '/travel-essay/table-data?role=user'
+									, type: 'get'
+									, async: false
+									, data: {
+										limit: limit,
+										page: page
+									}, success: function (res) {
+										// 获取节点
+										var getTpl = document.getElementById('travelEssayList').innerHTML;
+										// 执行tpl渲染
+										laytpl(getTpl).render(res.data, function (html) {
+											document.getElementById('view').innerHTML = html;
+										});
+									}
+								});
+							}
+						}
+					});
+				}
+			});
+		}
 
 
-    });
-  </script>
+	});
+</script>
 </body>
 </html>

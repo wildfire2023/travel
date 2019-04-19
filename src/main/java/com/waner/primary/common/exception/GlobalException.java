@@ -10,13 +10,10 @@ import lombok.Getter;
  */
 @Getter
 public class GlobalException extends RuntimeException {
-    private Integer code;
+  private Integer code;
 
-
-    public GlobalException(String message, Integer code) {
-        super(message);
-        this.code = code;
-    }
-
-
+  public GlobalException(String message, Integer code) {
+    super(message);
+    this.code = code;
+  }
 }

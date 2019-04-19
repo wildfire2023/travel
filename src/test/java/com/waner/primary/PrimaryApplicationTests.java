@@ -13,15 +13,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class PrimaryApplicationTests {
 
-    @Autowired
-    private RedisUtil redisUtil;
+  @Autowired private RedisUtil redisUtil;
 
-    @Test
-    public void contextLoads() {
-        SysUser sysUser = new SysUser();
-        sysUser.setNickname("薛本刚");
-        redisUtil.set(TestKey.TEST, "test", sysUser);
-    }
-
+  @Test
+  public void contextLoads() {
+    SysUser sysUser = new SysUser();
+    sysUser.setNickname("薛本刚");
+    redisUtil.set(TestKey.TEST, "test", sysUser);
+  }
 }
-

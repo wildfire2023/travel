@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.waner.primary.web.mapper.TravelUserMapper" >
-  <resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelUser" >
-    <id column="sys_user_id" property="sysUserId" jdbcType="INTEGER" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
-    <result column="birth" property="birth" jdbcType="TIMESTAMP" />
-    <result column="intro" property="intro" jdbcType="VARCHAR" />
-    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
-    <result column="cover" property="cover" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.waner.primary.web.mapper.TravelUserMapper">
+	<resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelUser">
+		<id column="sys_user_id" property="sysUserId" jdbcType="INTEGER"/>
+		<result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="TINYINT"/>
+		<result column="city" property="city" jdbcType="VARCHAR"/>
+		<result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+		<result column="intro" property="intro" jdbcType="VARCHAR"/>
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+		<result column="cover" property="cover" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
     sys_user_id, nickname, sex, city, birth, intro, img_url, cover
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from travel_user
-    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from travel_user
+		where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from travel_user
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
   </delete>
-  <insert id="insertTravelUserMapper" parameterType="com.waner.primary.web.entity.TravelUser" >
+	<insert id="insertTravelUserMapper" parameterType="com.waner.primary.web.entity.TravelUser">
     insert into travel_user (sys_user_id, nickname, sex, 
       city, birth, intro, 
       img_url, cover)
@@ -32,89 +32,89 @@
       #{city,jdbcType=VARCHAR}, #{birth,jdbcType=TIMESTAMP}, #{intro,jdbcType=VARCHAR}, 
       #{imgUrl,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelUser" >
-    insert into travel_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysUserId != null" >
-        sys_user_id,
-      </if>
-      <if test="nickname != null" >
-        nickname,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="birth != null" >
-        birth,
-      </if>
-      <if test="intro != null" >
-        intro,
-      </if>
-      <if test="imgUrl != null" >
-        img_url,
-      </if>
-      <if test="cover != null" >
-        cover,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysUserId != null" >
-        #{sysUserId,jdbcType=INTEGER},
-      </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="birth != null" >
-        #{birth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="intro != null" >
-        #{intro,jdbcType=VARCHAR},
-      </if>
-      <if test="imgUrl != null" >
-        #{imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null" >
-        #{cover,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelUser" >
-    update travel_user
-    <set >
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="city != null" >
-        city = #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="birth != null" >
-        birth = #{birth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="intro != null" >
-        intro = #{intro,jdbcType=VARCHAR},
-      </if>
-      <if test="imgUrl != null" >
-        img_url = #{imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null" >
-        cover = #{cover,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelUser" >
+	<insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelUser">
+		insert into travel_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sysUserId != null">
+				sys_user_id,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="birth != null">
+				birth,
+			</if>
+			<if test="intro != null">
+				intro,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="cover != null">
+				cover,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sysUserId != null">
+				#{sysUserId,jdbcType=INTEGER},
+			</if>
+			<if test="nickname != null">
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=TINYINT},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="birth != null">
+				#{birth,jdbcType=TIMESTAMP},
+			</if>
+			<if test="intro != null">
+				#{intro,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="cover != null">
+				#{cover,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelUser">
+		update travel_user
+		<set>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=TINYINT},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="birth != null">
+				birth = #{birth,jdbcType=TIMESTAMP},
+			</if>
+			<if test="intro != null">
+				intro = #{intro,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null">
+				img_url = #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="cover != null">
+				cover = #{cover,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelUser">
     update travel_user
     set nickname = #{nickname,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},

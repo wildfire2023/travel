@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CommentWithUser extends TravelComment {
-    private String nickname;
-    private String imgUrl;
+  private String nickname;
+  private String imgUrl;
 }

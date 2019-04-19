@@ -13,18 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = PrimaryApplication.class)
 public class TransactionTests {
 
-    @Autowired
-    private TravelUserMapper travelUserMapper;
+  @Autowired private TravelUserMapper travelUserMapper;
 
-    @Test
-    @Transactional
-    public void test(){
-        TravelUser travelUser = new TravelUser();
-        travelUser.setImgUrl("111");
-        travelUser.setSysUserId(2234234);
-        travelUserMapper.insertTravelUserMapper(travelUser);
-        TravelUser travelUser1 = new TravelUser();
-        travelUser1.setImgUrl("222");
-        travelUserMapper.insertTravelUserMapper(travelUser1);
-    }
+  @Test
+  @Transactional
+  public void test() {
+    TravelUser travelUser = new TravelUser();
+    travelUser.setImgUrl("111");
+    travelUser.setSysUserId(2234234);
+    travelUserMapper.insertTravelUserMapper(travelUser);
+    TravelUser travelUser1 = new TravelUser();
+    travelUser1.setImgUrl("222");
+    travelUserMapper.insertTravelUserMapper(travelUser1);
+  }
 }

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PageConfig {
 
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
+  @Bean
+  public PaginationInterceptor paginationInterceptor() {
+    return new PaginationInterceptor();
+  }
 }

@@ -7,15 +7,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionResolverServiceImpl implements QuestionResolverService {
-    private final TravelQuestionMapper questionMapper;
+  private final TravelQuestionMapper questionMapper;
 
-    public QuestionResolverServiceImpl(TravelQuestionMapper questionMapper) {
-        this.questionMapper = questionMapper;
-    }
+  public QuestionResolverServiceImpl(TravelQuestionMapper questionMapper) {
+    this.questionMapper = questionMapper;
+  }
 
-
-    @Override
-    public int addQuestion(TravelQuestion question) {
-        return questionMapper.insert(question);
-    }
+  @Override
+  public int addQuestion(TravelQuestion question) {
+    return questionMapper.insert(question);
+  }
 }

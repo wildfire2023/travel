@@ -1,183 +1,184 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Waner - 游记撰写</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
+	<meta charset="UTF-8">
+	<title>Waner - 游记撰写</title>
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
 <div class="micronews-header-wrap">
-    <div class="micronews-header w1000 layui-clear">
-        <h1 class="logo">
-            <a href="/">
-                <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
-                <span class="layui-hide">logo</span>
-            </a>
-        </h1>
-        <p class="nav">
-            <a href="/front/page/index">推荐</a>
-            <a href="/travel-essay/list-page">游记</a>
-            <a href="#">问答</a>
-        </p>
-        <div class="search-bar">
-            <form class="layui-form" action="">
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
-                        <button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="login">
-            <a th:if="${session.sessionUser == null}" href="/front/page/login">
-                登录
-            </a>
-            <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
-            <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
-                lay-filter="component-nav">
-                <li class="layui-nav-item">
-                    <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
-                </li>
-                <li class="layui-nav-item" lay-unselect="">
-                    <a href="javascript:;" style="font-size: 16px;color: #222;"><span th:text="${session.sessionUser.nickname}"></span></a>
-                    <dl class="layui-nav-child">
-                        <dd style="text-align: center;"><a href="javascript:;" >修改信息</a></dd>
-                        <dd style="text-align: center;"><a href="/user/person-info" >个人资料</a></dd>
-                        <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-        <div class="menu-icon">
-            <i class="layui-icon layui-icon-more-vertical"></i>
-        </div>
-        <!--<div class="mobile-nav">-->
-        <!--<ul class="layui-nav" lay-filter="">-->
-        <!--<li class="layui-nav-item"><a href="index.html">最新</a></li>-->
-        <!--<li class="layui-nav-item  layui-this"><a href="list.html">娱乐</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">生活</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">财经</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">科技</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">军事</a></li>-->
-        <!--</ul>-->
-        <!--</div>  -->
-    </div>
+	<div class="micronews-header w1000 layui-clear">
+		<h1 class="logo">
+			<a href="/">
+				<img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+				<span class="layui-hide">logo</span>
+			</a>
+		</h1>
+		<p class="nav">
+			<a href="/front/page/index">推荐</a>
+			<a href="/travel-essay/list-page">游记</a>
+			<a href="#">问答</a>
+		</p>
+		<div class="search-bar">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
+						<button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="login">
+			<a th:if="${session.sessionUser == null}" href="/front/page/login">
+				登录
+			</a>
+			<!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+			<ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
+			    lay-filter="component-nav">
+				<li class="layui-nav-item">
+					<a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;" style="font-size: 16px;color: #222;"><span
+							th:text="${session.sessionUser.nickname}"></span></a>
+					<dl class="layui-nav-child">
+						<dd style="text-align: center;"><a href="javascript:;">修改信息</a></dd>
+						<dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
+						<dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<div class="menu-icon">
+			<i class="layui-icon layui-icon-more-vertical"></i>
+		</div>
+		<!--<div class="mobile-nav">-->
+		<!--<ul class="layui-nav" lay-filter="">-->
+		<!--<li class="layui-nav-item"><a href="index.html">最新</a></li>-->
+		<!--<li class="layui-nav-item  layui-this"><a href="list.html">娱乐</a></li>-->
+		<!--<li class="layui-nav-item"><a href="list.html">生活</a></li>-->
+		<!--<li class="layui-nav-item"><a href="list.html">财经</a></li>-->
+		<!--<li class="layui-nav-item"><a href="list.html">科技</a></li>-->
+		<!--<li class="layui-nav-item"><a href="list.html">军事</a></li>-->
+		<!--</ul>-->
+		<!--</div>  -->
+	</div>
 </div>
 
 <div class="micronews-container micronews-details-container w1000">
-    <div class="layui-form" lay-filter="essay-form" id="essay-form">
-        <div class="layui-form-item">
-            <div class="layui-input-inline" style="width: 70%">
-                <input name="headImgUrl" id="LAY_headImgSrc" placeholder="请上传游记头图"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-input-inline layui-btn-container" style="width: auto;">
-                <button type="button" class="layui-btn layui-btn-primary" id="LAY_headImgUpload">
-                    <i class="layui-icon">&#xe67c;</i>上传图片
-                </button>
-                <button class="layui-btn layui-btn-primary" layadmin-event="headImgPreview">查看图片
-                </button>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <!--            <label class="layui-form-label">文章标题</label>-->
-            <div class="layui-input-inline" style="width: 100%;">
-                <input type="text" name="title" id="title" lay-verify="required" placeholder="请输入游记标题"
-                       autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
+	<div class="layui-form" lay-filter="essay-form" id="essay-form">
+		<div class="layui-form-item">
+			<div class="layui-input-inline" style="width: 70%">
+				<input name="headImgUrl" id="LAY_headImgSrc" placeholder="请上传游记头图"
+				       autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-input-inline layui-btn-container" style="width: auto;">
+				<button type="button" class="layui-btn layui-btn-primary" id="LAY_headImgUpload">
+					<i class="layui-icon">&#xe67c;</i>上传图片
+				</button>
+				<button class="layui-btn layui-btn-primary" layadmin-event="headImgPreview">查看图片
+				</button>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<!--            <label class="layui-form-label">文章标题</label>-->
+			<div class="layui-input-inline" style="width: 100%;">
+				<input type="text" name="title" id="title" lay-verify="required" placeholder="请输入游记标题"
+				       autocomplete="off"
+				       class="layui-input">
+			</div>
+		</div>
 
 
-        <div class="layui-form-item">
-            <!--            <label class="layui-form-label">文章内容</label>-->
-            <div class="layui-input-inline" style="width: 100%; ">
+		<div class="layui-form-item">
+			<!--            <label class="layui-form-label">文章内容</label>-->
+			<div class="layui-input-inline" style="width: 100%; ">
             <textarea id="content" name="content" style="display: none;"
                       class="layui-textarea" lay-verify="content"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item layui-layout-admin">
-            <div class="layui-input-inline" style="width:100%;text-align: center;">
-                <button type="button" class="layui-btn" style="background-color: #6294b5;width: 160px;" lay-submit=""
-                        lay-filter="essay-form-submit">发表游记
-                </button>
-            </div>
-        </div>
+			</div>
+		</div>
+		<div class="layui-form-item layui-layout-admin">
+			<div class="layui-input-inline" style="width:100%;text-align: center;">
+				<button type="button" class="layui-btn" style="background-color: #6294b5;width: 160px;" lay-submit=""
+				        lay-filter="essay-form-submit">发表游记
+				</button>
+			</div>
+		</div>
 
-    </div>
+	</div>
 </div>
 
 <script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
 <script>
-    layui.config({
-        base: '/layuiadmin/'
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'news', 'form', 'set', 'layedit'], function () {
-        var news = layui.news
-            , admin = layui.admin
-            , layedit = layui.layedit
-            , form = layui.form;
+	layui.config({
+		base: '/layuiadmin/'
+	}).extend({
+		index: 'lib/index' //主入口模块
+	}).use(['index', 'news', 'form', 'set', 'layedit'], function () {
+		var news = layui.news
+				, admin = layui.admin
+				, layedit = layui.layedit
+				, form = layui.form;
 
-        // 版图渲染
-        news.banner();
-        // 搜索按钮
-        news.seachBtn();
-        //
-        news.arrowutil();
+		// 版图渲染
+		news.banner();
+		// 搜索按钮
+		news.seachBtn();
+		//
+		news.arrowutil();
 
-        // layedit set
-        layedit.set({
-            uploadImage: {
-                url: '/file/upload'
-                , type: 'post'
-            }
-            , height: 900
-        });
+		// layedit set
+		layedit.set({
+			uploadImage: {
+				url: '/file/upload'
+				, type: 'post'
+			}
+			, height: 900
+		});
 
-        //富文本编辑器
-        var id = layedit.build('content');
+		//富文本编辑器
+		var id = layedit.build('content');
 
-        form.verify({
-            content: function (value) {
-                return layedit.sync(id);
-            }
-        });
+		form.verify({
+			content: function (value) {
+				return layedit.sync(id);
+			}
+		});
 
-        /**
-         * 监听表格提交
-         */
-        form.on('submit(essay-form-submit)', function (data) {
-            var field = data.field;
-            admin.req({
-                url: '/travel-essay/post'
-                , data: field
-                , type: 'post'
-                , success: function (res) {
-                    if (res.code === 200) {
-                        layer.msg(res.data, {
-                            time: 1000
-                        });
-                        // TODO 执行跳转
-                    } else {
+		/**
+		 * 监听表格提交
+		 */
+		form.on('submit(essay-form-submit)', function (data) {
+			var field = data.field;
+			admin.req({
+				url: '/travel-essay/post'
+				, data: field
+				, type: 'post'
+				, success: function (res) {
+					if (res.code === 200) {
+						layer.msg(res.data, {
+							time: 1000
+						});
+						// TODO 执行跳转
+					} else {
 
-                    }
+					}
 
-                }
-            });
+				}
+			});
 
-        });
+		});
 
 
-    });
+	});
 </script>
 </body>
 </html>

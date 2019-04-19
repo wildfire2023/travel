@@ -9,16 +9,16 @@ import java.util.Date;
 
 @Data
 public class TravelComment {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+  @TableId(type = IdType.AUTO)
+  private Integer id;
 
-    private Integer parentId;
-    private Integer sysUserId;
+  private Integer parentId;
+  private Integer sysUserId;
 
-    private String content;
+  private String content;
 
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+  @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  private Date createTime;
 
-    private Byte delFlag;
+  private Byte delFlag;
 }

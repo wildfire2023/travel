@@ -16,43 +16,48 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * 用户提问相关内容控制器
+ * 用户提问相关控制器
  *
  * @author Monster
- * @since 1.0.0-SNAPSHOT
+ * @since
  */
 @Controller
 @RequestMapping("question")
 public class QuestionResolverController {
-    private final QuestionResolverService questionResolverService;
+  private final QuestionResolverService questionResolverService;
 
-    public QuestionResolverController(QuestionResolverService questionResolverService) {
-        this.questionResolverService = questionResolverService;
-    }
+  public QuestionResolverController(QuestionResolverService questionResolverService) {
+    this.questionResolverService = questionResolverService;
+  }
 
-    /**
-     * 定向到问题表单
-     *
-     * @return
-     */
-    @GetMapping("form-page")
-    public String redirectToQuestionFormPage() {
-        return "front/question-form";
-    }
+  /**
+   * 定向到问题表单
+   *
+   * @return
+   */
+  @GetMapping("form-page")
+  public String redirectToQuestionFormPage() {
+    return "front/question-form";
+  }
 
-    @PostMapping("add")
-    @ResponseBody
-    public Response<String> addQuestion(TravelQuestion question, HttpSession session) {
-        if (ObjectUtils.isEmpty(question)) {
-            throw new GlobalException("空参数", 500100);
-        }
-        SessionUser sysUser = (SessionUser) session.getAttribute("sessionUser");
-        question.setSysUserId(sysUser.getId());
-        int ret = questionResolverService.addQuestion(question);
-        if (ret > 0) {
-            return Response.success("提问成功");
-        } else {
-            return Response.fail(CodeMsg.FAIL);
-        }
+  @PostMapping("add")
+  @ResponseBody
+  public Response<String> addQuestion(TravelQuestion question, HttpSession session) {
+    if (ObjectUtils.isEmpty(question)) {
+      throw new GlobalException("空参数", 500100);
     }
+    SessionUser sysUser = (SessionUser) session.getAttribute("sessionUser");
+    question.setSysUserId(sysUser.getId());
+    int ret = questionResolverService.addQuestion(question);
+    Integer a = 1;
+    if (ret > 0) {
+      return Response.success("提问成功");
+    } else {
+      return Response.fail(CodeMsg.FAIL);
+    }
+  }
+
+  @PostMapping("list")
+  @ResponseBody
+  public Response<String> questionList() {}
 }

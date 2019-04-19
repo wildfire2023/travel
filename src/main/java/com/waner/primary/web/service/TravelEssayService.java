@@ -7,15 +7,15 @@ import com.waner.primary.web.vo.EssayWithUser;
 import java.util.List;
 
 public interface TravelEssayService {
-    int save(TravelEssay essay);
+  int save(TravelEssay essay);
 
-    List<EssayWithUser> getList(EssayWithUser essay, int limit, int page, boolean checkPushFlag);
+  List<EssayWithUser> getList(EssayWithUser essay, int limit, int page, boolean checkPushFlag);
 
-    int getCount(EssayWithUser essay, boolean checkPushFlag);
+  int getCount(EssayWithUser essay, boolean checkPushFlag);
 
-    int modify(TravelEssay essay);
+  int modify(TravelEssay essay);
 
-    int remove(TravelEssay[] essays);
+  int remove(TravelEssay[] essays);
 
-    Response<EssayWithUser> getEssayDetail(Integer id);
+  Response<EssayWithUser> getEssayDetail(Integer id);
 }

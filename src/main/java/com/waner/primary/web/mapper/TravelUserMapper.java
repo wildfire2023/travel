@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.waner.primary.web.entity.TravelUser;
 
 public interface TravelUserMapper extends BaseMapper<TravelUser> {
-    int deleteByPrimaryKey(Integer sysUserId);
+  int deleteByPrimaryKey(Integer sysUserId);
 
-    int insertTravelUserMapper(TravelUser record);
+  int insertTravelUserMapper(TravelUser record);
 
-    int insertSelective(TravelUser record);
+  int insertSelective(TravelUser record);
 
-    TravelUser selectByPrimaryKey(Integer sysUserId);
+  TravelUser selectByPrimaryKey(Integer sysUserId);
 
-    int updateByPrimaryKeySelective(TravelUser record);
+  int updateByPrimaryKeySelective(TravelUser record);
 
-    int updateByPrimaryKey(TravelUser record);
+  int updateByPrimaryKey(TravelUser record);
 }

@@ -9,17 +9,17 @@ import java.util.Date;
 
 @Data
 public class TravelQuestion {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+  @TableId(type = IdType.AUTO)
+  private Integer id;
 
-    private Integer sysUserId;
+  private Integer sysUserId;
 
-    private String title;
+  private String title;
 
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+  @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  private Date createTime;
 
-    private Byte delFlag;
+  private Byte delFlag;
 
-    private String content;
+  private String content;
 }

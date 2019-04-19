@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
  * 邮件服务提供
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -17,24 +18,19 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @ConfigurationProperties(prefix = "spring.mail")
 @Data
 public class MailConfigurationProperties {
-    private String host;
-    private Integer port;
-    private String username;
-    private String password;
+  private String host;
+  private Integer port;
+  private String username;
+  private String password;
 
-    /**
-     *
-     * @return JavaMailSender 作为Java邮件发送服务提供者
-     */
-    @Bean
-    public JavaMailSender mailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(host);
-        mailSender.setPort(port);
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-        return mailSender;
-    }
-
-
+  /** @return JavaMailSender 作为Java邮件发送服务提供者 */
+  @Bean
+  public JavaMailSender mailSender() {
+    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+    mailSender.setHost(host);
+    mailSender.setPort(port);
+    mailSender.setUsername(username);
+    mailSender.setPassword(password);
+    return mailSender;
+  }
 }

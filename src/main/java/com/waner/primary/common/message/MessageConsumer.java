@@ -17,22 +17,24 @@ import javax.mail.MessagingException;
 @Component
 public class MessageConsumer {
 
-    private final MailService mailService;
+  private final MailService mailService;
 
-    public MessageConsumer(MailService mailService) {
-        this.mailService = mailService;
-    }
+  public MessageConsumer(MailService mailService) {
+    this.mailService = mailService;
+  }
 
-    /**
-     * 消息消费者
-     * @param mailMessage
-     */
-    @JmsListener(destination = "mail-queue")
-    public void receiveQueue(MailMessage mailMessage) {
-        try {
-            mailService.sendAttachmentsMail(mailMessage.getTo(), mailMessage.getSubject(), mailMessage.getContent(), "");
-        } catch (MessagingException e) {
-            throw new GlobalException(CodeMsg.SERVER_ERROR.getMsg(), CodeMsg.SERVER_ERROR.getCode());
-        }
+  /**
+   * 消息消费者
+   *
+   * @param mailMessage
+   */
+  @JmsListener(destination = "mail-queue")
+  public void receiveQueue(MailMessage mailMessage) {
+    try {
+      mailService.sendAttachmentsMail(
+          mailMessage.getTo(), mailMessage.getSubject(), mailMessage.getContent(), "");
+    } catch (MessagingException e) {
+      throw new GlobalException(CodeMsg.SERVER_ERROR.getMsg(), CodeMsg.SERVER_ERROR.getCode());
     }
+  }
 }

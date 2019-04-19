@@ -8,19 +8,19 @@ import java.util.Date;
 
 @Data
 public class TravelUser {
-    private Integer sysUserId;
+  private Integer sysUserId;
 
-    private String nickname;
+  private String nickname;
 
-    private Byte sex;
+  private Byte sex;
 
-    private String city;
+  private String city;
 
-    private Date birth;
+  private Date birth;
 
-    private String intro;
+  private String intro;
 
-    private String imgUrl;
+  private String imgUrl;
 
-    private String cover;
+  private String cover;
 }

@@ -6,17 +6,17 @@ import java.util.Date;
 
 @Data
 public class TravelAnswer {
-    private Integer id;
+  private Integer id;
 
-    private Integer parentId;
+  private Integer parentId;
 
-    private Integer sysUserId;
+  private Integer sysUserId;
 
-    private String contentImgUrl;
+  private String contentImgUrl;
 
-    private Date createTime;
+  private Date createTime;
 
-    private Byte delFlag;
+  private Byte delFlag;
 
-    private String content;
+  private String content;
 }

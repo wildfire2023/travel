@@ -6,23 +6,23 @@ import java.util.Date;
 
 @Data
 public class SysPermission {
-    private Integer id;
+  private Integer id;
 
-    private String code;
+  private String code;
 
-    private String name;
+  private String name;
 
-    private String url;
+  private String url;
 
-    private Byte type;
+  private Byte type;
 
-    private Byte status;
+  private Byte status;
 
-    private String remark;
+  private String remark;
 
-    private String operator;
+  private String operator;
 
-    private Date operatorTime;
+  private Date operatorTime;
 
-    private String operatorIp;
+  private String operatorIp;
 }

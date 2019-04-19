@@ -194,66 +194,66 @@
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <script th:inline="javascript">
-    layui.config({
-        base: '/layuiadmin/'
-    }).extend({
-        index: 'lib/index'
-    }).use(['index', 'news'], function () {
-        var news = layui.news
-            , $ = layui.$
-            , admin = layui.admin
-            , element = layui.element;
+	layui.config({
+		base: '/layuiadmin/'
+	}).extend({
+		index: 'lib/index'
+	}).use(['index', 'news'], function () {
+		var news = layui.news
+				, $ = layui.$
+				, admin = layui.admin
+				, element = layui.element;
 
-        // index.Page('micronews-details-test',50);
-        // 导航渲染
-        element.render('nav', 'component-nav');
-        // 获取sessionUser信息
-        var user = [[${session.sessionUser}]];
-        var essayId = GetQueryString('id');
+		// index.Page('micronews-details-test',50);
+		// 导航渲染
+		element.render('nav', 'component-nav');
+		// 获取sessionUser信息
+		var user = [[${session.sessionUser}]];
+		var essayId = GetQueryString('id');
 
-        // 加载留言列表
-        news.MessageList(essayId);
+		// 加载留言列表
+		news.MessageList(essayId);
 
-        news.EnterMessage(user, essayId);
-        // index.Page('micronews-details-test', 50);
-        var collOff = true;
-        $('.Collection').on('click', function () {
-            if (collOff) {
-                $(this).addClass('active')
-            } else {
-                $(this).removeClass('active')
-            }
-            collOff = !collOff
-        });
-        news.seachBtn();
-        news.onInput();
-        news.arrowutil();
+		news.EnterMessage(user, essayId);
+		// index.Page('micronews-details-test', 50);
+		var collOff = true;
+		$('.Collection').on('click', function () {
+			if (collOff) {
+				$(this).addClass('active')
+			} else {
+				$(this).removeClass('active')
+			}
+			collOff = !collOff
+		});
+		news.seachBtn();
+		news.onInput();
+		news.arrowutil();
 
-        // 渲染页面主体内容
-        getDetail(essayId);
+		// 渲染页面主体内容
+		getDetail(essayId);
 
-        function GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]);
-            return null;
-        }
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) return unescape(r[2]);
+			return null;
+		}
 
-        // 加载页面内容
-        function getDetail(id) {
-            admin.req({
-                url: '/travel-essay/detail'
-                , data: {id: id}
-                , success: function (res) {
-                    var data = res.data;
-                    $("#title").text(data.title);
-                    $("#createTime").text(data.createTime);
-                    $("#content").html(data.content);
-                    $("#user-nickname").text(data.nickname);
-                }
-            });
-        }
-    });
+		// 加载页面内容
+		function getDetail(id) {
+			admin.req({
+				url: '/travel-essay/detail'
+				, data: {id: id}
+				, success: function (res) {
+					var data = res.data;
+					$("#title").text(data.title);
+					$("#createTime").text(data.createTime);
+					$("#content").html(data.content);
+					$("#user-nickname").text(data.nickname);
+				}
+			});
+		}
+	});
 </script>
 </body>
 </html>

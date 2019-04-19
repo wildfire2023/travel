@@ -14,45 +14,48 @@ import java.util.List;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    private final GlobalInterceptor globalInterceptor;
+  private final GlobalInterceptor globalInterceptor;
 
-    public WebConfig(GlobalInterceptor globalInterceptor) {
-        this.globalInterceptor = globalInterceptor;
-    }
+  public WebConfig(GlobalInterceptor globalInterceptor) {
+    this.globalInterceptor = globalInterceptor;
+  }
 
-    /**
-     * 拦截器注册
-     * @param registry
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(globalInterceptor);
-    }
+  /**
+   * 拦截器注册
+   *
+   * @param registry
+   */
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(globalInterceptor);
+  }
 
-    /**
-     * 配置主页映射路径
-     * @param registry
-     */
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/front/page/index");
-        super.addViewControllers(registry);
-    }
+  /**
+   * 配置主页映射路径
+   *
+   * @param registry
+   */
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addRedirectViewController("/", "/front/page/index");
+    super.addViewControllers(registry);
+  }
 
-    /**
-     * 配置FastJson
-     * @param converters
-     */
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        super.configureMessageConverters(converters);
-        // converter对象
-        FastJsonHttpMessageConverter fastJsonConverter = new FastJsonHttpMessageConverter();
-        // 添加fastjson配置信息
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        // converter添加配置信息
-        fastJsonConverter.setFastJsonConfig(fastJsonConfig);
-        converters.add(fastJsonConverter);
-    }
+  /**
+   * 配置FastJson
+   *
+   * @param converters
+   */
+  @Override
+  public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    super.configureMessageConverters(converters);
+    // converter对象
+    FastJsonHttpMessageConverter fastJsonConverter = new FastJsonHttpMessageConverter();
+    // 添加fastjson配置信息
+    FastJsonConfig fastJsonConfig = new FastJsonConfig();
+    fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+    // converter添加配置信息
+    fastJsonConverter.setFastJsonConfig(fastJsonConfig);
+    converters.add(fastJsonConverter);
+  }
 }

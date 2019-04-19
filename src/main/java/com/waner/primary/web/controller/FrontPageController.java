@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("front/page")
 public class FrontPageController {
 
-    /**
-     * 跳转登录页面
-     *
-     * @return
-     */
-    @GetMapping("login")
-    public String login() {
-        return "login";
-    }
+  /**
+   * 跳转登录页面
+   *
+   * @return
+   */
+  @GetMapping("login")
+  public String login() {
+    return "login";
+  }
 
-    /**
-     * 跳转注册页面
-     *
-     * @return
-     */
-    @GetMapping("register")
-    public String register() {
-        return "reg";
-    }
+  /**
+   * 跳转注册页面
+   *
+   * @return
+   */
+  @GetMapping("register")
+  public String register() {
+    return "reg";
+  }
 
-    /**
-     * 忘记密码页面
-     *
-     * @return
-     */
-    @GetMapping("forget")
-    public String forget() {
-        return "forget";
-    }
+  /**
+   * 忘记密码页面
+   *
+   * @return
+   */
+  @GetMapping("forget")
+  public String forget() {
+    return "forget";
+  }
 
-    /**
-     * 前台主页面
-     *
-     * @return
-     */
-    @GetMapping("index")
-    public String index() {
-        return "front/index";
-    }
+  /**
+   * 前台主页面
+   *
+   * @return
+   */
+  @GetMapping("index")
+  public String index() {
+    return "front/index";
+  }
 }

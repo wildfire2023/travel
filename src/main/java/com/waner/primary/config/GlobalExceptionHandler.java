@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class GlobalExceptionHandler {
 
-    /**
-     * 处理自定义全局异常
-     * @param request
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = GlobalException.class)
-    public Response exceptionHandler(HttpServletRequest request, Exception e) {
-        GlobalException ex = (GlobalException) e;
-        return Response.fail(ex.getCode(), ex.getMessage());
-    }
-
+  /**
+   * 处理自定义全局异常
+   *
+   * @param request
+   * @param e
+   * @return
+   */
+  @ExceptionHandler(value = GlobalException.class)
+  public Response exceptionHandler(HttpServletRequest request, Exception e) {
+    GlobalException ex = (GlobalException) e;
+    return Response.fail(ex.getCode(), ex.getMessage());
+  }
 }

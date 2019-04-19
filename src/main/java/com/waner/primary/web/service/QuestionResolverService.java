@@ -4,5 +4,5 @@ import com.waner.primary.web.entity.TravelQuestion;
 
 public interface QuestionResolverService {
 
-    int addQuestion(TravelQuestion question);
+  int addQuestion(TravelQuestion question);
 }
