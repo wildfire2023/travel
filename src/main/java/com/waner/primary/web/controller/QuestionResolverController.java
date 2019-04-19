@@ -3,7 +3,6 @@ package com.waner.primary.web.controller;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
-import com.waner.primary.web.entity.SysUser;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.service.QuestionResolverService;
 import com.waner.primary.web.vo.SessionUser;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 用户提问相关内容控制器
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -32,6 +32,7 @@ public class QuestionResolverController {
 
     /**
      * 定向到问题表单
+     *
      * @return
      */
     @GetMapping("form-page")
@@ -50,10 +51,8 @@ public class QuestionResolverController {
         int ret = questionResolverService.addQuestion(question);
         if (ret > 0) {
             return Response.success("提问成功");
-        }else {
+        } else {
             return Response.fail(CodeMsg.FAIL);
         }
     }
-
-
 }

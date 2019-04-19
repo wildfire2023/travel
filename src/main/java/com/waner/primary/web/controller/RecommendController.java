@@ -60,10 +60,11 @@ public class RecommendController {
      */
     @GetMapping("table-data")
     @ResponseBody
-    public TableResult<List<TravelRecommend>> getTableData(@RequestParam(value = "role", required = false) String role,
-                                                           TravelRecommend travelRecommend,
-                                                           int limit,
-                                                           int page) {
+    public TableResult<List<TravelRecommend>> getTableData(
+            @RequestParam(value = "role", required = false) String role,
+            TravelRecommend travelRecommend,
+            int limit,
+            int page) {
         String checkStatus = "";
         if (RecommendServiceImpl.USER.equals(role)) {
             // 已发布推荐内容
@@ -73,7 +74,8 @@ public class RecommendController {
             checkStatus = "all";
         }
         // 分页查询
-        List<TravelRecommend> recommends = recommendService.getList(checkStatus, travelRecommend, limit, page);
+        List<TravelRecommend> recommends =
+                recommendService.getList(checkStatus, travelRecommend, limit, page);
         int count = recommendService.getCount(checkStatus, travelRecommend);
         return new TableResult<>(200, "", count, recommends);
     }
@@ -90,7 +92,6 @@ public class RecommendController {
         TravelRecommend recommend = recommendService.getOneRecommend(id);
         return Response.success(recommend);
     }
-
 
     /**
      * 文章添加、修改页面
@@ -159,5 +160,4 @@ public class RecommendController {
             return Response.fail(CodeMsg.FAIL);
         }
     }
-
 }

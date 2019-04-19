@@ -76,7 +76,6 @@ public class TravelEssayServiceImpl implements TravelEssayService {
     @Override
     public int getCount(EssayWithUser essay, boolean checkPushFlag) {
         if (checkPushFlag) {
-
             return essayMapper.count(essay, 1);
         } else {
             return essayMapper.count(essay, null);

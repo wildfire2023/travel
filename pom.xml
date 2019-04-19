@@ -25,9 +25,9 @@
 
     <dependencies>
         <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!-- 解决thymeleaf严格HTML页面元素解析 -->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>

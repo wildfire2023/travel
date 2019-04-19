@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 后台页面请求控制器
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -15,6 +16,7 @@ public class BackGroundPageController {
 
     /**
      * 跳转后台控制台页面
+     *
      * @return
      */
     @GetMapping("index")
@@ -24,6 +26,7 @@ public class BackGroundPageController {
 
     /**
      * 跳转到控制页面
+     *
      * @return
      */
     @GetMapping("console")
@@ -38,6 +41,7 @@ public class BackGroundPageController {
 
     /**
      * 弃用内部修改密码，转为实现登录界面实现邮箱密码修改
+     *
      * @return
      */
     @Deprecated
@@ -45,8 +49,4 @@ public class BackGroundPageController {
     public String resetPassPage() {
         return "background/set/user/password";
     }
-
-
-
-
 }

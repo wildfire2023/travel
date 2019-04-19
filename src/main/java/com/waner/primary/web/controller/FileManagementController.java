@@ -18,6 +18,7 @@ import java.io.IOException;
 
 /**
  * 文件管理控制器
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -33,12 +34,15 @@ public class FileManagementController {
 
     /**
      * 文件上传映射
+     *
      * @return
      */
     @PostMapping("upload")
     @ResponseBody
-    public Response<String> uploadImg(MultipartFile file, HttpSession session,
-                                       @RequestParam(name = "way", required = false) String way) {
+    public Response<String> uploadImg(
+            MultipartFile file,
+            HttpSession session,
+            @RequestParam(name = "way", required = false) String way) {
         if (file.isEmpty()) {
             return Response.fail(CodeMsg.EMPTY_FILE);
         }

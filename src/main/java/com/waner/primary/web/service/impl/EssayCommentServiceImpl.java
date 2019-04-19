@@ -18,7 +18,8 @@ public class EssayCommentServiceImpl implements EssayCommentService {
     private final TravelCommentMapper commentMapper;
     private final TravelUserMapper travelUserMapper;
 
-    public EssayCommentServiceImpl(TravelCommentMapper commentMapper, TravelUserMapper travelUserMapper) {
+    public EssayCommentServiceImpl(
+            TravelCommentMapper commentMapper, TravelUserMapper travelUserMapper) {
         this.commentMapper = commentMapper;
         this.travelUserMapper = travelUserMapper;
     }

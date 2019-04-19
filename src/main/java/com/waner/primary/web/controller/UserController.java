@@ -29,9 +29,9 @@ public class UserController {
         this.userService = userService;
     }
 
-
     /**
      * 到前台用户个人信息页面
+     *
      * @return
      */
     @GetMapping("person-info")
@@ -125,7 +125,6 @@ public class UserController {
         return "background/set/user/info";
     }
 
-
     /**
      * 修改用户信息
      *
@@ -133,14 +132,12 @@ public class UserController {
      */
     @PutMapping("modify-info")
     @ResponseBody
-    public Response<Boolean> modifyInfo(String nickname, Integer sex,
-                                        String phone, String remark, HttpSession session) {
-
+    public Response<Boolean> modifyInfo(
+            String nickname, Integer sex, String phone, String remark, HttpSession session) {
         boolean ret = userService.modifyUserInfo(nickname, sex, phone, remark, session);
         if (!ret) {
             return Response.fail(CodeMsg.SERVER_ERROR);
         }
         return Response.success(true);
     }
-
 }

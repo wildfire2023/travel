@@ -13,7 +13,6 @@ public class TravelComment {
     private Integer id;
 
     private Integer parentId;
-
     private Integer sysUserId;
 
     private String content;

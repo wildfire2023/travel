@@ -13,7 +13,6 @@ layui.define(['table', 'form'], function (exports) {
         , admin = layui.admin;
 
 
-
     //文章管理
     table.render({
         elem: '#LAY-app-content-list'
@@ -84,6 +83,7 @@ layui.define(['table', 'form'], function (exports) {
                         obj.update({
                             title: field.title
                             , pushFlag: field.pushFlag
+                            , content: field.content
                         }); //数据更新
 
                         form.render();
@@ -105,7 +105,6 @@ layui.define(['table', 'form'], function (exports) {
                     if (data.pushFlag === 1) {
                         switchButton.attr("checked", "checked");
                     }
-
                 }
             });
         }

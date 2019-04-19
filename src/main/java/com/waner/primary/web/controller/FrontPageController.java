@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 前台控制页面
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -15,6 +16,7 @@ public class FrontPageController {
 
     /**
      * 跳转登录页面
+     *
      * @return
      */
     @GetMapping("login")
@@ -24,6 +26,7 @@ public class FrontPageController {
 
     /**
      * 跳转注册页面
+     *
      * @return
      */
     @GetMapping("register")
@@ -33,6 +36,7 @@ public class FrontPageController {
 
     /**
      * 忘记密码页面
+     *
      * @return
      */
     @GetMapping("forget")
@@ -40,9 +44,9 @@ public class FrontPageController {
         return "forget";
     }
 
-
     /**
      * 前台主页面
+     *
      * @return
      */
     @GetMapping("index")
