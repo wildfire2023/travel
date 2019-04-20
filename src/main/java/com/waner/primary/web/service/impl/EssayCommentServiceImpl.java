@@ -3,6 +3,7 @@ package com.waner.primary.web.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.web.entity.TravelComment;
+import com.waner.primary.web.entity.TravelEssayComment;
 import com.waner.primary.web.mapper.TravelCommentMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
 import com.waner.primary.web.service.EssayCommentService;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EssayCommentServiceImpl implements EssayCommentService {
@@ -76,4 +78,27 @@ public class EssayCommentServiceImpl implements EssayCommentService {
     public int getCommentsCountWithEssay(Integer essayId) {
         return commentMapper.queryCommentsWithUserCount(essayId);
     }
+
+    /**
+     * 删除与给定文章编号相关的评论
+     *
+     * @param essayId
+     * @return
+     */
+    @Override
+    @Transactional
+    public int deleteCommentWithEssayId(Integer essayId) {
+        List<TravelEssayComment> essayComments = commentMapper.queryCommentIdsByEssayId(essayId);
+        List<Integer> commentIds =
+                essayComments.parallelStream()
+                             .map(TravelEssayComment::getTravelCommentId)
+                             .collect(Collectors.toList());
+        // 批量删除评论
+        int ret = commentMapper.deleteBatchIds(commentIds);
+        // 删除游记评论关联表
+        commentMapper.deleteEssayComment(essayId);
+        return ret;
+    }
+
+
 }

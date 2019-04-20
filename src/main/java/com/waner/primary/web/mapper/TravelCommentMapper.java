@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.web.entity.TravelComment;
+import com.waner.primary.web.entity.TravelEssayComment;
 import com.waner.primary.web.vo.CommentWithUser;
-import com.waner.primary.web.vo.EssayWithUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,4 +29,8 @@ public interface TravelCommentMapper extends BaseMapper<TravelComment> {
     IPage<CommentWithUser> queryCommentsWithUser(Page pageHelper, @Param("essayId") Integer essayId);
 
     int queryCommentsWithUserCount(@Param("essayId") Integer essayId);
+
+    List<TravelEssayComment> queryCommentIdsByEssayId(Integer essayId);
+
+    int deleteEssayComment(Integer essayId);
 }

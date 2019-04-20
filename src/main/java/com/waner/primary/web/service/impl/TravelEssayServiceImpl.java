@@ -8,6 +8,7 @@ import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelUser;
 import com.waner.primary.web.mapper.TravelEssayMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
+import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.TravelEssayService;
 import com.waner.primary.web.vo.EssayWithUser;
 import org.springframework.beans.BeanUtils;
@@ -22,10 +23,14 @@ public class TravelEssayServiceImpl implements TravelEssayService {
 
     private final TravelEssayMapper essayMapper;
     private final TravelUserMapper userMapper;
+    private final EssayCommentService essayCommentService;
 
-    public TravelEssayServiceImpl(TravelEssayMapper essayMapper, TravelUserMapper userMapper) {
+    public TravelEssayServiceImpl(TravelEssayMapper essayMapper,
+                                  TravelUserMapper userMapper,
+                                  EssayCommentService essayCommentService) {
         this.essayMapper = essayMapper;
         this.userMapper = userMapper;
+        this.essayCommentService = essayCommentService;
     }
 
     /**
@@ -104,12 +109,15 @@ public class TravelEssayServiceImpl implements TravelEssayService {
      * @return
      */
     @Override
+    @Transactional
     public int remove(TravelEssay[] essays) {
         List<Integer> ids =
                 Lists.newArrayList(essays)
-                        .parallelStream()
-                        .map(TravelEssay::getId)
-                        .collect(Collectors.toList());
+                     .parallelStream()
+                     .map(TravelEssay::getId)
+                     .collect(Collectors.toList());
+        // 删除游记相关评论
+        ids.forEach(essayCommentService::deleteCommentWithEssayId);
         return essayMapper.deleteBatchIds(ids);
     }
 

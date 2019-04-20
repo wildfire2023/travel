@@ -209,12 +209,12 @@
         element.render('nav', 'component-nav');
         // 获取sessionUser信息
         var user = [[${session.sessionUser}]];
-        var essayId = GetQueryString('id');
+        var questionId = GetQueryString('id');
 
         // 加载留言列表
-        news.MessageList(essayId);
+        news.MessageList(questionId);
 
-        news.EnterMessage(user, essayId);
+        news.EnterMessage(user, questionId);
         // index.Page('micronews-details-test', 50);
         var collOff = true;
         $('.Collection').on('click', function () {
@@ -230,7 +230,7 @@
         news.arrowutil();
 
         // 渲染页面主体内容
-        getDetail(essayId);
+        getDetail(questionId);
 
         function GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

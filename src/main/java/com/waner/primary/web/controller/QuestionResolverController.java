@@ -10,11 +10,9 @@ import com.waner.primary.web.vo.SessionUser;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class QuestionResolverController {
      * @return
      */
     @GetMapping("form-page")
-    public String redirectToQuestionFormPage() {
+    public String redirectToFormPage() {
         return "front/question-form";
     }
 
@@ -47,8 +45,17 @@ public class QuestionResolverController {
      * 定向到问题列表
      */
     @GetMapping("list-page")
-    public String redirectToQuestionList() {
+    public String redirectToList() {
         return "front/question-list";
+    }
+
+    /**
+     * 定向到问题详情页面
+     */
+    @GetMapping("detail-page")
+    public String redirectToDetailPage(@RequestParam("id") Integer id, HttpServletRequest request) {
+        request.setAttribute("id",id);
+        return "question-detail";
     }
 
     @PostMapping("add")
@@ -60,7 +67,6 @@ public class QuestionResolverController {
         SessionUser sysUser = (SessionUser) session.getAttribute("sessionUser");
         question.setSysUserId(sysUser.getId());
         int ret = questionResolverService.addQuestion(question);
-        Integer a = 1;
         if (ret > 0) {
             return Response.success("提问成功");
         } else {
@@ -83,5 +89,11 @@ public class QuestionResolverController {
         List<QuestionWithUser> questions = questionResolverService.listAll(page, limit);
         int count = questionResolverService.countAll();
         return new TableResult<>(200, "", count, questions);
+    }
+
+    @GetMapping("detail")
+    @ResponseBody
+    public Response<QuestionWithUser> getQuestionDetail(@RequestParam("id") Integer id) {
+        return questionResolverService.getQuestionDetail(id);
     }
 }

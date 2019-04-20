@@ -10,4 +10,6 @@ public interface EssayCommentService {
     List<CommentWithUser> listComments(Integer essayId, int limit, Integer page);
 
     int getCommentsCountWithEssay(Integer essayId);
+
+    int deleteCommentWithEssayId(Integer essayId);
 }

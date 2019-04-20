@@ -120,4 +120,11 @@
         from travel_comment
         where id in (select travel_comment_id as id from travel_essay_comment where travel_essay_id = #{essayId} )
     </select>
+    <select id="queryCommentIdsByEssayId" resultType="com.waner.primary.web.entity.TravelEssayComment">
+        select * from travel_essay_comment where travel_essay_id = #{essayId}
+    </select>
+    <delete id="deleteEssayComment" parameterType="java.lang.Integer">
+        delete from travel_essay_comment where travel_essay_id = #{essayId}
+    </delete>
+
 </mapper>

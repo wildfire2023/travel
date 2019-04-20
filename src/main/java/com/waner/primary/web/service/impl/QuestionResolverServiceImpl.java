@@ -3,6 +3,7 @@ package com.waner.primary.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.mapper.TravelQuestionMapper;
 import com.waner.primary.web.service.QuestionResolverService;
@@ -35,7 +36,7 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
         pageHelper.setSize(limit);
         pageHelper.setCurrent(page);
 
-        IPage<QuestionWithUser> pageVo = null;
+        IPage<QuestionWithUser> pageVo;
 
         pageVo = questionMapper.queryAllQuestions(pageHelper);
         return pageVo.getRecords();
@@ -45,5 +46,11 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
     public int countAll() {
         QueryWrapper<TravelQuestion> wrapper = new QueryWrapper<>();
         return questionMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public Response<QuestionWithUser> getQuestionDetail(Integer id) {
+
+        return null;
     }
 }
