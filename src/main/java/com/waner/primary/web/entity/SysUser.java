@@ -8,26 +8,26 @@ import java.util.Date;
 
 @Data
 public class SysUser {
-  @TableId(type = IdType.AUTO)
-  private Integer id;
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-  private String username;
+    private String username;
 
-  private String password;
+    private String password;
 
-  private String nickname;
+    private String nickname;
 
-  private String email;
+    private String email;
 
-  private String phone;
+    private String phone;
 
-  private Byte status;
+    private Byte status;
 
-  private String remark;
+    private String remark;
 
-  private String operator;
+    private String operator;
 
-  private Date operatorTime;
+    private Date operatorTime;
 
-  private String operatorIp;
+    private String operatorIp;
 }

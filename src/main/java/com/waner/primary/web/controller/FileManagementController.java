@@ -26,37 +26,37 @@ import java.io.IOException;
 @RequestMapping("file")
 public class FileManagementController {
 
-  private final UserService userService;
+    private final UserService userService;
 
-  public FileManagementController(UserService userService) {
-    this.userService = userService;
-  }
+    public FileManagementController(UserService userService) {
+        this.userService = userService;
+    }
 
-  /**
-   * 文件上传映射
-   *
-   * @return
-   */
-  @PostMapping("upload")
-  @ResponseBody
-  public Response<String> uploadImg(
-      MultipartFile file,
-      HttpSession session,
-      @RequestParam(name = "way", required = false) String way) {
-    if (file.isEmpty()) {
-      return Response.fail(CodeMsg.EMPTY_FILE);
+    /**
+     * 文件上传映射
+     *
+     * @return
+     */
+    @PostMapping("upload")
+    @ResponseBody
+    public Response<String> uploadImg(
+            MultipartFile file,
+            HttpSession session,
+            @RequestParam(name = "way", required = false) String way) {
+        if (file.isEmpty()) {
+            return Response.fail(CodeMsg.EMPTY_FILE);
+        }
+        String imgUrl;
+        try {
+            imgUrl = COSClientUtil.uploadFile2Cos(file);
+            imgUrl = Constants.COS_PROTOCOL + Constants.COS_CDN_URL + "/" + imgUrl;
+            if ("user".equals(way)) {
+                // 图片地址存储
+                userService.saveImg(imgUrl, session);
+            }
+        } catch (IOException e) {
+            throw new GlobalException("图片上传错误", 501001);
+        }
+        return Response.success(imgUrl);
     }
-    String imgUrl;
-    try {
-      imgUrl = COSClientUtil.uploadFile2Cos(file);
-      imgUrl = Constants.COS_PROTOCOL + Constants.COS_CDN_URL + "/" + imgUrl;
-      if ("user".equals(way)) {
-        // 图片地址存储
-        userService.saveImg(imgUrl, session);
-      }
-    } catch (IOException e) {
-      throw new GlobalException("图片上传错误", 501001);
-    }
-    return Response.success(imgUrl);
-  }
 }

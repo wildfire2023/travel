@@ -6,170 +6,170 @@
 
 
 #micronews-carouse {
-	height: 300px;
-	text-align: center;
+    height: 300px;
+    text-align: center;
 }
 
 #micronews-carouse > *[carousel-item] > *, #micronews-carouse .layui-carousel {
-	background: none;
+    background: none;
 }
 
 #micronews-carouse .layui-carousel img {
-	max-width: 100%;
-	height: 300px;
+    max-width: 100%;
+    height: 300px;
 }
 
 
 .micronews .layui-fixbar li {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	margin-bottom: 1px;
-	text-align: center;
-	cursor: pointer;
-	font-size: 30px;
-	background: #6294b5;
-	color: rgb(255, 255, 255);
-	opacity: 0.95;
-	border-radius: 2px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 1px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+    background: #6294b5;
+    color: rgb(255, 255, 255);
+    opacity: 0.95;
+    border-radius: 2px;
 }
 
 .micronews .layui-laypage .layui-laypage-curr .layui-laypage-em {
-	background: #6394b5;
+    background: #6394b5;
 }
 
 .micronews .layui-laypage-prev:hover, .micronews .layui-laypage-next:hover {
-	color: #6394b5;
+    color: #6394b5;
 }
 
 .micronews .w1000 {
-	max-width: 1000px;
-	margin: 0 auto;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .micronews .layui-carousel > [carousel-item] > * {
-	height: auto;
+    height: auto;
 }
 
 .micronews .layui-carousel-ind {
-	margin-top: -20px;
-	top: auto;
-	bottom: 10px;
+    margin-top: -20px;
+    top: auto;
+    bottom: 10px;
 }
 
 html, body {
-	height: 100%;
+    height: 100%;
 }
 
 /*header*/
 .micronews-header-wrap {
-	border-bottom: 1px solid #6395b8;
-	background: #fff;
+    border-bottom: 1px solid #6395b8;
+    background: #fff;
 }
 
 .micronews-header {
-	line-height: 70px;
-	height: 70px;
-	position: relative;
-	font-size: 16px;
+    line-height: 70px;
+    height: 70px;
+    position: relative;
+    font-size: 16px;
 }
 
 .micronews-header .logo, .micronews-header .nav, .micronews-header .search-bar, .micronews-header .search-bar button, .micronews-header .search-bar input {
-	float: left;
+    float: left;
 }
 
 .micronews-header .search-bar input {
-	background: #f6f6f8;
+    background: #f6f6f8;
 }
 
 .micronews-header .logo {
-	width: 100px;
-	text-align: center;
+    width: 100px;
+    text-align: center;
 }
 
 .micronews-header .nav {
-	padding: 0 10px;
+    padding: 0 10px;
 }
 
 .micronews-header .nav a {
-	display: inline-block;
-	height: 70px;
-	font-size: 16px;
-	color: #222;
-	padding: 0 22px;
-	float: left;
+    display: inline-block;
+    height: 70px;
+    font-size: 16px;
+    color: #222;
+    padding: 0 22px;
+    float: left;
 }
 
 .micronews-header .nav a.active {
-	background: #6294b5;
-	color: #fff;
+    background: #6294b5;
+    color: #fff;
 }
 
 .micronews-header .nav a.active:hover {
-	color: #fff;
+    color: #fff;
 }
 
 .micronews-header .nav a:hover {
-	color: #6294b5;
+    color: #6294b5;
 }
 
 .login .layui-nav a:hover {
-	color: #6294b5;
+    color: #6294b5;
 }
 
 
 .micronews-header .search-bar {
-	width: 280px;
-	height: 38px;
-	margin: 17px 0 0 20px;
-	font-size: 14px;
+    width: 280px;
+    height: 38px;
+    margin: 17px 0 0 20px;
+    font-size: 14px;
 }
 
 .micronews-header .search-bar .layui-form-item {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .micronews-header .search-bar .layui-input-block {
-	margin-left: 0;
-	height: 38px;
+    margin-left: 0;
+    height: 38px;
 }
 
 .micronews-header .search-bar input {
-	width: 229px;
-	border: 1px solid #e9eaec;
-	border-right: none;
-	border-radius: 2px 0px 0px 2px;
+    width: 229px;
+    border: 1px solid #e9eaec;
+    border-right: none;
+    border-radius: 2px 0px 0px 2px;
 }
 
 .micronews-header .search-bar button {
-	width: 50px;
-	background: #6294b5;
-	padding: 0;
-	border-radius: 0 2px 2px 0px;
+    width: 50px;
+    background: #6294b5;
+    padding: 0;
+    border-radius: 0 2px 2px 0px;
 }
 
 .micronews-header .login img {
-	height: 100%;
+    height: 100%;
 }
 
 .micronews-header .login {
-	position: absolute;
-	right: 0;
-	top: 0px;
+    position: absolute;
+    right: 0;
+    top: 0px;
 }
 
 .micronews-header .login a {
-	color: #6294b5;
-	display: inline-block;
-	padding: 0 10px;
+    color: #6294b5;
+    display: inline-block;
+    padding: 0 10px;
 }
 
 .micronews-header .menu-icon {
-	display: none;
+    display: none;
 }
 
 .micronews-header .mobile-nav {
-	display: none;
+    display: none;
 }
 
 /*end-header*/
@@ -177,16 +177,16 @@ html, body {
 
 /*baner*/
 .micronews .micronews-banner {
-	margin: 40px auto 0 auto;
+    margin: 40px auto 0 auto;
 }
 
 .micronews-banner .title {
-	position: absolute;
-	left: 20px;
-	bottom: 14px;
-	color: #fff;
-	font-size: 22px;
-	font-weight: 100;
+    position: absolute;
+    left: 20px;
+    bottom: 14px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 100;
 }
 
 /*end-baner*/
@@ -194,151 +194,151 @@ html, body {
 
 /*content*/
 .micronews-container {
-	padding: 30px 0 100px 0;
+    padding: 30px 0 100px 0;
 }
 
 .micronews-container .layui-flow-more {
-	margin: 50px 0;
+    margin: 50px 0;
 }
 
 .micronews-container .layui-fluid {
-	padding: 0;
+    padding: 0;
 }
 
 .micronews-container .main {
-	padding-right: 50px;
+    padding-right: 50px;
 }
 
 .micronews-container .item {
-	overflow: hidden;
-	padding: 20px 0;
-	border-bottom: 1px solid #eaeaea;
+    overflow: hidden;
+    padding: 20px 0;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .micronews-container .item img {
-	float: left;
-	margin-right: 30px;
+    float: left;
+    margin-right: 30px;
 }
 
 .micronews-container .item h4 {
-	font-size: 20px;
-	color: #222222;
-	font-weight: bold;
-	line-height: 32px;
-	margin-bottom: 14px;
+    font-size: 20px;
+    color: #222222;
+    font-weight: bold;
+    line-height: 32px;
+    margin-bottom: 14px;
 }
 
 .micronews-container .b-txt .label {
-	display: inline-block;
-	padding: 0 4px;
-	height: 18px;
-	line-height: 18px;
-	background: #6294b5;
-	font-size: 12px;
-	cursor: pointer;
-	color: #fff;
-	border-radius: 2px;
-	margin-right: 30px;
+    display: inline-block;
+    padding: 0 4px;
+    height: 18px;
+    line-height: 18px;
+    background: #6294b5;
+    font-size: 12px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 2px;
+    margin-right: 30px;
 }
 
 .micronews-container .b-txt .message {
-	margin-right: 20px;
+    margin-right: 20px;
 }
 
 .micronews-container .b-txt .icon {
-	color: #d2d6da;
-	position: relative;
-	top: 2px;
-	cursor: pointer;
+    color: #d2d6da;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
 }
 
 
 .micronews-container .popular-info {
-	background: #f5f6f7;
-	border-top: 2px solid #6294b5;
-	padding-bottom: 25px;
+    background: #f5f6f7;
+    border-top: 2px solid #6294b5;
+    padding-bottom: 25px;
 }
 
 .micronews-container .popular-info .list {
-	padding: 16px 0;
+    padding: 16px 0;
 }
 
 .micronews-container .popular-info .list-item {
-	position: relative;
+    position: relative;
 }
 
 .micronews-container .popular-info .list-item i.layui-badge-dot {
-	margin: 0 8px;
+    margin: 0 8px;
 }
 
 .micronews-container .layui-card {
-	background: none;
-	box-shadow: none;
+    background: none;
+    box-shadow: none;
 }
 
 .micronews-container .layui-card-body {
-	padding: 0 15px;
+    padding: 0 15px;
 }
 
 .micronews-container .layui-card-header {
-	line-height: 50px;
-	height: 50px;
+    line-height: 50px;
+    height: 50px;
 }
 
 .micronews-container .popular-info h3 {
-	line-height: 50px;
-	font-size: 16px;
-	color: #6294b5;
+    line-height: 50px;
+    font-size: 16px;
+    color: #6294b5;
 }
 
 .micronews-container .popular-info .list:last-child {
-	border-bottom: 0;
+    border-bottom: 0;
 }
 
 .micronews-container .popular-info .list {
-	border-bottom: 1px solid #eaeaea;
-	list-style-position: inside;
-	list-style-type: decimal
+    border-bottom: 1px solid #eaeaea;
+    list-style-position: inside;
+    list-style-type: decimal
 }
 
 .micronews-container .popular-info .list a {
-	padding-right: 5px;
-	padding-left: 10px;
+    padding-right: 5px;
+    padding-left: 10px;
 }
 
 .micronews-container .popular-info-tog i {
-	display: block;
-	width: 4px;
-	height: 4px;
-	border-radius: 50%;
-	color: #ceced0;
-	position: absolute;
-	top: 0;
-	background: #cdcdcf;
-	top: 26px;
-	left: 8px;
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    color: #ceced0;
+    position: absolute;
+    top: 0;
+    background: #cdcdcf;
+    top: 26px;
+    left: 8px;
 }
 
 .micronews-container .popular-info-tog .list {
-	list-style-type: disc;
+    list-style-type: disc;
 }
 
 .micronews-container .popular-info-tog .list a {
-	padding: 0;
+    padding: 0;
 }
 
 .micronews-container .popular-info-tog a {
-	margin-right: 0;
-	padding-right: 0;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 .micronews-container .popular-info .heat-icon {
-	display: inline-block;
-	width: 12px;
-	height: 16px;
-	background: url(images/heat.png) no-repeat center center;
-	position: relative;
-	top: 3px;
+    display: inline-block;
+    width: 12px;
+    height: 16px;
+    background: url(images/heat.png) no-repeat center center;
+    position: relative;
+    top: 3px;
 }
 
 /*end-content*/
@@ -346,32 +346,32 @@ html, body {
 
 /*footer*/
 .micronews-footer-wrap {
-	border-top: 2px solid #6294b5;
-	color: #777777;
+    border-top: 2px solid #6294b5;
+    color: #777777;
 }
 
 .micronews-footer {
-	padding: 36px 0 44px 0;
-	position: relative;
+    padding: 36px 0 44px 0;
+    position: relative;
 }
 
 .micronews-footer .ft-nav {
-	margin-bottom: 24px;
+    margin-bottom: 24px;
 }
 
 .micronews-footer .ft-nav a {
-	margin-right: 40px;
-	color: #777777;
+    margin-right: 40px;
+    color: #777777;
 }
 
 .micronews-footer .f-icon {
-	position: absolute;
-	right: 0;
-	top: 46px;
+    position: absolute;
+    right: 0;
+    top: 46px;
 }
 
 .micronews-footer .w-icon {
-	margin-right: 40px;
+    margin-right: 40px;
 }
 
 /*end-footer*/
@@ -379,216 +379,216 @@ html, body {
 
 /*micronews-details-container*/
 .micronews-details-container {
-	padding: 60px 0;
+    padding: 60px 0;
 }
 
 .micronews-details-container .main {
-	margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .micronews-details-container .b-txt {
-	padding: 10px 0;
-	line-height: 35px;
+    padding: 10px 0;
+    line-height: 35px;
 }
 
 .micronews-details-container .b-txt .icon {
-	margin-right: 26px;
+    margin-right: 26px;
 }
 
 .micronews-details-container .b-txt .icon b {
-	color: #ec414d;
+    color: #ec414d;
 }
 
 .micronews-details-container .title {
-	border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .micronews-details-container .title h3 {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 .micronews-details-container .article {
-	color: #555;
-	padding: 10px 0 32px 0;
+    color: #555;
+    padding: 10px 0 32px 0;
 }
 
 .micronews-details-container .article p {
-	line-height: 30px;
+    line-height: 30px;
 }
 
 .micronews-details-container .article p.mt30 {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .micronews-details-container .article .img-box {
-	text-align: center;
-	padding: 12px;
-	cursor: pointer;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
 }
 
 .micronews-details-container .article img {
-	max-width: 80%;
+    max-width: 80%;
 }
 
 .micronews-details-container .title .share-title {
-	height: 30px;
-	line-height: 30px;
+    height: 30px;
+    line-height: 30px;
 }
 
 .micronews-details-container .title .share-title .txt {
-	position: relative;
-	top: -4px;
-	margin-right: 5px;
+    position: relative;
+    top: -4px;
+    margin-right: 5px;
 }
 
 .micronews-details-container .title .share-title .icon {
-	font-size: 26px;
-	margin-right: 6px;
+    font-size: 26px;
+    margin-right: 6px;
 }
 
 .micronews-details-container .title .share-title .icon.layui-icon-login-wechat {
-	color: #3ab032;
+    color: #3ab032;
 }
 
 .micronews-details-container .title .share-title .layui-icon-login-weibo {
-	color: #f16420;
+    color: #f16420;
 }
 
 .micronews-details-container .title .share-title .layui-icon-login-qq {
-	color: #04aed9;
+    color: #04aed9;
 }
 
 .micronews-details-container .title .layui-btn {
-	width: 96px;
-	padding: 0;
-	height: 28px;
-	line-height: 26px;
-	background: #ec414d;
-	border: 1px solid #ec414d;
-	margin-left: 37px;
-	position: relative;
-	top: -5px;
+    width: 96px;
+    padding: 0;
+    height: 28px;
+    line-height: 26px;
+    background: #ec414d;
+    border: 1px solid #ec414d;
+    margin-left: 37px;
+    position: relative;
+    top: -5px;
 }
 
 .micronews-details-container .title .layui-btn.active {
-	background: #fff;
-	color: #ec414d;
+    background: #fff;
+    color: #ec414d;
 }
 
 .micronews-details-container .title .layui-btn span {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .micronews-details-container .leave-message .tit-box {
-	line-height: 40px;
+    line-height: 40px;
 }
 
 .micronews-details-container .leave-message .tit {
-	font-size: 16px;
-	margin-right: 28px;
+    font-size: 16px;
+    margin-right: 28px;
 }
 
 .micronews-details-container .leave-message .tit-box .num {
-	color: #b5b9bd;
+    color: #b5b9bd;
 }
 
 .micronews-details-container .leave-message .tit-box b {
-	color: #ec414d;
+    color: #ec414d;
 }
 
 .micronews-details-container .leave-message .tear-box img {
-	float: left;
+    float: left;
 }
 
 .micronews-details-container .leave-message .tear-box form {
-	padding-left: 50px;
-	margin: 10px 0;
+    padding-left: 50px;
+    margin: 10px 0;
 }
 
 .micronews-details-container .content-box .layui-form .layui-form-item {
-	clear: none;
-	margin-bottom: 0;
+    clear: none;
+    margin-bottom: 0;
 }
 
 .micronews-details-container .content-box .layui-form .layui-btn {
-	width: 90px;
-	height: 30px;
-	line-height: 30px;
-	background: #6294b5;
-	position: relative;
-	z-index: 10;
-	border-radius: 0
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    background: #6294b5;
+    position: relative;
+    z-index: 10;
+    border-radius: 0
 }
 
 .micronews-details-container .content-box .layui-form .layui-textarea {
-	border-radius: 0
+    border-radius: 0
 }
 
 .micronews-details-container .content-box .layui-form .message-text {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	padding: 0 90px 0 0px;
-	text-align: left;
-	box-sizing: border-box;
-	line-height: 30px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0 90px 0 0px;
+    text-align: left;
+    box-sizing: border-box;
+    line-height: 30px;
 }
 
 .micronews-details-container .content-box .layui-form .message-text .txt {
-	padding-left: 10px;
-	border: 1px solid #e6e6e6;
-	height: 100%;
-	box-sizing: border-box;
-	border-top: 0;
-	border-right: 0;
-	color: #ec414d;
+    padding-left: 10px;
+    border: 1px solid #e6e6e6;
+    height: 100%;
+    box-sizing: border-box;
+    border-top: 0;
+    border-right: 0;
+    color: #ec414d;
 }
 
 .micronews-details-container .content-box .layui-form .layui-input-block {
-	margin-left: 0;
-	min-height: 30px;
+    margin-left: 0;
+    min-height: 30px;
 }
 
 .micronews-details-container .content-box .ulCommentList {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .micronews-details-container .content-box .ulCommentList .item-cont {
-	padding-left: 50px;
+    padding-left: 50px;
 }
 
 .micronews-details-container .content-box .ulCommentList .cont {
-	padding: 10px 20px;
-	background: #f5f6f7;
-	word-wrap: break-word;
+    padding: 10px 20px;
+    background: #f5f6f7;
+    word-wrap: break-word;
 }
 
 .micronews-details-container .liCont {
-	padding: 30px 0 0 0;
-	border-bottom: 0;
+    padding: 30px 0 0 0;
+    border-bottom: 0;
 }
 
 .micronews-details-container .liCont img {
-	float: left;
-	width: 28px;
-	height: 28px;
+    float: left;
+    width: 28px;
+    height: 28px;
 }
 
 .micronews-details-container .cont .name {
-	margin-right: 15px;
+    margin-right: 15px;
 }
 
 .micronews-details-container .cont .time {
-	color: #6d6d6d;
-	font-size: 12px;
+    color: #6d6d6d;
+    font-size: 12px;
 }
 
 .micronews-details-container .cont p {
-	line-height: 26px;
+    line-height: 26px;
 }
 
 .micronews-details-container .cont .text {
-	color: #555;
+    color: #555;
 }
 
 /*end-micronews-details-container*/
@@ -596,14 +596,14 @@ html, body {
 
 /*micronews-list-container*/
 .micronews-list-container {
-	padding-top: 16px;
+    padding-top: 16px;
 }
 
 .micronews-list-container h3 {
-	font-size: 16px;
-	line-height: 50px;
-	padding-left: 12px;
-	font-weight: bold;
+    font-size: 16px;
+    line-height: 50px;
+    padding-left: 12px;
+    font-weight: bold;
 }
 
 /*end-micronews-list-container*/
@@ -611,27 +611,27 @@ html, body {
 
 /*micronews-search-container*/
 .micronews-search-container p.num {
-	color: #888888;
+    color: #888888;
 }
 
 .micronews-search-container p.num span {
-	color: #ec414d;
+    color: #ec414d;
 }
 
 .micronews-search-container .item {
-	border-bottom: 0;
-	padding: 30px 0;
+    border-bottom: 0;
+    padding: 30px 0;
 }
 
 .micronews-search-container .time {
-	font-size: 14px;
-	color: #868686;
-	padding-left: 20px;
+    font-size: 14px;
+    color: #868686;
+    padding-left: 20px;
 }
 
 .micronews-search-container .item p {
-	line-height: 30px;
-	font-size: 16px;
+    line-height: 30px;
+    font-size: 16px;
 }
 
 /*end-micronews-search-container*/
@@ -639,98 +639,98 @@ html, body {
 
 /*micronews-login-container*/
 .micronews-login {
-	width: 100%;
-	min-height: 100%;
-	background: url(images/loadbg.jpg) no-repeat;
-	background-size: cover;
+    width: 100%;
+    min-height: 100%;
+    background: url(images/loadbg.jpg) no-repeat;
+    background-size: cover;
 }
 
 .micronews-login-container .layui-form-item {
-	margin: 20px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .micronews-login-container .agreement {
-	margin-top: 0px;
+    margin-top: 0px;
 }
 
 .micronews-login-container .agreement a {
-	color: #5980c5;
+    color: #5980c5;
 }
 
 .micronews-login-container .wrap {
-	padding: 20px 40px;
-	background: #fff;
-	box-shadow: 1px 1px 10px 1px #ccc;
-	box-sizing: border-box;
+    padding: 20px 40px;
+    background: #fff;
+    box-shadow: 1px 1px 10px 1px #ccc;
+    box-sizing: border-box;
 }
 
 .micronews-login-container .wrap form {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .micronews-login-container .form-box {
-	margin: 0 auto;
-	width: 380px;
-	padding-top: 20px;
+    margin: 0 auto;
+    width: 380px;
+    padding-top: 20px;
 }
 
 .micronews-login-container .form-box h3 {
-	line-height: 60px;
-	font-size: 28px;
-	color: #5a94b9;
-	text-align: center;
+    line-height: 60px;
+    font-size: 28px;
+    color: #5a94b9;
+    text-align: center;
 }
 
 .micronews-login-container .layui-input-block {
-	margin-left: 0;
-	position: relative;
+    margin-left: 0;
+    position: relative;
 }
 
 .micronews-login-container .layui-input-block span.txt {
-	position: relative;
-	top: 1px;
+    position: relative;
+    top: 1px;
 }
 
 .micronews-login-container .agreement .layui-input-block {
-	line-height: 36px;
+    line-height: 36px;
 }
 
 .micronews-login-container .agreement .layui-unselect {
-	margin: 0;
+    margin: 0;
 }
 
 .micronews-login-container .agreement .layui-unselect span {
-	padding-right: 0;
+    padding-right: 0;
 }
 
 .micronews-login-container .layui-input-block img {
-	height: 36px;
-	position: absolute;
-	right: 1px;
-	top: 1px;
-	cursor: pointer;
+    height: 36px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    cursor: pointer;
 }
 
 .micronews-login-container .obtain {
-	position: absolute;
-	background: #eeeeee;
-	right: 1px;
-	top: 1px;
-	height: 36px;
-	color: #454545;
+    position: absolute;
+    background: #eeeeee;
+    right: 1px;
+    top: 1px;
+    height: 36px;
+    color: #454545;
 }
 
 .micronews-login-container button {
-	width: 100%;
-	background: #6294b5;
+    width: 100%;
+    background: #6294b5;
 }
 
 .micronews-login-container .other-login {
-	text-align: center;
+    text-align: center;
 }
 
 .micronews-login-container .other-login a {
-	margin: 0 20px;
+    margin: 0 20px;
 }
 
 /*end-micronews-login-container*/
@@ -738,79 +738,79 @@ html, body {
 
 /*micronews-persInfo-content*/
 .micronews-persInfo-wrap {
-	background: #f5f6f8;
+    background: #f5f6f8;
 }
 
 .micronews-persInfo-content {
-	padding: 26px 0 90px 0;
+    padding: 26px 0 90px 0;
 }
 
 .micronews-persInfo-content .main {
-	margin: 0 0 0 30px;
-	padding-right: 0;
-	background: #fff;
+    margin: 0 0 0 30px;
+    padding-right: 0;
+    background: #fff;
 }
 
 .micronews-persInfo-content .ulCommentList {
-	padding: 0 30px;
+    padding: 0 30px;
 }
 
 .micronews-persInfo-content .item {
-	border-bottom: 0;
-	padding: 0;
+    border-bottom: 0;
+    padding: 0;
 }
 
 .micronews-persInfo-content .item h4 {
-	margin-bottom: 0
+    margin-bottom: 0
 }
 
 .micronews-persInfo-content .liCont {
-	padding: 30px 0;
-	border-bottom: 1px solid #eaeaea;
+    padding: 30px 0;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .micronews-persInfo-content .liCont:last-child {
-	border-bottom: 0;
+    border-bottom: 0;
 }
 
 .leave-message {
-	min-height: 900px;
+    min-height: 900px;
 }
 
 .micronews-persInfo-content .content-box {
-	padding-bottom: 30px;
-	display: none;
+    padding-bottom: 30px;
+    display: none;
 }
 
 .micronews-persInfo-content .popular-info {
-	background: #fff;
-	border: 0;
-	padding: 60px 0 150px 0;
-	text-align: center;
+    background: #fff;
+    border: 0;
+    padding: 60px 0 150px 0;
+    text-align: center;
 }
 
 .micronews-persInfo-content .layui-card-header {
-	height: auto;
-	line-height: auto;
-	border: 0;
+    height: auto;
+    line-height: auto;
+    border: 0;
 }
 
 .micronews-persInfo-content .tab {
-	margin-top: 30px;
-	padding: 0 60px;
+    margin-top: 30px;
+    padding: 0 60px;
 }
 
 .micronews-persInfo-content .tab li {
-	line-height: 40px;
-	font-size: 16px;
-	color: #666666;
-	margin-bottom: 16px;
-	cursor: pointer;
+    line-height: 40px;
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 16px;
+    cursor: pointer;
 }
 
 .micronews-persInfo-content .tab li.layui-this {
-	border-bottom: 1px solid #6295b4;
-	color: #6295b4;
+    border-bottom: 1px solid #6295b4;
+    color: #6295b4;
 }
 
 /*end-micronews-persInfo-content*/
@@ -818,134 +818,134 @@ html, body {
 
 /*中屏幕*/
 @media screen and (max-width: 1024px) {
-	.micronews-header {
-		height: 60px;
-		line-height: 60px;
-	}
+    .micronews-header {
+        height: 60px;
+        line-height: 60px;
+    }
 
-	.micronews-header .search-bar, .micronews-header .nav {
-		display: none;
-	}
+    .micronews-header .search-bar, .micronews-header .nav {
+        display: none;
+    }
 
-	.micronews-header .logo {
-		position: absolute;
-		left: 50%;
-		margin-left: -50px;
-	}
+    .micronews-header .logo {
+        position: absolute;
+        left: 50%;
+        margin-left: -50px;
+    }
 
-	.micronews-banner .title {
-		display: none;
-	}
+    .micronews-banner .title {
+        display: none;
+    }
 
-	.micronews-container .layui-fluid {
-		padding: 0 15px;
-	}
+    .micronews-container .layui-fluid {
+        padding: 0 15px;
+    }
 
-	.micronews-footer {
-		text-align: center;
-	}
+    .micronews-footer {
+        text-align: center;
+    }
 
-	.micronews-footer .f-icon {
-		position: static;
-		margin-top: 20px;
-	}
+    .micronews-footer .f-icon {
+        position: static;
+        margin-top: 20px;
+    }
 
-	.micronews-header .menu-icon {
-		display: block;
-		height: 100%;
-		width: 60px;
-		cursor: pointer;
-		text-align: center;
-	}
+    .micronews-header .menu-icon {
+        display: block;
+        height: 100%;
+        width: 60px;
+        cursor: pointer;
+        text-align: center;
+    }
 
-	.micronews-header .menu-icon i {
-		font-size: 26px;
-		color: #6294b5;
-	}
+    .micronews-header .menu-icon i {
+        font-size: 26px;
+        color: #6294b5;
+    }
 
-	.micronews-header .mobile-nav {
-		display: none;
-		position: absolute;
-		top: 60px;
-		left: 0;
-		width: 100%;
-		z-index: 100;
-	}
+    .micronews-header .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
 
-	.micronews-header .mobile-nav li {
-		display: block;
-	}
+    .micronews-header .mobile-nav li {
+        display: block;
+    }
 
-	.micronews-header .mobile-nav .layui-nav {
-		background: #fff;
-		padding: 0;
-	}
+    .micronews-header .mobile-nav .layui-nav {
+        background: #fff;
+        padding: 0;
+    }
 
-	.micronews-header .mobile-nav .layui-nav a {
-		color: #6294b5;
-	}
+    .micronews-header .mobile-nav .layui-nav a {
+        color: #6294b5;
+    }
 
-	.micronews-header .mobile-nav .layui-nav .layui-this:after, .micronews-header .mobile-nav .layui-nav-bar {
-		background: #6294b5;
-		height: 3px;
-	}
+    .micronews-header .mobile-nav .layui-nav .layui-this:after, .micronews-header .mobile-nav .layui-nav-bar {
+        background: #6294b5;
+        height: 3px;
+    }
 }
 
 
 /*小屏幕*/
 @media screen and (max-width: 768px) {
-	.micronews-container .main {
-		padding-right: 0;
-	}
+    .micronews-container .main {
+        padding-right: 0;
+    }
 
-	.micronews-details-container .article .img-box img {
-		width: 100%;
-	}
+    .micronews-details-container .article .img-box img {
+        width: 100%;
+    }
 
-	.micronews-container .item img {
-		float: none;
-		margin: 0 0 15px 0;
-	}
+    .micronews-container .item img {
+        float: none;
+        margin: 0 0 15px 0;
+    }
 
-	.micronews-container .item h4 {
-		font-size: 16px;
-		line-height: 24px;
-	}
+    .micronews-container .item h4 {
+        font-size: 16px;
+        line-height: 24px;
+    }
 
-	.micronews-footer .ft-nav a {
-		display: block;
-		margin: 15px 0;
-	}
+    .micronews-footer .ft-nav a {
+        display: block;
+        margin: 15px 0;
+    }
 
-	.micronews-login-container .form-box {
-		padding: 0 10px;
-		width: auto;
-		overflow-x: hidden;
-	}
+    .micronews-login-container .form-box {
+        padding: 0 10px;
+        width: auto;
+        overflow-x: hidden;
+    }
 
-	.micronews-login-container .form-box form {
-		width: 100%;
-	}
+    .micronews-login-container .form-box form {
+        width: 100%;
+    }
 
-	.micronews-login-container .form-box h3 {
-		line-height: 70px;
-		font-size: 24px;
-	}
+    .micronews-login-container .form-box h3 {
+        line-height: 70px;
+        font-size: 24px;
+    }
 
-	.micronews-persInfo-content .popular-info {
-		padding: 60px 0;
-		margin-bottom: 20px;
-	}
+    .micronews-persInfo-content .popular-info {
+        padding: 60px 0;
+        margin-bottom: 20px;
+    }
 
-	.micronews-container .main {
-		margin-left: 0;
-	}
+    .micronews-container .main {
+        margin-left: 0;
+    }
 
-	#micronews-carouse {
-		height: 150px;
-	}
+    #micronews-carouse {
+        height: 150px;
+    }
 
-	#micronews-carouse img {
-		height: 150px;
-	}
+    #micronews-carouse img {
+        height: 150px;
+    }
 }

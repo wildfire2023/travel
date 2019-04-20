@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.waner.primary.web.mapper.TravelRecommendMapper">
-	<resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelRecommend">
-		<id column="id" property="id" jdbcType="INTEGER"/>
-		<result column="title" property="title" jdbcType="VARCHAR"/>
-		<result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
-		<result column="content" property="content" jdbcType="LONGVARCHAR"/>
-		<result column="content_img_url" property="contentImgUrl" jdbcType="VARCHAR"/>
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-		<result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
-		<result column="push_flag" property="pushFlag" jdbcType="TINYINT"/>
-	</resultMap>
-	<sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelRecommend">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="content_img_url" property="contentImgUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="push_flag" property="pushFlag" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
         id,
         title,
         head_img_url,
@@ -21,18 +21,18 @@
         del_flag,
         push_flag
     </sql>
-	<select id="selectPageVo" resultMap="BaseResultMap">
-		select * from travel_recommend
-		<where>
-			del_flag = 0
-			<if test="checkStatus != null">
-				and push_flag = #{checkStatus}
-			</if>
-			<if test="title != null and title != ''">
-				<bind name="pattern" value="'%' + title + '%'"/>
-				and title like #{pattern}
-			</if>
-		</where>
-		order by create_time desc
-	</select>
+    <select id="selectPageVo" resultMap="BaseResultMap">
+        select * from travel_recommend
+        <where>
+            del_flag = 0
+            <if test="checkStatus != null">
+                and push_flag = #{checkStatus}
+            </if>
+            <if test="title != null and title != ''">
+                <bind name="pattern" value="'%' + title + '%'"/>
+                and title like #{pattern}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>

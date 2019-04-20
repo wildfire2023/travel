@@ -12,8 +12,8 @@ import java.io.Serializable;
  */
 @Data
 public class MailMessage implements Serializable {
-  private static final long serialVersionUID = 4166120963605878421L;
-  private String subject;
-  private String content;
-  private String to;
+    private static final long serialVersionUID = 4166120963605878421L;
+    private String subject;
+    private String content;
+    private String to;
 }

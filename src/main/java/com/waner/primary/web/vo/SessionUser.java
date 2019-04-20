@@ -7,5 +7,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class SessionUser extends SysUser {
-  private String imgUrl;
+    private String imgUrl;
 }

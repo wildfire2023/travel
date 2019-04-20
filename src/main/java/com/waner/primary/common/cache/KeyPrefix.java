@@ -7,17 +7,17 @@ package com.waner.primary.common.cache;
  * @since 1.0.0-SNAPSHOT
  */
 public interface KeyPrefix {
-  /**
-   * 设置key缓存时间
-   *
-   * @return
-   */
-  int expireSeconds();
+    /**
+     * 设置key缓存时间
+     *
+     * @return
+     */
+    int expireSeconds();
 
-  /**
-   * 获取前缀
-   *
-   * @return
-   */
-  String getPrefix();
+    /**
+     * 获取前缀
+     *
+     * @return
+     */
+    String getPrefix();
 }

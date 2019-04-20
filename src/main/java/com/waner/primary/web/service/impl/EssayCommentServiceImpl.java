@@ -15,65 +15,65 @@ import java.util.List;
 
 @Service
 public class EssayCommentServiceImpl implements EssayCommentService {
-  private final TravelCommentMapper commentMapper;
-  private final TravelUserMapper travelUserMapper;
+    private final TravelCommentMapper commentMapper;
+    private final TravelUserMapper travelUserMapper;
 
-  public EssayCommentServiceImpl(
-      TravelCommentMapper commentMapper, TravelUserMapper travelUserMapper) {
-    this.commentMapper = commentMapper;
-    this.travelUserMapper = travelUserMapper;
-  }
+    public EssayCommentServiceImpl(
+            TravelCommentMapper commentMapper, TravelUserMapper travelUserMapper) {
+        this.commentMapper = commentMapper;
+        this.travelUserMapper = travelUserMapper;
+    }
 
-  /**
-   * 插入评论--->事务操作
-   *
-   * @param essayId
-   * @param userId
-   * @param content
-   * @return
-   */
-  @Transactional
-  @Override
-  public int add(Integer essayId, Integer userId, String content) {
-    TravelComment travelComment = new TravelComment();
-    travelComment.setContent(content);
-    travelComment.setSysUserId(userId);
-    travelComment.setDelFlag((byte) 0);
-    travelComment.setCreateTime(new Date());
-    // TODO: 2019/4/16 handle exception
-    // 插入评论表
-    int commentRet = commentMapper.insertTravelCommentMapper(travelComment);
-    // 插入文章-评论表
-    int relativeRet = commentMapper.insertEssayCommentRelative(essayId, travelComment.getId());
-    return commentRet + relativeRet;
-  }
+    /**
+     * 插入评论--->事务操作
+     *
+     * @param essayId
+     * @param userId
+     * @param content
+     * @return
+     */
+    @Transactional
+    @Override
+    public int add(Integer essayId, Integer userId, String content) {
+        TravelComment travelComment = new TravelComment();
+        travelComment.setContent(content);
+        travelComment.setSysUserId(userId);
+        travelComment.setDelFlag((byte) 0);
+        travelComment.setCreateTime(new Date());
+        // TODO: 2019/4/16 handle exception
+        // 插入评论表
+        int commentRet = commentMapper.insertTravelCommentMapper(travelComment);
+        // 插入文章-评论表
+        int relativeRet = commentMapper.insertEssayCommentRelative(essayId, travelComment.getId());
+        return commentRet + relativeRet;
+    }
 
-  /**
-   * 查询文章对应的评论列表信息
-   *
-   * @param essayId
-   * @param limit
-   * @param page
-   * @return
-   */
-  @Override
-  public List<CommentWithUser> listComments(Integer essayId, int limit, Integer page) {
-    Page<CommentWithUser> pageHelper = new Page<>();
-    pageHelper.setSize(limit);
-    pageHelper.setCurrent(page);
+    /**
+     * 查询文章对应的评论列表信息
+     *
+     * @param essayId
+     * @param limit
+     * @param page
+     * @return
+     */
+    @Override
+    public List<CommentWithUser> listComments(Integer essayId, int limit, Integer page) {
+        Page<CommentWithUser> pageHelper = new Page<>();
+        pageHelper.setSize(limit);
+        pageHelper.setCurrent(page);
 
-    IPage<CommentWithUser> pageVo = commentMapper.queryCommentsWithUser(pageHelper, essayId);
-    return pageVo.getRecords();
-  }
+        IPage<CommentWithUser> pageVo = commentMapper.queryCommentsWithUser(pageHelper, essayId);
+        return pageVo.getRecords();
+    }
 
-  /**
-   * 查询文章对应的评论列表总数
-   *
-   * @param essayId
-   * @return
-   */
-  @Override
-  public int getCommentsCountWithEssay(Integer essayId) {
-    return commentMapper.queryCommentsWithUserCount(essayId);
-  }
+    /**
+     * 查询文章对应的评论列表总数
+     *
+     * @param essayId
+     * @return
+     */
+    @Override
+    public int getCommentsCountWithEssay(Integer essayId) {
+        return commentMapper.queryCommentsWithUserCount(essayId);
+    }
 }

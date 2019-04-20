@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class TravelLink {
-  private Integer id;
+    private Integer id;
 
-  private String title;
+    private String title;
 
-  private String imgUrl;
+    private String imgUrl;
 
-  private Byte delFlag;
+    private Byte delFlag;
 }

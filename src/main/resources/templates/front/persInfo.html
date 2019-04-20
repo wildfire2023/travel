@@ -1,409 +1,409 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Waner - 个人信息</title>
-	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
+    <meta charset="UTF-8">
+    <title>Waner - 个人信息</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
 <div class="micronews-header-wrap">
-	<div class="micronews-header w1000 layui-clear">
-		<h1 class="logo">
-			<a href="/">
-				<img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
-				<span class="layui-hide">logo</span>
-			</a>
-		</h1>
-		<p class="nav">
-			<a href="/front/page/index">推荐</a>
-			<a href="/travel-essay/list-page">游记</a>
-			<a href="#">问答</a>
-		</p>
-		<div class="search-bar">
-			<form class="layui-form" action="">
-				<div class="layui-form-item">
-					<div class="layui-input-block">
-						<input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
-						<button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="login">
-			<a th:if="${session.sessionUser == null}" href="/front/page/login">
-				登录
-			</a>
-			<!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
-			<ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
-			    lay-filter="component-nav">
-				<li class="layui-nav-item">
-					<a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
-				</li>
-				<li class="layui-nav-item" lay-unselect="">
-					<a href="javascript:;" style="font-size: 16px;color: #222;"><span
-							th:text="${session.sessionUser.nickname}"></span></a>
-					<dl class="layui-nav-child">
-						<dd style="text-align: center;"><a href="javascript:;">修改信息</a></dd>
-						<dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
-						<dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
-					</dl>
-				</li>
-			</ul>
-		</div>
-		<div class="menu-icon">
-			<i class="layui-icon layui-icon-more-vertical"></i>
-		</div>
-	</div>
+    <div class="micronews-header w1000 layui-clear">
+        <h1 class="logo">
+            <a href="/">
+                <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+                <span class="layui-hide">logo</span>
+            </a>
+        </h1>
+        <p class="nav">
+            <a href="/front/page/index">推荐</a>
+            <a href="/travel-essay/list-page">游记</a>
+            <a href="/question/list-page">问答</a>
+        </p>
+        <div class="search-bar">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="text" name="title" placeholder="搜索你要的内容" autocomplete="off" class="layui-input">
+                        <button class="layui-btn search-btn" formnovalidate><i class="layui-icon layui-icon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="login">
+            <a th:if="${session.sessionUser == null}" href="/front/page/login">
+                登录
+            </a>
+            <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+            <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
+                lay-filter="component-nav">
+                <li class="layui-nav-item">
+                    <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="javascript:;" style="font-size: 16px;color: #222;"><span
+                            th:text="${session.sessionUser.nickname}"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd style="text-align: center;"><a href="javascript:;">修改信息</a></dd>
+                        <dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
+                        <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-icon">
+            <i class="layui-icon layui-icon-more-vertical"></i>
+        </div>
+    </div>
 </div>
 
 
 <div class="micronews-persInfo-wrap">
-	<div class="micronews-container micronews-details-container micronews-persInfo-content w1000">
-		<div class="layui-fluid">
-			<div class="layui-row">
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md3">
-					<div class="popular-info">
-						<div class="layui-card">
-							<div class="layui-card-header">
-								<a href="#"><img th:src="@{/layuiadmin/myfile/images/header.png}"></a>
-								<p class="name">喵小咪</p>
-							</div>
-							<div class="layui-card-body">
-								<ul class="tab" id="tabHeader" lay-filter="myInfo">
-									<li lay-id="yj">我的游记</li>
-									<li lay-id="wt">我的问题</li>
-									<li lay-id="sc">我的收藏</li>
-									<li lay-id="pl">我的评论</li>
-									<li lay-id="hd">我的回答</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md9">
-					<div class="main">
-						<div class="leave-message" id="tabBody">
-							<!-- 我的评论 -->
-							<div class="content-box">
-								<div class="ulCommentList">
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+    <div class="micronews-container micronews-details-container micronews-persInfo-content w1000">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md3">
+                    <div class="popular-info">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <a href="#"><img th:src="@{/layuiadmin/myfile/images/header.png}"></a>
+                                <p class="name">喵小咪</p>
+                            </div>
+                            <div class="layui-card-body">
+                                <ul class="tab" id="tabHeader" lay-filter="myInfo">
+                                    <li lay-id="yj">我的游记</li>
+                                    <li lay-id="wt">我的问题</li>
+                                    <li lay-id="sc">我的收藏</li>
+                                    <li lay-id="pl">我的评论</li>
+                                    <li lay-id="hd">我的回答</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md9">
+                    <div class="main">
+                        <div class="leave-message" id="tabBody">
+                            <!-- 我的评论 -->
+                            <div class="content-box">
+                                <div class="ulCommentList">
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-										<a href="#"><img th:src="@{/layuiadmin/myfile/images/header.png}"></a>
-										<div class="item-cont">
-											<div class="cont">
-												<p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-												<p class="text">
-													万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#"><img th:src="@{/layuiadmin/myfile/images/header.png}"></a>
+                                        <div class="item-cont">
+                                            <div class="cont">
+                                                <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
+                                                <p class="text">
+                                                    万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-										<a href="#"><img src="../res/static/images/header.png"></a>
-										<div class="item-cont">
-											<div class="cont">
-												<p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-												<p class="text">
-													万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#"><img src="../res/static/images/header.png"></a>
+                                        <div class="item-cont">
+                                            <div class="cont">
+                                                <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
+                                                <p class="text">
+                                                    万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-										<a href="#"><img src="../res/static/images/header.png"></a>
-										<div class="item-cont">
-											<div class="cont">
-												<p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-												<p class="text">
-													万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#"><img src="../res/static/images/header.png"></a>
+                                        <div class="item-cont">
+                                            <div class="cont">
+                                                <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
+                                                <p class="text">
+                                                    万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-										<a href="#"><img src="../res/static/images/header.png"></a>
-										<div class="item-cont">
-											<div class="cont">
-												<p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-												<p class="text">
-													万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#"><img src="../res/static/images/header.png"></a>
+                                        <div class="item-cont">
+                                            <div class="cont">
+                                                <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
+                                                <p class="text">
+                                                    万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-										<a href="#"><img src="../res/static/images/header.png"></a>
-										<div class="item-cont">
-											<div class="cont">
-												<p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
-												<p class="text">
-													万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="micronews-details-test" style="text-align: center;"></div>
-							</div>
-							<!-- 结束-我的评论 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#"><img src="../res/static/images/header.png"></a>
+                                        <div class="item-cont">
+                                            <div class="cont">
+                                                <p><span class="name">我是锦鲤</span><span class="time">1小时前</span></p>
+                                                <p class="text">
+                                                    万达似乎在重新考虑该事项。此外，万达已经为这个项目支付高达8000万美元的费用和税款，但项目却迟迟未开工。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="micronews-details-test" style="text-align: center;"></div>
+                            </div>
+                            <!-- 结束-我的评论 -->
 
-							<!-- 我的收藏 -->
-							<div class="content-box">
-								<div class="ulCommentList">
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                            <!-- 我的收藏 -->
+                            <div class="content-box">
+                                <div class="ulCommentList">
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="liCont">
-										<div class="item">
-											<div class="item-info">
-												<h4><a href="recommend-details.html">想要头发好只要不洗头？
-													英国女子留1.83米长发自爆近20年没洗过</a></h4>
-												<div class="b-txt">
-													<span class="label">娱乐</span>
-													<span class="icon message">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="liCont">
+                                        <div class="item">
+                                            <div class="item-info">
+                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
+                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
+                                                <div class="b-txt">
+                                                    <span class="label">娱乐</span>
+                                                    <span class="icon message">
                               <i class="layui-icon layui-icon-dialogue"></i>
                               500条
                             </span>
-													<span class="icon time">
+                                                    <span class="icon time">
                               <i class="layui-icon layui-icon-log"></i>
                              2018.08.28
                             </span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="micronews-details-test1" style="text-align: center;"></div>
-							</div>
-							<!-- 结束-我的收藏 -->
-						</div>
-					</div>
-				</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="micronews-details-test1" style="text-align: center;"></div>
+                            </div>
+                            <!-- 结束-我的收藏 -->
+                        </div>
+                    </div>
+                </div>
 
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="micronews-footer-wrap">
-	<div class="micronews-footer w1000">
-		<div class="ft-nav">
-			<a href="#">关于我们</a>
-			<a href="#">合作伙伴</a>
-			<a href="#">广告服务</a>
-			<a href="#">常见问题</a>
-		</div>
-		<div class="Copyright">
-			<span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
-		</div>
-		<div class="f-icon">
-			<a href="#" class="w-icon">
-				<img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
-			</a>
-			<a href="#" class="wb-icon">
-				<img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
-			</a>
-		</div>
-	</div>
+    <div class="micronews-footer w1000">
+        <div class="ft-nav">
+            <a href="#">关于我们</a>
+            <a href="#">合作伙伴</a>
+            <a href="#">广告服务</a>
+            <a href="#">常见问题</a>
+        </div>
+        <div class="Copyright">
+            <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
+        </div>
+        <div class="f-icon">
+            <a href="#" class="w-icon">
+                <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
+            </a>
+            <a href="#" class="wb-icon">
+                <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
+            </a>
+        </div>
+    </div>
 </div>
 <script th:src="@{/layuiadmin/layui/layui.js}"></script>
 <!--[if lt IE 9]>
@@ -411,54 +411,54 @@
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <script>
-	layui.config({
-		base: '/layuiadmin/'
-	}).extend({
-		index: 'lib/index'
-	}).use(['index', 'news', 'element'], function () {
-		var news = layui.news
-				, $ = layui.$
-				, admin = layui.admin
-				, element = layui.element;
-		// 导航渲染
-		element.render('nav', 'component-nav');
+    layui.config({
+        base: '/layuiadmin/'
+    }).extend({
+        index: 'lib/index'
+    }).use(['index', 'news', 'element'], function () {
+        var news = layui.news
+            , $ = layui.$
+            , admin = layui.admin
+            , element = layui.element;
+        // 导航渲染
+        element.render('nav', 'component-nav');
 
-		news.Page('micronews-details-test', 50);
-		news.Page('micronews-details-test1', 50);
-		news.arrowutil();
-		var collOff = true;
+        news.Page('micronews-details-test', 50);
+        news.Page('micronews-details-test1', 50);
+        news.arrowutil();
+        var collOff = true;
 
-		$('.Collection').on('click', function () {
-			if (collOff) {
-				$(this).addClass('active')
-			} else {
-				$(this).removeClass('active')
-			}
-			collOff = !collOff
-		});
+        $('.Collection').on('click', function () {
+            if (collOff) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+            collOff = !collOff
+        });
 
 
-		news.seachBtn();
-		element.tab({
-			headerElem: '#tabHeader>li' //指定tab头元素项
-			, bodyElem: '#tabBody>.content-box' //指定tab主体元素项
-		});
-		var layid = location.hash.replace(/^#myInfo=/, '');
-		element.tabChange('myInfo', layid);
+        news.seachBtn();
+        element.tab({
+            headerElem: '#tabHeader>li' //指定tab头元素项
+            , bodyElem: '#tabBody>.content-box' //指定tab主体元素项
+        });
+        var layid = location.hash.replace(/^#myInfo=/, '');
+        element.tabChange('myInfo', layid);
 
-		//监听Tab切换，以改变地址hash值
-		element.on('tab(myInfo)', function () {
-			location.hash = 'myInfo=' + this.getAttribute('lay-id');
-		});
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(myInfo)', function () {
+            location.hash = 'myInfo=' + this.getAttribute('lay-id');
+        });
 
-		var url = window.location.hash;
-		var loc = url && url.substring(url.lastIndexOf('=') + 1, url.length) || false;
-		if (loc) {
-			$("[lay-id=" + loc + "]").trigger("click")
-		} else {
-			$("[lay-id=pl]").trigger("click")
-		}
-	});
+        var url = window.location.hash;
+        var loc = url && url.substring(url.lastIndexOf('=') + 1, url.length) || false;
+        if (loc) {
+            $("[lay-id=" + loc + "]").trigger("click")
+        } else {
+            $("[lay-id=pl]").trigger("click")
+        }
+    });
 </script>
 </body>
 </html>

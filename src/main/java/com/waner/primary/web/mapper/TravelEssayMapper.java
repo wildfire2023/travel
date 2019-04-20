@@ -9,24 +9,24 @@ import com.waner.primary.web.vo.EssayWithUser;
 import org.apache.ibatis.annotations.Param;
 
 public interface TravelEssayMapper extends BaseMapper<TravelEssay> {
-  int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-  int insertTravelEssayMapper(TravelEssay record);
+    int insertTravelEssayMapper(TravelEssay record);
 
-  int insertSelective(TravelEssay record);
+    int insertSelective(TravelEssay record);
 
-  TravelEssay selectByPrimaryKey(Integer id);
+    TravelEssay selectByPrimaryKey(Integer id);
 
-  int updateByPrimaryKeySelective(TravelEssay record);
+    int updateByPrimaryKeySelective(TravelEssay record);
 
-  int updateByPrimaryKeyWithBLOBs(TravelEssay record);
+    int updateByPrimaryKeyWithBLOBs(TravelEssay record);
 
-  int updateByPrimaryKey(TravelEssay record);
+    int updateByPrimaryKey(TravelEssay record);
 
-  IPage<EssayWithUser> selectPageVo(
-      Page pageHelper,
-      @Param("essay") EssayWithUser essay,
-      @Param("checkStatus") Integer checkStatus);
+    IPage<EssayWithUser> selectPageVo(
+            Page pageHelper,
+            @Param("essay") EssayWithUser essay,
+            @Param("checkStatus") Integer checkStatus);
 
-  int count(@Param("essay") EssayWithUser essay, @Param("checkStatus") Integer checkPushFlag);
+    int count(@Param("essay") EssayWithUser essay, @Param("checkStatus") Integer checkPushFlag);
 }

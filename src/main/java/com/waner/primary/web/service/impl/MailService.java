@@ -21,38 +21,38 @@ import java.io.File;
 @Service
 public class MailService {
 
-  @Value("${spring.mail.username}")
-  private String from;
+    @Value("${spring.mail.username}")
+    private String from;
 
-  private final JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
 
-  @Autowired
-  public MailService(JavaMailSender mailSender) {
-    this.mailSender = mailSender;
-  }
-
-  /**
-   * 邮件发送
-   *
-   * @param to
-   * @param subject
-   * @param content
-   * @param filePath
-   * @throws MessagingException
-   */
-  public void sendAttachmentsMail(String to, String subject, String content, String filePath)
-      throws MessagingException {
-    MimeMessage mailMessage = mailSender.createMimeMessage();
-    MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true);
-    helper.setFrom(from);
-    helper.setTo(to);
-    helper.setSubject(subject);
-    helper.setText(content);
-    if (!StringUtils.isEmpty(filePath)) {
-      FileSystemResource file = new FileSystemResource(new File(filePath));
-      String fileName = file.getFilename();
-      helper.addAttachment(fileName, file);
+    @Autowired
+    public MailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
     }
-    mailSender.send(mailMessage);
-  }
+
+    /**
+     * 邮件发送
+     *
+     * @param to
+     * @param subject
+     * @param content
+     * @param filePath
+     * @throws MessagingException
+     */
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath)
+            throws MessagingException {
+        MimeMessage mailMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true);
+        helper.setFrom(from);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content);
+        if (!StringUtils.isEmpty(filePath)) {
+            FileSystemResource file = new FileSystemResource(new File(filePath));
+            String fileName = file.getFilename();
+            helper.addAttachment(fileName, file);
+        }
+        mailSender.send(mailMessage);
+    }
 }

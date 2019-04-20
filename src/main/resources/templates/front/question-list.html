@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Waner - 游记列表</title>
+    <title>Waner - 问题列表</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
@@ -19,8 +19,8 @@
         </h1>
         <p class="nav">
             <a href="/front/page/index">推荐</a>
-            <a href="/travel-essay/list-page" class="active">游记</a>
-            <a href="/question/list-page">问答</a>
+            <a href="/travel-essay/list-page" >游记</a>
+            <a href="/question/list-page" class="active">问答</a>
         </p>
         <div class="search-bar">
             <form class="layui-form" action="">
@@ -81,7 +81,7 @@
                 <div class="popular-info popular-info-tog">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h3>游记推荐</h3>
+                            <h3>最多回答</h3>
                         </div>
                         <div class="layui-card-body">
                             <ul class="list-box">
@@ -138,7 +138,7 @@
 </div>
 
 <!-- content-laytpl -->
-<script id="travelEssayList" type="text/html">
+<script id="questionList" type="text/html">
     {{#  layui.each(d, function(index, item){ }}
     <div class="item">
         {{# if(item.headImgUrl){ }}
@@ -220,14 +220,14 @@
 
         function loadData() {
             admin.req({
-                url: '/travel-essay/table-data?role=user'
-                , type: 'get'
+                url: '/question/list'
+                , type: 'post'
                 , data: {
                     limit: limit,
                     page: page
                 }, success: function (res) {
                     // 获取节点
-                    var getTpl = document.getElementById('travelEssayList').innerHTML;
+                    var getTpl = document.getElementById('questionList').innerHTML;
                     // 执行tpl渲染
                     laytpl(getTpl).render(res.data, function (html) {
                         document.getElementById('view').innerHTML = html;
@@ -247,15 +247,15 @@
                             if (!first) {
                                 // loadData();
                                 admin.req({
-                                    url: '/travel-essay/table-data?role=user'
-                                    , type: 'get'
+                                    url: '/question/list'
+                                    , type: 'post'
                                     , async: false
                                     , data: {
                                         limit: limit,
                                         page: page
                                     }, success: function (res) {
                                         // 获取节点
-                                        var getTpl = document.getElementById('travelEssayList').innerHTML;
+                                        var getTpl = document.getElementById('questionList').innerHTML;
                                         // 执行tpl渲染
                                         laytpl(getTpl).render(res.data, function (html) {
                                             document.getElementById('view').innerHTML = html;

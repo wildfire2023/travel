@@ -11,22 +11,22 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TravelCommentMapper extends BaseMapper<TravelComment> {
-  int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-  int insertTravelCommentMapper(TravelComment record);
+    int insertTravelCommentMapper(TravelComment record);
 
-  int insertSelective(TravelComment record);
+    int insertSelective(TravelComment record);
 
-  TravelComment selectByPrimaryKey(Integer id);
+    TravelComment selectByPrimaryKey(Integer id);
 
-  int updateByPrimaryKeySelective(TravelComment record);
+    int updateByPrimaryKeySelective(TravelComment record);
 
-  int updateByPrimaryKey(TravelComment record);
+    int updateByPrimaryKey(TravelComment record);
 
-  int insertEssayCommentRelative(
-      @Param("essayId") Integer essayId, @Param("commentId") Integer commentId);
+    int insertEssayCommentRelative(
+            @Param("essayId") Integer essayId, @Param("commentId") Integer commentId);
 
-  IPage<CommentWithUser> queryCommentsWithUser(Page pageHelper, @Param("essayId") Integer essayId);
+    IPage<CommentWithUser> queryCommentsWithUser(Page pageHelper, @Param("essayId") Integer essayId);
 
-  int queryCommentsWithUserCount(@Param("essayId") Integer essayId);
+    int queryCommentsWithUserCount(@Param("essayId") Integer essayId);
 }
