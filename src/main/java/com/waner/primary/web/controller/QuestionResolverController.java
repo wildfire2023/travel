@@ -55,9 +55,15 @@ public class QuestionResolverController {
     @GetMapping("detail-page")
     public String redirectToDetailPage(@RequestParam("id") Integer id, HttpServletRequest request) {
         request.setAttribute("id",id);
-        return "question-detail";
+        return "front/question-detail";
     }
 
+    /**
+     * 添加问题请求映射
+     * @param question
+     * @param session
+     * @return
+     */
     @PostMapping("add")
     @ResponseBody
     public Response<String> addQuestion(TravelQuestion question, HttpSession session) {
@@ -73,7 +79,6 @@ public class QuestionResolverController {
             return Response.fail(CodeMsg.FAIL);
         }
     }
-
 
 
     /**

@@ -3,6 +3,7 @@ package com.waner.primary.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.mapper.TravelQuestionMapper;
@@ -14,6 +15,7 @@ import java.util.List;
 
 /**
  * 问题相关接口实现
+ *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -48,9 +50,17 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
         return questionMapper.selectCount(wrapper);
     }
 
+    /**
+     * 查找问题详情
+     * @param id
+     * @return
+     */
     @Override
     public Response<QuestionWithUser> getQuestionDetail(Integer id) {
-
-        return null;
+        QuestionWithUser questionWithUser = questionMapper.selectQuestionWithUser(id);
+        if (questionWithUser == null) {
+            return Response.fail(CodeMsg.FAIL);
+        }
+        return Response.success(questionWithUser);
     }
 }

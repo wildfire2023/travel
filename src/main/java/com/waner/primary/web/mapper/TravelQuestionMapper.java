@@ -22,4 +22,6 @@ public interface TravelQuestionMapper extends BaseMapper<TravelQuestion> {
     int updateByPrimaryKey(TravelQuestion record);
 
     IPage<QuestionWithUser> queryAllQuestions(Page pageVo);
+
+    QuestionWithUser selectQuestionWithUser(Integer id);
 }

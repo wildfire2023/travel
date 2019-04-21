@@ -212,9 +212,9 @@
         var questionId = GetQueryString('id');
 
         // 加载留言列表
-        news.MessageList(questionId);
+        // news.MessageList(questionId);
 
-        news.EnterMessage(user, questionId);
+        // news.EnterMessage(user, questionId);
         // index.Page('micronews-details-test', 50);
         var collOff = true;
         $('.Collection').on('click', function () {
@@ -242,7 +242,7 @@
         // 加载页面内容
         function getDetail(id) {
             admin.req({
-                url: '/travel-essay/detail'
+                url: '/question/detail'
                 , data: {id: id}
                 , success: function (res) {
                     var data = res.data;

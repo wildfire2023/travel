@@ -124,4 +124,9 @@
                 inner join travel_user user on user.sys_user_id = question.sys_user_id
                     order by question.create_time desc
     </select>
+    <select id="selectQuestionWithUser" resultType="com.waner.primary.web.vo.QuestionWithUser">
+        select question.*,user.nickname,user.img_url
+            from travel_question question inner join travel_user user on question.sys_user_id = user.sys_user_id
+                where question.id = #{id}
+    </select>
 </mapper>
