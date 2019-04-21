@@ -5,11 +5,13 @@ import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.service.QuestionResolverService;
+import com.waner.primary.web.vo.AnswerWithUser;
 import com.waner.primary.web.vo.QuestionWithUser;
 import com.waner.primary.web.vo.SessionUser;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,12 +56,13 @@ public class QuestionResolverController {
      */
     @GetMapping("detail-page")
     public String redirectToDetailPage(@RequestParam("id") Integer id, HttpServletRequest request) {
-        request.setAttribute("id",id);
+        request.setAttribute("id", id);
         return "front/question-detail";
     }
 
     /**
      * 添加问题请求映射
+     *
      * @param question
      * @param session
      * @return
@@ -100,5 +103,30 @@ public class QuestionResolverController {
     @ResponseBody
     public Response<QuestionWithUser> getQuestionDetail(@RequestParam("id") Integer id) {
         return questionResolverService.getQuestionDetail(id);
+    }
+
+    @PostMapping("add-answer")
+    @ResponseBody
+    public Response<String> addAnswer(Integer questionId, Integer userId, String content) {
+        if (questionId == null || userId == null || StringUtils.isEmpty(content)) {
+            throw new GlobalException("空参数", 500100);
+        }
+        int ret = questionResolverService.addAnswer(questionId, userId, content);
+        if (ret > 1) {
+            return Response.success("评论成功");
+        } else {
+            return Response.fail(CodeMsg.FAIL);
+        }
+    }
+
+    @PostMapping("list-answers")
+    @ResponseBody
+    public TableResult<List<AnswerWithUser>> getAnswers(Integer questionId, int page, int limit) {
+        if (questionId == null) {
+            throw new GlobalException("空参数", 500100);
+        }
+        List<AnswerWithUser> answers = questionResolverService.getAnswers(questionId, page, limit);
+        int count = questionResolverService.countAnswers(questionId);
+        return new TableResult<>(200, "", count, answers);
     }
 }

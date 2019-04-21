@@ -1,0 +1,2 @@
+INSERT INTO travel.sys_role (id, name, type, status, remark, operator, operator_time, operator_ip) VALUES (1, '管理员', 1, 1, '', '', '2019-02-21 21:08:21', '0.0.0.0');
+INSERT INTO travel.sys_role (id, name, type, status, remark, operator, operator_time, operator_ip) VALUES (2, '用户', 2, 1, '', '', '2019-02-21 22:21:39', '0.0.0.0');

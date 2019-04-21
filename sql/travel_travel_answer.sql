@@ -1,0 +1,13 @@
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (4, null, 9, '测试回答', null, '2019-04-21 18:38:46', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (5, null, 9, '回答', null, '2019-04-21 19:25:29', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (6, null, 9, '阿斯顿发', null, '2019-04-21 19:25:33', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (7, null, 9, '啊', null, '2019-04-21 19:25:34', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (8, null, 9, '啊', null, '2019-04-21 19:25:35', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (9, null, 9, 'a', null, '2019-04-21 19:25:35', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (10, null, 9, '啊', null, '2019-04-21 19:25:37', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (11, null, 9, '啊', null, '2019-04-21 19:25:38', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (12, null, 9, '啊', null, '2019-04-21 19:25:39', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (13, null, 9, '啊', null, '2019-04-21 19:25:39', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (14, null, 9, '啊', null, '2019-04-21 19:25:40', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (15, null, 9, '啊', null, '2019-04-21 19:25:41', 0);
+INSERT INTO travel.travel_answer (id, parent_id, sys_user_id, content, content_img_url, create_time, del_flag) VALUES (16, null, 9, '啊', null, '2019-04-21 19:25:42', 0);

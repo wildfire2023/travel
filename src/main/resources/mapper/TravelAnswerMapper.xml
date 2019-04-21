@@ -30,7 +30,8 @@
     delete from travel_answer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insertTravelAnswerMapper" parameterType="com.waner.primary.web.entity.TravelAnswer">
+    <insert id="insertTravelAnswerMapper" parameterType="com.waner.primary.web.entity.TravelAnswer"
+        useGeneratedKeys="true" keyProperty="id">
     insert into travel_answer (id, parent_id, sys_user_id, 
       content_img_url, create_time, del_flag, 
       content)
@@ -130,4 +131,16 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="queryAnswerWithUser" resultType="com.waner.primary.web.vo.AnswerWithUser">
+        select answer.*, user.nickname, user.img_url
+        from travel_answer answer
+               inner join travel_user user on answer.sys_user_id = user.sys_user_id
+        where answer.id in (select travel_answer_id as id from travel_question_answer where travel_question_id = #{questionId}  )
+        order by answer.create_time desc
+    </select>
+    <select id="queryAnswersWithUserCount" resultType="int">
+        select count(id)
+        from travel_answer
+        where id in (select travel_answer_id as id from travel_question_answer where travel_question_id = #{questionId} )
+    </select>
 </mapper>

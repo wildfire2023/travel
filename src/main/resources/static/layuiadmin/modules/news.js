@@ -190,6 +190,109 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
                 }
             });
         },
+        // 输入答案
+        EnterAnswer: function (user, questionId) {
+            $('.micronews-details-Publish').on('click', function (e) {
+                var event = e || event;
+                var messagetext = $(this).siblings('.message-text').find('.txt');
+                var textarea = $(this).parents('.layui-form-item').siblings('.layui-form-text').children('.layui-input-block').children('textarea');
+                if (user == null) {
+                    messagetext.text('请登录后发表答案');
+                    return;
+                }
+                if (!textarea.val()) {
+                    messagetext.text('请输入答案');
+                    return;
+                }
+                var name = $(textarea).val();
+                var data;
+                // var img = $(this).parents('form').siblings('a').find('img').attr('src');
+                var img = user.imgUrl;
+                if (img === "" || img == null) {
+                    data = [{
+                        nickname: user.nickname,
+                        createTime: '刚刚',
+                        content: name
+                    }];
+                } else {
+                    data = [{
+                        imgUrl: user.imgUrl,
+                        nickname: user.nickname,
+                        createTime: '刚刚',
+                        content: name
+                    }];
+                }
+                // 执行留言方法
+                admin.req({
+                    url: '/question/add-answer'
+                    , type: 'post'
+                    , data: {questionId: questionId, userId: user.id, content: name}
+                });
+                var html = messageTpl.innerHTML;
+                var view = $('.ulCommentList');
+                $('.message-text .txt').text('');
+                laytpl(html).render(data, function (html) {
+                    view.prepend(html)
+                });
+                textarea.val("");
+                return false;
+            })
+        },
+        // 答案列表
+        AnswerList: function (questionId) {
+            var page = 1;
+            var limit = 10;
+
+            admin.req({
+                url: '/question/list-answers/'
+                , type: 'post'
+                , data: {limit: limit, page: page, questionId: questionId}
+                , success: function (res) {
+                    // 获取节点
+                    var html = messageTpl.innerHTML;
+                    // 执行tpl渲染
+                    laytpl(html).render(res.data, function (html) {
+                        document.getElementById('view').innerHTML = html;
+                    });
+                    // 设置留言条数
+                    $('.comment-num').text(res.count);
+                    laypage.render({
+                        elem: 'page'
+                        , count: res.count
+                        , first: '首页'
+                        , last: '尾页'
+                        , prev: '<em>←</em>'
+                        , next: '<em>→</em>'
+                        , limit: limit
+                        , jump: function (obj, first) {
+                            page = obj.curr;
+                            limit = obj.limit;
+                            if (!first) {
+                                // loadData();
+                                admin.req({
+                                    url: '/question/list-answers/'
+                                    , type: 'post'
+                                    , async: false
+                                    , data: {
+                                        limit: limit
+                                        , page: page
+                                        , questionId: questionId
+                                    }, success: function (res) {
+                                        // 获取节点
+                                        var html = messageTpl.innerHTML;
+                                        // 执行tpl渲染
+                                        laytpl(html).render(res.data, function (html) {
+                                            document.getElementById('view').innerHTML = html;
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        },
         onInput: function () {
             // if (!("oninput" in document.body)) {
             // element.onpropertychange = function() {

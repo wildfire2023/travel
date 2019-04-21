@@ -97,7 +97,7 @@
                     </div>
                     <div class="leave-message" id="message">
                         <div class="tit-box">
-                            <span class="tit">网友跟帖</span>
+                            <span class="tit">网友回答</span>
                             <span class="num"><b class="comment-num"></b>条</span>
                         </div>
                         <div class="content-box">
@@ -122,7 +122,7 @@
 
                                                 </div>
                                             </div>
-                                            <button type="button" class="layui-btn micronews-details-Publish">发表
+                                            <button type="button" class="layui-btn micronews-details-Publish">回答
                                             </button>
                                         </div>
                                     </div>
@@ -212,9 +212,9 @@
         var questionId = GetQueryString('id');
 
         // 加载留言列表
-        // news.MessageList(questionId);
+        news.AnswerList(questionId);
 
-        // news.EnterMessage(user, questionId);
+        news.EnterAnswer(user, questionId);
         // index.Page('micronews-details-test', 50);
         var collOff = true;
         $('.Collection').on('click', function () {

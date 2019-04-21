@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.vo.QuestionWithUser;
+import org.apache.ibatis.annotations.Param;
 
 public interface TravelQuestionMapper extends BaseMapper<TravelQuestion> {
     int deleteByPrimaryKey(Integer id);
@@ -24,4 +25,6 @@ public interface TravelQuestionMapper extends BaseMapper<TravelQuestion> {
     IPage<QuestionWithUser> queryAllQuestions(Page pageVo);
 
     QuestionWithUser selectQuestionWithUser(Integer id);
+
+    int insertQuestionAnswer(@Param("questionId") Integer questionId, @Param("answerId") Integer answerId);
 }

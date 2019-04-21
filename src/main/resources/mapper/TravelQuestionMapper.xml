@@ -13,10 +13,10 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, sys_user_id, title, create_time, del_flag
-  </sql>
+    </sql>
     <sql id="Blob_Column_List">
     content
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -29,7 +29,8 @@
     delete from travel_question
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insertTravelQuetionMapper" parameterType="com.waner.primary.web.entity.TravelQuestion">
+    <insert id="insertTravelQuetionMapper" parameterType="com.waner.primary.web.entity.TravelQuestion"
+            useGeneratedKeys="true" keyProperty="id">
     insert into travel_question (id, sys_user_id, title, 
       create_time, del_flag, content
       )
@@ -80,6 +81,9 @@
             </if>
         </trim>
     </insert>
+    <insert id="insertQuestionAnswer">
+        insert into travel_question_answer(travel_question_id, travel_answer_id) values (#{questionId} , #{answerId}  );
+    </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelQuestion">
         update travel_question
         <set>
@@ -129,4 +133,5 @@
             from travel_question question inner join travel_user user on question.sys_user_id = user.sys_user_id
                 where question.id = #{id}
     </select>
+
 </mapper>
