@@ -36,7 +36,7 @@ public class UserController {
      */
     @GetMapping("person-info")
     public String toPersonInfoPage() {
-        return "front/persinfo";
+        return "front/persInfo";
     }
 
     /**
