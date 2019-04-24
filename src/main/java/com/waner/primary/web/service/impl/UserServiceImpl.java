@@ -214,7 +214,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void queryBaseInfo(Model model, HttpSession session) {
-        SysUser sessionUser = (SysUser) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         Integer userId = sessionUser.getId();
         SysRole sysRole = sysRoleMapper.queryRoleByUserId(userId);
         if (!Objects.isNull(sysRole)) {
@@ -234,7 +234,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void saveImg(String imgUrl, HttpSession session) {
-        SysUser sessionUser = (SysUser) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         Integer userId = sessionUser.getId();
         // 设置待更新用户信息
         TravelUser travelUser = new TravelUser();
@@ -259,7 +259,7 @@ public class UserServiceImpl implements UserService {
     public boolean modifyUserInfo(
             String nickname, Integer sex, String phone, String remark, HttpSession session) {
         // SysUser set
-        SysUser sessionUser = (SysUser) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         SysUser sysUser = new SysUser();
         sysUser.setId(sessionUser.getId());
         sysUser.setNickname(nickname);
@@ -273,7 +273,12 @@ public class UserServiceImpl implements UserService {
         int sysRet = sysUserMapper.updateByPrimaryKeySelective(sysUser);
         // Reset session
         SysUser dbSessionUser = sysUserMapper.selectByPrimaryKey(sessionUser.getId());
-        session.setAttribute("sessionUser", dbSessionUser);
+        // 重置用户img_url
+        SessionUser newSessionUser = new SessionUser();
+        TravelUser getUserImgUser = travelUserMapper.selectByPrimaryKey(sessionUser.getId());
+        BeanUtils.copyProperties(dbSessionUser,newSessionUser);
+        newSessionUser.setImgUrl(getUserImgUser.getImgUrl());
+        session.setAttribute("sessionUser", newSessionUser);
         int travelRet = travelUserMapper.updateByPrimaryKeySelective(travelUser);
         return sysRet > 0 && travelRet > 0;
     }

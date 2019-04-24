@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelAnswer;
+import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.mapper.TravelAnswerMapper;
 import com.waner.primary.web.mapper.TravelQuestionMapper;
@@ -116,5 +117,13 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
     @Override
     public int countAnswers(Integer questionId) {
         return answerMapper.queryAnswersWithUserCount(questionId);
+    }
+
+    @Override
+    public List<TravelQuestion> queryQuestionByUser(Integer userId) {
+        QueryWrapper<TravelQuestion> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sys_user_id", userId);
+        queryWrapper.eq("del_flag", (byte) 0);
+        return questionMapper.selectList(queryWrapper);
     }
 }

@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.waner.primary.web.mapper.TravelAnswerMapper">
-    <resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelAnswer">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="sys_user_id" property="sysUserId" jdbcType="INTEGER"/>
-        <result column="content_img_url" property="contentImgUrl" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
-    </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.waner.primary.web.entity.TravelAnswer" extends="BaseResultMap">
-        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
-    </resultMap>
-    <sql id="Base_Column_List">
+  <resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelAnswer">
+	<id column="id" property="id" jdbcType="INTEGER"/>
+	<result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+	<result column="sys_user_id" property="sysUserId" jdbcType="INTEGER"/>
+	<result column="content_img_url" property="contentImgUrl" jdbcType="VARCHAR"/>
+	<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+	<result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.waner.primary.web.entity.TravelAnswer" extends="BaseResultMap">
+	<result column="content" property="content" jdbcType="LONGVARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">
     id, parent_id, sys_user_id, content_img_url, create_time, del_flag
   </sql>
-    <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List">
     content
   </sql>
-    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from travel_answer
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+	select
+	<include refid="Base_Column_List"/>
+	,
+	<include refid="Blob_Column_List"/>
+	from travel_answer
+	where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from travel_answer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insertTravelAnswerMapper" parameterType="com.waner.primary.web.entity.TravelAnswer"
-        useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertTravelAnswerMapper" parameterType="com.waner.primary.web.entity.TravelAnswer"
+		  useGeneratedKeys="true" keyProperty="id">
     insert into travel_answer (id, parent_id, sys_user_id, 
       content_img_url, create_time, del_flag, 
       content)
@@ -39,80 +39,80 @@
       #{contentImgUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelAnswer">
-        insert into travel_answer
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="parentId != null">
-                parent_id,
-            </if>
-            <if test="sysUserId != null">
-                sys_user_id,
-            </if>
-            <if test="contentImgUrl != null">
-                content_img_url,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="delFlag != null">
-                del_flag,
-            </if>
-            <if test="content != null">
-                content,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="parentId != null">
-                #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="sysUserId != null">
-                #{sysUserId,jdbcType=INTEGER},
-            </if>
-            <if test="contentImgUrl != null">
-                #{contentImgUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="delFlag != null">
-                #{delFlag,jdbcType=TINYINT},
-            </if>
-            <if test="content != null">
-                #{content,jdbcType=LONGVARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelAnswer">
-        update travel_answer
-        <set>
-            <if test="parentId != null">
-                parent_id = #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="sysUserId != null">
-                sys_user_id = #{sysUserId,jdbcType=INTEGER},
-            </if>
-            <if test="contentImgUrl != null">
-                content_img_url = #{contentImgUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="delFlag != null">
-                del_flag = #{delFlag,jdbcType=TINYINT},
-            </if>
-            <if test="content != null">
-                content = #{content,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.waner.primary.web.entity.TravelAnswer">
+  <insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelAnswer">
+	insert into travel_answer
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+	  <if test="id != null">
+		id,
+	  </if>
+	  <if test="parentId != null">
+		parent_id,
+	  </if>
+	  <if test="sysUserId != null">
+		sys_user_id,
+	  </if>
+	  <if test="contentImgUrl != null">
+		content_img_url,
+	  </if>
+	  <if test="createTime != null">
+		create_time,
+	  </if>
+	  <if test="delFlag != null">
+		del_flag,
+	  </if>
+	  <if test="content != null">
+		content,
+	  </if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+	  <if test="id != null">
+		#{id,jdbcType=INTEGER},
+	  </if>
+	  <if test="parentId != null">
+		#{parentId,jdbcType=INTEGER},
+	  </if>
+	  <if test="sysUserId != null">
+		#{sysUserId,jdbcType=INTEGER},
+	  </if>
+	  <if test="contentImgUrl != null">
+		#{contentImgUrl,jdbcType=VARCHAR},
+	  </if>
+	  <if test="createTime != null">
+		#{createTime,jdbcType=TIMESTAMP},
+	  </if>
+	  <if test="delFlag != null">
+		#{delFlag,jdbcType=TINYINT},
+	  </if>
+	  <if test="content != null">
+		#{content,jdbcType=LONGVARCHAR},
+	  </if>
+	</trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelAnswer">
+	update travel_answer
+	<set>
+	  <if test="parentId != null">
+		parent_id = #{parentId,jdbcType=INTEGER},
+	  </if>
+	  <if test="sysUserId != null">
+		sys_user_id = #{sysUserId,jdbcType=INTEGER},
+	  </if>
+	  <if test="contentImgUrl != null">
+		content_img_url = #{contentImgUrl,jdbcType=VARCHAR},
+	  </if>
+	  <if test="createTime != null">
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+	  </if>
+	  <if test="delFlag != null">
+		del_flag = #{delFlag,jdbcType=TINYINT},
+	  </if>
+	  <if test="content != null">
+		content = #{content,jdbcType=LONGVARCHAR},
+	  </if>
+	</set>
+	where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.waner.primary.web.entity.TravelAnswer">
     update travel_answer
     set parent_id = #{parentId,jdbcType=INTEGER},
       sys_user_id = #{sysUserId,jdbcType=INTEGER},
@@ -122,7 +122,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelAnswer">
+  <update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelAnswer">
     update travel_answer
     set parent_id = #{parentId,jdbcType=INTEGER},
       sys_user_id = #{sysUserId,jdbcType=INTEGER},
@@ -131,14 +131,14 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="queryAnswerWithUser" resultType="com.waner.primary.web.vo.AnswerWithUser">
+  <select id="queryAnswerWithUser" resultType="com.waner.primary.web.vo.AnswerWithUser">
         select answer.*, user.nickname, user.img_url
         from travel_answer answer
                inner join travel_user user on answer.sys_user_id = user.sys_user_id
         where answer.id in (select travel_answer_id as id from travel_question_answer where travel_question_id = #{questionId}  )
         order by answer.create_time desc
     </select>
-    <select id="queryAnswersWithUserCount" resultType="int">
+  <select id="queryAnswersWithUserCount" resultType="int">
         select count(id)
         from travel_answer
         where id in (select travel_answer_id as id from travel_question_answer where travel_question_id = #{questionId} )

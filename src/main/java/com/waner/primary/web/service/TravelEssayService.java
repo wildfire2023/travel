@@ -18,4 +18,6 @@ public interface TravelEssayService {
     int remove(TravelEssay[] essays);
 
     Response<EssayWithUser> getEssayDetail(Integer id);
+
+	List<TravelEssay> queryEssayByUser(Integer userId);
 }

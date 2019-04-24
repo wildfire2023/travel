@@ -113,7 +113,7 @@ public class UserController {
     }
 
     /**
-     * 用户信息
+     * 后台用户信息
      *
      * @param model
      * @param session
@@ -123,6 +123,18 @@ public class UserController {
     public String baseInfo(Model model, HttpSession session) {
         userService.queryBaseInfo(model, session);
         return "background/set/user/info";
+    }
+
+    /**
+     * 前端个人信息修改
+     * @param model
+     * @param session
+     * @return
+     */
+    @GetMapping("info-form")
+    public String infoForm(Model model, HttpSession session) {
+        userService.queryBaseInfo(model, session);
+        return "front/info-form";
     }
 
     /**

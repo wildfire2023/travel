@@ -9,6 +9,7 @@ import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.TravelEssayService;
 import com.waner.primary.web.vo.CommentWithUser;
 import com.waner.primary.web.vo.EssayWithUser;
+import com.waner.primary.web.vo.SessionUser;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
@@ -76,7 +77,7 @@ public class TravelEssayController {
         if (ObjectUtils.isEmpty(essay)) {
             throw new GlobalException("空参数", 500100);
         }
-        SysUser user = (SysUser) httpSession.getAttribute("sessionUser");
+        SessionUser user = (SessionUser) httpSession.getAttribute("sessionUser");
         essay.setSysUserId(user.getId());
         int ret = essayService.save(essay);
         return ret > 0 ? Response.success("发表成功，审核通过即可展示") : Response.fail(CodeMsg.ESSAY_PUSH_FAIL);
@@ -233,4 +234,5 @@ public class TravelEssayController {
         // 返回成功响应的数据
         return new TableResult<>(200, "", count, comments);
     }
+
 }

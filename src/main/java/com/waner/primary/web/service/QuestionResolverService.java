@@ -22,4 +22,6 @@ public interface QuestionResolverService {
     List<AnswerWithUser> getAnswers(Integer questionId, int page, int limit);
 
     int countAnswers(Integer questionId);
+
+	List<TravelQuestion> queryQuestionByUser(Integer userId);
 }
