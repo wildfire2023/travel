@@ -78,14 +78,6 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
         //     });
         // },
 
-        // 分页
-        Page: function (ele, count) {
-            laypage.render({
-                elem: ele //注意，这里的 ele 是 ID，不用加 # 号
-                , count: count //数据总数，从服务端得到
-            });
-        },
-
 
         // 输入留言
         EnterMessage: function (user, essayId) {

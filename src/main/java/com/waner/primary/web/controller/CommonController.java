@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * Common usage to list the user's pushed articles, also include common top viewed articles.
+ * @author Monster
+ * @since 1.0.0-SNAPSHOT
+ */
 @Controller
 @RequestMapping("common")
 public class CommonController {
