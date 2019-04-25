@@ -149,4 +149,11 @@ public class TravelEssayServiceImpl implements TravelEssayService {
     queryWrapper.eq("del_flag", (byte) 0);
     return essayMapper.selectList(queryWrapper);
   }
+
+  @Override
+  public List<TravelEssay> getListWithSearchPattern(String pattern) {
+    QueryWrapper<TravelEssay> wrapper = new QueryWrapper<>();
+    wrapper.like("title", pattern);
+    return essayMapper.selectList(wrapper);
+  }
 }

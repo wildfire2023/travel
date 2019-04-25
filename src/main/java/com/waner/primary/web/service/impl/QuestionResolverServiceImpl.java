@@ -179,4 +179,11 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
     answerMapper.deleteByPrimaryKey(id);
     answerMapper.deleteQuestionAnswerAccording2AnswerId(id);
   }
+
+  @Override
+  public List<TravelQuestion> getListWithSearchPattern(String pattern) {
+    QueryWrapper<TravelQuestion> wrapper = new QueryWrapper<>();
+    wrapper.like("title", pattern);
+    return questionMapper.selectList(wrapper);
+  }
 }

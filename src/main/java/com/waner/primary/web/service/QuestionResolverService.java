@@ -32,4 +32,6 @@ public interface QuestionResolverService {
   List<AnswerWithUser> queryReplysAccoring2Condition(Reply reply);
 
   void removeAnswer(Integer id);
+
+  List<TravelQuestion> getListWithSearchPattern(String pattern);
 }

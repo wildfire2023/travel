@@ -23,111 +23,124 @@ import java.util.stream.Collectors;
 @Service
 public class RecommendServiceImpl implements RecommendService {
 
-    public static final String USER = "user";
-    public static final String ADMINISTRATOR = "administrator";
+  public static final String USER = "user";
+  public static final String ADMINISTRATOR = "administrator";
 
-    private final TravelRecommendMapper travelRecommendMapper;
+  private final TravelRecommendMapper travelRecommendMapper;
 
-    public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper) {
-        this.travelRecommendMapper = travelRecommendMapper;
+  public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper) {
+    this.travelRecommendMapper = travelRecommendMapper;
+  }
+
+  /**
+   * 新增推荐内容
+   *
+   * @param recommend
+   * @return 新增推荐成功标志
+   */
+  @Override
+  public int addRecommend(TravelRecommend recommend) {
+    recommend.setCreateTime(new Date());
+    int insertRet = travelRecommendMapper.insert(recommend);
+    return insertRet;
+  }
+
+  /**
+   * 删除指定推荐内容
+   *
+   * @param recommends
+   * @return
+   */
+  @Override
+  @Transactional
+  public int remove(TravelRecommend[] recommends) {
+    List<Integer> ids =
+        Lists.newArrayList(recommends)
+            .parallelStream()
+            .map(TravelRecommend::getId)
+            .collect(Collectors.toList());
+    return travelRecommendMapper.deleteBatchIds(ids);
+  }
+
+  /**
+   * 获取单条推荐内容
+   *
+   * @param id
+   * @return
+   */
+  @Override
+  public TravelRecommend getOneRecommend(Integer id) {
+    QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
+    wrapper.eq("id", id);
+    return travelRecommendMapper.selectOne(wrapper);
+  }
+
+  @Override
+  public int modifyRecommend(TravelRecommend recommend) {
+    return travelRecommendMapper.updateById(recommend);
+  }
+
+  /**
+   * 根据给定条件查找列表
+   *
+   * @param pattern
+   * @return
+   */
+  @Override
+  public List<TravelRecommend> getListWithSearchPattern(String pattern) {
+    QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
+    wrapper.like("title", pattern);
+    return travelRecommendMapper.selectList(wrapper);
+  }
+
+  /**
+   * 分页查询
+   *
+   * @param checkStatus
+   * @param travelRecommend
+   * @param limit
+   * @param page
+   * @return
+   */
+  @Override
+  public List<TravelRecommend> getList(
+      String checkStatus, TravelRecommend travelRecommend, int limit, int page) {
+    // 分页
+    Page<TravelRecommend> pageHelper = new Page<>();
+    pageHelper.setSize(limit);
+    pageHelper.setCurrent(page);
+
+    IPage<TravelRecommend> pageVo = null;
+    // 未删除推荐内容
+
+    // 已发表推荐
+    if ("pushed".equals(checkStatus)) {
+      pageVo = travelRecommendMapper.selectPageVo(pageHelper, 1, travelRecommend.getTitle());
+    } else {
+      pageVo = travelRecommendMapper.selectPageVo(pageHelper, null, travelRecommend.getTitle());
     }
+    return pageVo.getRecords();
+  }
 
-    /**
-     * 新增推荐内容
-     *
-     * @param recommend
-     * @return 新增推荐成功标志
-     */
-    @Override
-    public int addRecommend(TravelRecommend recommend) {
-        recommend.setCreateTime(new Date());
-        int insertRet = travelRecommendMapper.insert(recommend);
-        return insertRet;
+  /**
+   * 查询未删除的推荐数量
+   *
+   * @param checkStatus
+   * @param travelRecommend
+   * @return
+   */
+  @Override
+  public int getCount(String checkStatus, TravelRecommend travelRecommend) {
+    QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
+    // 设置未删除查询条件
+    wrapper.eq("del_flag", 0);
+    // 搜索
+    if (travelRecommend.getTitle() != null) {
+      wrapper.like("title", travelRecommend.getTitle());
     }
-
-    /**
-     * 删除指定推荐内容
-     *
-     * @param recommends
-     * @return
-     */
-    @Override
-    @Transactional
-    public int remove(TravelRecommend[] recommends) {
-        List<Integer> ids =
-                Lists.newArrayList(recommends)
-                        .parallelStream()
-                        .map(TravelRecommend::getId)
-                        .collect(Collectors.toList());
-        return travelRecommendMapper.deleteBatchIds(ids);
+    if ("pushed".equals(checkStatus)) {
+      wrapper.eq("push_flag", 1);
     }
-
-    /**
-     * 获取单条推荐内容
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public TravelRecommend getOneRecommend(Integer id) {
-        QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
-        wrapper.eq("id", id);
-        return travelRecommendMapper.selectOne(wrapper);
-    }
-
-    @Override
-    public int modifyRecommend(TravelRecommend recommend) {
-        return travelRecommendMapper.updateById(recommend);
-    }
-
-    /**
-     * 分页查询
-     *
-     * @param checkStatus
-     * @param travelRecommend
-     * @param limit
-     * @param page
-     * @return
-     */
-    @Override
-    public List<TravelRecommend> getList(
-            String checkStatus, TravelRecommend travelRecommend, int limit, int page) {
-        // 分页
-        Page<TravelRecommend> pageHelper = new Page<>();
-        pageHelper.setSize(limit);
-        pageHelper.setCurrent(page);
-
-        IPage<TravelRecommend> pageVo = null;
-        // 未删除推荐内容
-
-        // 已发表推荐
-        if ("pushed".equals(checkStatus)) {
-            pageVo = travelRecommendMapper.selectPageVo(pageHelper, 1, travelRecommend.getTitle());
-        } else {
-            pageVo = travelRecommendMapper.selectPageVo(pageHelper, null, travelRecommend.getTitle());
-        }
-        return pageVo.getRecords();
-    }
-
-    /**
-     * 查询未删除的推荐数量
-     *
-     * @param checkStatus
-     * @param travelRecommend
-     * @return
-     */
-    @Override
-    public int getCount(String checkStatus, TravelRecommend travelRecommend) {
-        QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
-        // 设置未删除查询条件
-        wrapper.eq("del_flag", 0);
-        // 搜索
-        if (travelRecommend.getTitle() != null) {
-            wrapper.like("title", travelRecommend.getTitle());
-        }
-        if ("pushed".equals(checkStatus)) {
-            wrapper.eq("push_flag", 1);
-        }
-        return travelRecommendMapper.selectCount(wrapper);
-    }
+    return travelRecommendMapper.selectCount(wrapper);
+  }
 }

@@ -64,43 +64,39 @@
 </div>
 
 <div class="micronews-container micronews-search-container w1000">
-    <div class="layui-fluid">
-        <p class="num">为您找到相关结果为<span> &nbsp;1770000&nbsp; </span>个</p>
-        <div class="item-list">
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元 </a><span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元</a> <span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元</a> <span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元</a> <span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元 </a> <span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
-            <div class="item">
-                <h4><a href="recommend-details.html">AI人才抢夺"生猛":应届博士年薪涨到80万元 </a> <span class="time">3小时前</span></h4>
-                <p>人工智能(AI)人才薪水之高、涨幅之大,颇有令人瞠目结舌之感。
-                    一年前,针对AI领域的应届毕业生,硕士生约莫能拿到30万元的年薪,博士生则高达50万元。有企业给应届生的薪水拔高了10%~20%；也有企业上涨幅度更大，尤其是给博士生的薪水从去年的50万元年薪倏地蹿到80万元；也有准备布局AI领域的新锐企业</p>
-            </div>
+    <div class="layui-fluid" >
+        <div id="view">
+
         </div>
-        <div id="micronews-search-test" style="text-align: center; padding:30px 0"></div>
+        <div id="page" style="text-align: center; padding:30px 0"></div>
     </div>
 </div>
+
+<!-- content-laytpl -->
+<script id="laytpl" type="text/html">
+    <p class="num">为您找到相关结果为<span> &nbsp;{{d.count}}&nbsp; </span>个</p>
+    <div class="item-list">
+        {{#  layui.each(d.data, function(index, item){ }}
+        <div class="item">
+            <h4>
+                <span style="background-color: #6294b5;color: white;border-style: ridge ;">{{item.tag}}</span>
+                {{# if(item.tag === '推荐'){ }}
+                <a href="/recommend/detail-page?id={{item.id}}">{{item.title}} </a>
+                {{# } }}
+                {{# if(item.tag === '游记'){ }}
+                <a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}} </a>
+                {{# } }}
+                {{# if(item.tag === '问答'){ }}
+                <a href="/question/detail-page?id={{item.id}}">{{item.title}} </a>
+                {{# } }}
+                <span class="time">{{item.createTime}}</span>
+            </h4>
+            <p>{{item.content}}</p>
+        </div>
+        {{#  }); }}
+    </div>
+</script>
+<!-- end-content-laytpl-->
 
 
 <div class="micronews-footer-wrap">
@@ -112,14 +108,14 @@
             <a href="#">常见问题</a>
         </div>
         <div class="Copyright">
-            <span>Copyright&nbsp;</span>&nbsp;&copy;<span>新闻网&nbsp;&nbsp;</span><span>赣ICP备12345678号</span>
+            <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
         </div>
         <div class="f-icon">
             <a href="#" class="w-icon">
-                <img src="../res/static/images/wechat_ic.png">
+                <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
             </a>
             <a href="#" class="wb-icon">
-                <img src="../res/static/images/qq_ic.png">
+                <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
             </a>
         </div>
     </div>
@@ -131,8 +127,78 @@
         base: '../../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index','news'], function () {
-        var news = layui.news;
+    }).use(['index', 'news', 'laytpl', 'laypage'], function () {
+        var news = layui.news
+            , laytpl = layui.laytpl
+            , laypage = layui.laypage
+            , admin = layui.admin;
+
+        var page = 1;
+        var limit = 10;
+        var urlInfo = window.location.href;
+        var info = urlInfo.split("?")[1].split("=")[1];
+        var pattern = decodeURI(info);
+        // var pattern = GetQueryString('pattern');
+        // 加载数据
+        loadData();
+
+
+        function loadData() {
+            admin.req({
+                url: '/common/search-list'
+                , type: 'get'
+                , async: false
+                , data: {
+                    limit: limit,
+                    page: page,
+                    pattern: pattern
+                }, success: function (res) {
+                    // 获取节点
+                    var getTpl = document.getElementById('laytpl').innerHTML;
+                    // 执行tpl渲染
+                    laytpl(getTpl).render(res, function (html) {
+                        document.getElementById('view').innerHTML = html;
+                    });
+                    // 执行分页
+                    laypage.render({
+                        elem: 'page'
+                        , count: res.count
+                        , first: '首页'
+                        , last: '尾页'
+                        , prev: '<em>←</em>'
+                        , next: '<em>→</em>'
+                        , limit: limit
+                        , jump: function (obj, first) {
+                            page = obj.curr;
+                            limit = obj.limit;
+                            if (!first) {
+                                // loadData();
+                                admin.req({
+                                    url: '/common/search-list'
+                                    , type: 'get'
+                                    , async: false
+                                    , data: {
+                                        limit: limit,
+                                        page: page,
+                                        pattern: pattern
+                                    }, success: function (res) {
+                                        // 获取节点
+                                        var getTpl = document.getElementById('laytpl').innerHTML;
+                                        // 执行tpl渲染
+                                        laytpl(getTpl).render(res, function (html) {
+                                            document.getElementById('view').innerHTML = html;
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+
+
         news.omitted('.item p', 150);
         news.seachBtn();
         news.arrowutil();

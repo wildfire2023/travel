@@ -316,8 +316,12 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
         seachBtn: function () {
             $('.search-btn').on('click', function () {
                 var inpVal = $(this).siblings('input').val();
-                if (inpVal) {
-                    window.location.href = "search.html"
+                // 搜索条件不为空串
+                if (inpVal !== '') {
+                    var url = "/front/page/search-page";
+                    // window.open(encodeURI(url + "?pattern=" + inpVal));
+                    window.location.href = encodeURI(url + "?pattern=" + inpVal);
+                    // window.location.href = "/front/page/search-page?pattern=" + inpVal;
                 }
                 return false;
             })
