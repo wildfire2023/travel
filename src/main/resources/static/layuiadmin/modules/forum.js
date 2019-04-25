@@ -31,7 +31,9 @@ layui.define(['table', 'form'], function (exports) {
         , page: true
         , limit: 10
         , limits: [10, 15, 20, 25, 30]
-        , text: '对不起，加载出现异常！'
+        , text: {
+            none: "搜索的内容不存在"
+        }
     });
 
     //监听工具条

@@ -1,29 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>微新闻</title>
+    <title>Waner - 个人信息</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/myfile/main.css}">
 </head>
 <body class="micronews">
 <div class="micronews-header-wrap">
     <div class="micronews-header w1000 layui-clear">
         <h1 class="logo">
-            <a href="index.html">
-                <img src="../res/static/images/LOGO.png" alt="logo">
-                <span class="layui-hide">LOGO</span>
+            <a href="/">
+                <img width="66px" height="22px" th:src="@{/layuiadmin/myfile/images/logo3.png}" alt="logo">
+                <span class="layui-hide">logo</span>
             </a>
         </h1>
         <p class="nav">
-            <a href="index.html" class="active">最新</a>
-            <a href="list.html">娱乐</a>
-            <a href="list.html">生活</a>
-            <a href="list.html">财经</a>
-            <a href="list.html">科技</a>
-            <a href="list.html">军事</a>
+            <a href="/front/page/index">推荐</a>
+            <a href="/travel-essay/list-page">游记</a>
+            <a href="/question/list-page">问答</a>
         </p>
         <div class="search-bar">
             <form class="layui-form" action="">
@@ -37,25 +34,31 @@
             </form>
         </div>
         <div class="login">
-            <a href="login.html">
+            <a th:if="${session.sessionUser == null}" href="/front/page/login">
                 登录
             </a>
-            <!-- <a href="login.html"> -->
-            <!-- <img src="../res/static/images/header.png" style="width: 36px; height: 36px;"> -->
-            <!-- </a> -->
+            <!--<img th:src="@{/layuiadmin/myfile/images/header.png}" style="width: 36px; height: 36px;">-->
+            <ul th:if="${session.sessionUser != null}" class="layui-nav" style="background-color: #fff;"
+                lay-filter="component-nav">
+                <li class="layui-nav-item">
+                    <a href="/travel-essay/page" style="font-size: 16px;color: #222;">写游记</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/question/form-page" style="font-size: 16px;color: #222;">提问</a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="javascript:;" style="font-size: 16px;color: #222;"><span
+                            th:text="${session.sessionUser.nickname}"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd style="text-align: center;"><a href="/user/info-form">修改信息</a></dd>
+                        <dd style="text-align: center;"><a href="/user/person-info">个人资料</a></dd>
+                        <dd layadmin-event="logout" style="text-align: center;"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </li>
+            </ul>
         </div>
         <div class="menu-icon">
             <i class="layui-icon layui-icon-more-vertical"></i>
-        </div>
-        <div class="mobile-nav">
-            <ul class="layui-nav" lay-filter="">
-                <li class="layui-nav-item layui-this"><a href="index.html">最新</a></li>
-                <li class="layui-nav-item"><a href="list.html">娱乐</a></li>
-                <li class="layui-nav-item"><a href="list.html">生活</a></li>
-                <li class="layui-nav-item"><a href="list.html">财经</a></li>
-                <li class="layui-nav-item"><a href="list.html">科技</a></li>
-                <li class="layui-nav-item"><a href="list.html">军事</a></li>
-            </ul>
         </div>
     </div>
 </div>
@@ -122,20 +125,17 @@
     </div>
 </div>
 
-<script type="text/javascript" src="../res/layui/layui.js"></script>
-<!--[if lt IE 9]>
-<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script th:src="@{/layuiadmin/layui/layui.js}"></script>
 <script>
     layui.config({
-        base: '../res/static/js/'
-    }).use('index', function () {
-        var index = layui.index;
-        index.Page('micronews-search-test', 50)
-        index.omitted('.item p', 150)
-        index.seachBtn()
-        index.arrowutil()
+        base: '../../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index','news'], function () {
+        var news = layui.news;
+        news.omitted('.item p', 150);
+        news.seachBtn();
+        news.arrowutil();
     });
 </script>
 </body>

@@ -7,6 +7,8 @@ import com.waner.primary.web.entity.TravelAnswer;
 import com.waner.primary.web.vo.AnswerWithUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface TravelAnswerMapper extends BaseMapper<TravelAnswer> {
     int deleteByPrimaryKey(Integer id);
 
@@ -25,4 +27,12 @@ public interface TravelAnswerMapper extends BaseMapper<TravelAnswer> {
     IPage<AnswerWithUser> queryAnswerWithUser(Page pageHelper, @Param("questionId") Integer questionId);
 
     int queryAnswersWithUserCount(@Param("questionId") Integer questionId);
+
+    List<AnswerWithUser> queryAnswersByUserId(@Param("userId") Integer userId);
+
+    int queryQuestionIdByAnswerId(Integer answerId);
+
+    List<AnswerWithUser> queryWithContent(@Param("title") String title);
+
+	void deleteQuestionAnswerAccording2AnswerId(@Param("answerId") Integer id);
 }

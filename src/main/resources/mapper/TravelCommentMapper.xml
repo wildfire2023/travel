@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.waner.primary.web.mapper.TravelCommentMapper">
-    <resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelComment">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="sys_user_id" property="sysUserId" jdbcType="INTEGER"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
-    </resultMap>
-    <sql id="Base_Column_List">
+	<resultMap id="BaseResultMap" type="com.waner.primary.web.entity.TravelComment">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+		<result column="sys_user_id" property="sysUserId" jdbcType="INTEGER"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+	</resultMap>
+	<sql id="Base_Column_List">
     id, parent_id, sys_user_id, content, create_time, del_flag
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from travel_comment
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from travel_comment
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from travel_comment
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insertTravelCommentMapper" parameterType="com.waner.primary.web.entity.TravelComment"
-            useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertTravelCommentMapper" parameterType="com.waner.primary.web.entity.TravelComment"
+					useGeneratedKeys="true" keyProperty="id">
     insert into travel_comment (id, parent_id, sys_user_id, 
       content, create_time, del_flag
       )
@@ -31,71 +31,71 @@
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelComment">
-        insert into travel_comment
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="parentId != null">
-                parent_id,
-            </if>
-            <if test="sysUserId != null">
-                sys_user_id,
-            </if>
-            <if test="content != null">
-                content,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="delFlag != null">
-                del_flag,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="parentId != null">
-                #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="sysUserId != null">
-                #{sysUserId,jdbcType=INTEGER},
-            </if>
-            <if test="content != null">
-                #{content,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="delFlag != null">
-                #{delFlag,jdbcType=TINYINT},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelComment">
-        update travel_comment
-        <set>
-            <if test="parentId != null">
-                parent_id = #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="sysUserId != null">
-                sys_user_id = #{sysUserId,jdbcType=INTEGER},
-            </if>
-            <if test="content != null">
-                content = #{content,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="delFlag != null">
-                del_flag = #{delFlag,jdbcType=TINYINT},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelComment">
+	<insert id="insertSelective" parameterType="com.waner.primary.web.entity.TravelComment">
+		insert into travel_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="sysUserId != null">
+				sys_user_id,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="sysUserId != null">
+				#{sysUserId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.waner.primary.web.entity.TravelComment">
+		update travel_comment
+		<set>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="sysUserId != null">
+				sys_user_id = #{sysUserId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.waner.primary.web.entity.TravelComment">
     update travel_comment
     set parent_id = #{parentId,jdbcType=INTEGER},
       sys_user_id = #{sysUserId,jdbcType=INTEGER},
@@ -104,27 +104,49 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <insert id="insertEssayCommentRelative">
+	<insert id="insertEssayCommentRelative">
         insert into travel_essay_comment(travel_essay_id,travel_comment_id) values (#{essayId}, #{commentId})
 
     </insert>
-    <select id="queryCommentsWithUser" resultType="com.waner.primary.web.vo.CommentWithUser">
+	<select id="queryCommentsWithUser" resultType="com.waner.primary.web.vo.CommentWithUser">
         select comment.*, user.nickname, user.img_url
         from travel_comment comment
                inner join travel_user user on comment.sys_user_id = user.sys_user_id
         where comment.id in (select travel_comment_id as id from travel_essay_comment where travel_essay_id = #{essayId} )
         order by comment.create_time desc
     </select>
-    <select id="queryCommentsWithUserCount" resultType="int">
+	<select id="queryCommentsWithUserCount" resultType="int">
         select count(id)
         from travel_comment
         where id in (select travel_comment_id as id from travel_essay_comment where travel_essay_id = #{essayId} )
     </select>
-    <select id="queryCommentIdsByEssayId" resultType="com.waner.primary.web.entity.TravelEssayComment">
+	<select id="queryCommentIdsByEssayId" resultType="com.waner.primary.web.entity.TravelEssayComment">
         select * from travel_essay_comment where travel_essay_id = #{essayId}
     </select>
-    <delete id="deleteEssayComment" parameterType="java.lang.Integer">
+	<delete id="deleteEssayComment" parameterType="java.lang.Integer">
         delete from travel_essay_comment where travel_essay_id = #{essayId}
     </delete>
+	<select id="queryCommentsByUserId" resultType="com.waner.primary.web.vo.CommentWithUser">
+        select comment.*,user.nickname,user.img_url
+				from travel_comment comment inner join travel_user user on comment.sys_user_id = user.sys_user_id
+    				where comment.sys_user_id = #{userId}  and comment.del_flag = 0
+	</select>
+	<select id="queryEssayIdByCommentId" resultType="int">
+		select travel_essay_id
+		from travel_essay_comment where travel_comment_id = #{commentId}
+	</select>
+	<select id="queryWithContent" resultType="com.waner.primary.web.vo.CommentWithUser">
+		select comment.*, user.nickname, user.img_url
+		from travel_comment comment inner join travel_user user on comment.sys_user_id = user.sys_user_id
+		<where>
+			<if test="title != null and title != ''">
+				<bind name="content" value="'%' + title + '%'"/>
+				and comment.content like #{content}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteEssayCommentAccording2CommentId">
+		delete from travel_essay_comment where travel_comment_id = #{commentId}
+	</delete>
 
 </mapper>
