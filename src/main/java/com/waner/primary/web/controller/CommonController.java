@@ -192,6 +192,7 @@ public class CommonController {
       }
       results.add(searchs.get(i));
     }
+
     return new TableResult<>(200, "", searchs.size(), results);
   }
 }

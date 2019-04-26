@@ -306,7 +306,7 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
         //超出多少文件就省略号
         omitted: function (ele, num) {
             $(ele).each(function () {
-                var str = $(this).html();
+                var str = $(this).html;
                 var subStr = str.substring(0, num);
                 $(this).html(subStr + (str.length > num ? '...' : ''));
             });
