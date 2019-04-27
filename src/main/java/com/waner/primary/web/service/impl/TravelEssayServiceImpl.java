@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
-import com.waner.primary.common.result.Response;
+import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelUser;
 import com.waner.primary.web.mapper.TravelEssayMapper;
@@ -19,20 +19,27 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author Monster
+ * @since 1.0.0-SNAPSHOT
+ */
 @Service
 public class TravelEssayServiceImpl implements TravelEssayService {
 
   private final TravelEssayMapper essayMapper;
   private final TravelUserMapper userMapper;
   private final EssayCommentService essayCommentService;
+  private final RedisService redisService;
 
   public TravelEssayServiceImpl(
-      TravelEssayMapper essayMapper,
-      TravelUserMapper userMapper,
-      EssayCommentService essayCommentService) {
+          TravelEssayMapper essayMapper,
+          TravelUserMapper userMapper,
+          EssayCommentService essayCommentService, RedisService redisService) {
     this.essayMapper = essayMapper;
     this.userMapper = userMapper;
     this.essayCommentService = essayCommentService;
+    this.redisService = redisService;
   }
 
   /**
@@ -119,7 +126,11 @@ public class TravelEssayServiceImpl implements TravelEssayService {
             .map(TravelEssay::getId)
             .collect(Collectors.toList());
     // 删除游记相关评论
-    ids.forEach(essayCommentService::deleteCommentWithEssayId);
+    ids.forEach(id -> {
+      essayCommentService.deleteCommentWithEssayId(id);
+      // 删除缓存
+      redisService.deleteViewKey(id, ViewKey.ESSAY_KEY);
+    });
     return essayMapper.deleteBatchIds(ids);
   }
 
@@ -131,7 +142,7 @@ public class TravelEssayServiceImpl implements TravelEssayService {
    */
   @Override
   @Transactional
-  public Response<EssayWithUser> getEssayDetail(Integer id) {
+  public EssayWithUser getEssayDetail(Integer id) {
     TravelEssay travelEssay = essayMapper.selectByPrimaryKey(id);
     int userId = travelEssay.getSysUserId();
     TravelUser travelUser = userMapper.selectByPrimaryKey(userId);
@@ -139,7 +150,7 @@ public class TravelEssayServiceImpl implements TravelEssayService {
     // 复制properties
     BeanUtils.copyProperties(travelEssay, essayWithUser);
     BeanUtils.copyProperties(travelUser, essayWithUser);
-    return Response.success(essayWithUser);
+    return essayWithUser;
   }
 
   @Override

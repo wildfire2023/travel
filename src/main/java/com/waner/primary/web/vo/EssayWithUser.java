@@ -17,4 +17,6 @@ public class EssayWithUser extends TravelEssay {
     private String nickname;
 
     private String imgUrl;
+
+
 }

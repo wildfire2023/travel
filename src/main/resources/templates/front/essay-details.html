@@ -78,7 +78,7 @@
                 </span>
                             <span class="icon">
                   <i class="layui-icon layui-icon-radio"></i>
-                  <b>3002</b>人
+                  <b id="viewNum"></b>人
                 </span>
                             <a href="#message">
                 <span class="icon message">
@@ -250,6 +250,7 @@
                     $("#createTime").text(data.createTime);
                     $("#content").html(data.content);
                     $("#user-nickname").text(data.nickname);
+                    $("#viewNum").text(data.viewNum);
                 }
             });
         }

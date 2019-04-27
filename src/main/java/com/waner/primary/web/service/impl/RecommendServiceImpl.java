@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
+import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
@@ -27,9 +28,11 @@ public class RecommendServiceImpl implements RecommendService {
   public static final String ADMINISTRATOR = "administrator";
 
   private final TravelRecommendMapper travelRecommendMapper;
+  private final RedisService redisService;
 
-  public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper) {
+  public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper, RedisService redisService) {
     this.travelRecommendMapper = travelRecommendMapper;
+    this.redisService = redisService;
   }
 
   /**
@@ -59,6 +62,8 @@ public class RecommendServiceImpl implements RecommendService {
             .parallelStream()
             .map(TravelRecommend::getId)
             .collect(Collectors.toList());
+    // 删除缓存
+    ids.forEach(id -> redisService.deleteViewKey(id, ViewKey.RECOMMEND_KEY));
     return travelRecommendMapper.deleteBatchIds(ids);
   }
 

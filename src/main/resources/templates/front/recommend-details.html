@@ -85,14 +85,8 @@
                             <!--<span class="label">推荐</span>-->
                             <span class="icon">
                   <i class="layui-icon layui-icon-radio"></i>
-                  <b>3002</b>人
+                  <b id="viewNum"></b>人
                 </span>
-                            <a href="#message">
-                <span class="icon message">
-                  <i class="layui-icon layui-icon-dialogue"></i>
-                  <b>500</b>条
-                </span>
-                            </a>
                             <span class="icon time">
                   <i class="layui-icon layui-icon-log"></i>
                   <span id="createTime"></span>
@@ -205,6 +199,7 @@
                     $("#title").text(data.title);
                     $("#createTime").text(data.createTime);
                     $("#content").html(data.content);
+                    $("#viewNum").text(data.viewNum);
                 }
             });
         }

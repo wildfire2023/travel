@@ -1,15 +1,17 @@
 package com.waner.primary.web.controller;
 
 import com.google.common.collect.Lists;
+import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelEssay;
-import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.QuestionResolverService;
 import com.waner.primary.web.service.TravelEssayService;
+import com.waner.primary.web.service.impl.RedisService;
 import com.waner.primary.web.vo.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -32,14 +34,16 @@ public class TravelEssayController {
   private final TravelEssayService essayService;
   private final EssayCommentService commentService;
   private final QuestionResolverService questionResolverService;
+  private final RedisService redisService;
 
   public TravelEssayController(
-      TravelEssayService essayService,
-      EssayCommentService commentService,
-      QuestionResolverService questionResolverService) {
+          TravelEssayService essayService,
+          EssayCommentService commentService,
+          QuestionResolverService questionResolverService, RedisService redisService) {
     this.essayService = essayService;
     this.commentService = commentService;
     this.questionResolverService = questionResolverService;
+    this.redisService = redisService;
   }
 
   // -------------------------------------------------------------------------
@@ -179,8 +183,13 @@ public class TravelEssayController {
    */
   @GetMapping("detail")
   @ResponseBody
-  public Response<EssayWithUser> getEssayDetail(@RequestParam("id") Integer id) {
-    return essayService.getEssayDetail(id);
+  public Response<EssayWithUserAndView> getEssayDetail(@RequestParam("id") Integer id) {
+    EssayWithUser essayDetail = essayService.getEssayDetail(id);
+    EssayWithUserAndView withUserAndView = new EssayWithUserAndView();
+    BeanUtils.copyProperties(essayDetail, withUserAndView);
+    Number viewNum = redisService.getViewNum(id, ViewKey.ESSAY_KEY);
+    withUserAndView.setViewNum(viewNum.longValue());
+    return Response.success(withUserAndView);
   }
 
   /**
@@ -191,6 +200,7 @@ public class TravelEssayController {
   @GetMapping("detail-page")
   public String toDetailPage(@RequestParam("id") Integer id, HttpServletRequest request) {
     request.setAttribute("id", id);
+    redisService.setViewNum(id, ViewKey.ESSAY_KEY);
     return "front/essay-details";
   }
 

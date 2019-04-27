@@ -1,12 +1,16 @@
 package com.waner.primary.web.controller;
 
+import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.service.RecommendService;
 import com.waner.primary.web.service.impl.RecommendServiceImpl;
+import com.waner.primary.web.service.impl.RedisService;
+import com.waner.primary.web.vo.RecommendWithView;
 import com.waner.primary.web.vo.TableResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +29,11 @@ import java.util.List;
 public class RecommendController {
 
   private final RecommendService recommendService;
+  private final RedisService redisService;
 
-  public RecommendController(RecommendService recommendService) {
+  public RecommendController(RecommendService recommendService, RedisService redisService) {
     this.recommendService = recommendService;
+    this.redisService = redisService;
   }
 
   /**
@@ -41,7 +47,7 @@ public class RecommendController {
   }
 
   /**
-   * 返回前台推荐详情
+   * 返回前台推荐详情 添加redis浏览人数
    *
    * @param id
    * @return
@@ -49,6 +55,7 @@ public class RecommendController {
   @GetMapping("detail-page")
   public String toRecommendDetail(Integer id, HttpServletRequest request) {
     request.setAttribute("id", id);
+    redisService.setViewNum(id, ViewKey.RECOMMEND_KEY);
     return "front/recommend-details";
   }
 
@@ -88,9 +95,13 @@ public class RecommendController {
    */
   @GetMapping("detail")
   @ResponseBody
-  public Response<TravelRecommend> getOneTravelRecommend(Integer id) {
+  public Response<RecommendWithView> getOneTravelRecommend(Integer id) {
     TravelRecommend recommend = recommendService.getOneRecommend(id);
-    return Response.success(recommend);
+    Number viewNum = redisService.getViewNum(id, ViewKey.RECOMMEND_KEY);
+    RecommendWithView withView = new RecommendWithView();
+    BeanUtils.copyProperties(recommend, withView);
+    withView.setViewNum(viewNum.longValue());
+    return Response.success(withView);
   }
 
   /**
