@@ -1,5 +1,25 @@
 #
 
+## 界面展示
+
+游记详情
+
+![游记详情](/img/essay_detail.png)
+
+游记列表
+
+![游记列表](/img/essay_list.png)
+
+个人信息
+
+![个人信息](/img/perinfo_page.png)
+
+搜索列表
+
+![搜素列表](/img/search_info.png)
+
+## 系统设计
+
 ### 邮箱验证
 邮箱验证使用Spring-mail提供的API处理,邮件发送服务器[application.yml](src/main/resources/application.yml)进行配置。
 
@@ -16,6 +36,7 @@ key-value设计如下:
 
 ### 图片存储
 图片使用腾讯云提供的对象存储方式进行存储。
+
 
 
 
