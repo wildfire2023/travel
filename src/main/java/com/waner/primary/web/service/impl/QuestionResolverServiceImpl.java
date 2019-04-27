@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelAnswer;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
@@ -209,5 +210,29 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
               results.add(articleWithTag);
             });
     return results;
+  }
+
+  @Override
+  public Response<List<TravelQuestion>> top(List<TopMap> questions) {
+    if (questions == null || questions.size() == 0) {
+      return Response.fail(null);
+    }
+    List<Integer> ids = Lists.newArrayList();
+    questions.forEach(top -> ids.add(top.getArticleId()));
+    List<TravelQuestion> questionList = new ArrayList<>();
+    // 按照排名先后查询
+    ids.forEach(
+        id -> {
+          // 查询已发布的游记
+          TravelQuestion question = questionMapper.selectByPrimaryKey(id);
+          if (question != null) {
+            questionList.add(question);
+          }
+        });
+    List<TravelQuestion> results = null;
+    if (questionList.size() > 10) {
+      results = questionList.subList(0, 10);
+    }
+    return results != null ? Response.success(results) : Response.success(questionList);
   }
 }

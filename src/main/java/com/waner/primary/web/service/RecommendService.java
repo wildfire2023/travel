@@ -1,5 +1,7 @@
 package com.waner.primary.web.service;
 
+import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.vo.ArticleWithTag;
 
@@ -28,4 +30,6 @@ public interface RecommendService {
   List<TravelRecommend> getListWithSearchPattern(String pattern);
 
 	List<ArticleWithTag> getListByIds(List<Integer> recommendIds);
+
+  List<TravelRecommend> top(List<TopMap> recommends, boolean topTen);
 }

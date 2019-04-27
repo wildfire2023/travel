@@ -1,6 +1,8 @@
 package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
+import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.vo.*;
 
@@ -33,4 +35,6 @@ public interface QuestionResolverService {
   List<TravelQuestion> getListWithSearchPattern(String pattern);
 
 	List<ArticleWithTag> getListByIds(List<Integer> questionIds);
+
+	Response<List<TravelQuestion>> top(List<TopMap> question);
 }

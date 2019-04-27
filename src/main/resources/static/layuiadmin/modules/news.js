@@ -40,7 +40,7 @@ layui.define(['carousel', 'jquery', 'element', 'flow', 'laytpl', 'element', 'lay
                 , width: '100%'
                 , height: elemBanner.height() + 'px'
                 , arrow: 'none'
-                , interval: 5000
+                , interval: 3000
             });
             $(window).on('resize', function () {
                 var width = $(this).prop('innerWidth');

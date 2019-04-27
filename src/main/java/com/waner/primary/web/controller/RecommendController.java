@@ -4,6 +4,7 @@ import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.service.RecommendService;
 import com.waner.primary.web.service.impl.RecommendServiceImpl;
@@ -12,6 +13,7 @@ import com.waner.primary.web.vo.RecommendWithView;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 

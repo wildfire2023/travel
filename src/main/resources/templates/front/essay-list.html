@@ -84,17 +84,8 @@
                             <h3>游记推荐</h3>
                         </div>
                         <div class="layui-card-body">
-                            <ul class="list-box">
-                                <a href="recommend-details.html"><img src="../res/static/images/news_img15.jpg"
-                                                                      width="100%"> </a>
-                                <li class="list">
+                            <ul class="list-box" id="top-view">
 
-                                    <a href="recommend-details.html">南非金砖会议再造十年辉煌</a>
-
-                                </li>
-                                <li class="list">
-                                    <a href="recommend-details.html">中流击水 奋楫者进_中共十九大</a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -103,6 +94,14 @@
         </div>
     </div>
 </div>
+
+<script id="top-tpl" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <li class="list">
+        <a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}}</a>
+    </li>
+    {{#  }); }}
+</script>
 
 <!-- content-laytpl -->
 <script id="travelEssayList" type="text/html">
@@ -169,6 +168,24 @@
 
         // 加载数据
         loadData();
+        loadTop();
+
+        function loadTop() {
+            admin.req({
+                url: '/common/top-essay-list'
+                , type: 'get'
+                , success: function (res) {
+                    if (res.code === 200) {
+                        // 获取节点
+                        var getTpl = document.getElementById('top-tpl').innerHTML;
+                        // 执行tpl渲染
+                        laytpl(getTpl).render(res.data, function (html) {
+                            document.getElementById('top-view').innerHTML = html;
+                        });
+                    }
+                }
+            });
+        }
 
 
         function loadData() {

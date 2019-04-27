@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.waner.primary.common.cache.ViewKey;
+import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.entity.TravelUser;
@@ -23,7 +25,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author Monster
  * @since 1.0.0-SNAPSHOT
  */
@@ -36,9 +37,10 @@ public class TravelEssayServiceImpl implements TravelEssayService {
   private final RedisService redisService;
 
   public TravelEssayServiceImpl(
-          TravelEssayMapper essayMapper,
-          TravelUserMapper userMapper,
-          EssayCommentService essayCommentService, RedisService redisService) {
+      TravelEssayMapper essayMapper,
+      TravelUserMapper userMapper,
+      EssayCommentService essayCommentService,
+      RedisService redisService) {
     this.essayMapper = essayMapper;
     this.userMapper = userMapper;
     this.essayCommentService = essayCommentService;
@@ -129,11 +131,12 @@ public class TravelEssayServiceImpl implements TravelEssayService {
             .map(TravelEssay::getId)
             .collect(Collectors.toList());
     // 删除游记相关评论
-    ids.forEach(id -> {
-      essayCommentService.deleteCommentWithEssayId(id);
-      // 删除缓存
-      redisService.deleteViewKey(id, ViewKey.ESSAY_KEY);
-    });
+    ids.forEach(
+        id -> {
+          essayCommentService.deleteCommentWithEssayId(id);
+          // 删除缓存
+          redisService.deleteViewKey(id, ViewKey.ESSAY_KEY);
+        });
     return essayMapper.deleteBatchIds(ids);
   }
 
@@ -173,6 +176,7 @@ public class TravelEssayServiceImpl implements TravelEssayService {
 
   /**
    * 根据游记编号获取文章列表
+   *
    * @param essayIds
    * @return
    */
@@ -181,22 +185,46 @@ public class TravelEssayServiceImpl implements TravelEssayService {
     if (essayIds == null || essayIds.size() == 0) {
       return null;
     }
-    QueryWrapper<TravelEssay> wrapper= new QueryWrapper<>();
-    wrapper.in("id",essayIds);
+    QueryWrapper<TravelEssay> wrapper = new QueryWrapper<>();
+    wrapper.in("id", essayIds);
     List<TravelEssay> recommends = essayMapper.selectList(wrapper);
     ArrayList<ArticleWithTag> results = Lists.newArrayList();
     recommends.forEach(
-            essay -> {
-              ArticleWithTag articleWithTag =
-                      ArticleWithTag.builder()
-                              .id(essay.getId())
-                              .tag("游记")
-                              .createTime(essay.getCreateTime())
-                              .delFLag(essay.getDelFlag())
-                              .title(essay.getTitle())
-                              .build();
-              results.add(articleWithTag);
-            });
+        essay -> {
+          ArticleWithTag articleWithTag =
+              ArticleWithTag.builder()
+                  .id(essay.getId())
+                  .tag("游记")
+                  .createTime(essay.getCreateTime())
+                  .delFLag(essay.getDelFlag())
+                  .title(essay.getTitle())
+                  .build();
+          results.add(articleWithTag);
+        });
     return results;
+  }
+
+  @Override
+  public Response<List<TravelEssay>> top(List<TopMap> essays) {
+    if (essays == null || essays.size() == 0) {
+      return Response.fail(null);
+    }
+    List<Integer> ids = Lists.newArrayList();
+    essays.forEach(top -> ids.add(top.getArticleId()));
+    List<TravelEssay> recommendList = new ArrayList<>();
+    // 按照排名先后查询
+    ids.forEach(
+        id -> {
+          // 查询已发布的游记
+          TravelEssay essay = essayMapper.selectPublishedEssay(id);
+          if (essay != null) {
+            recommendList.add(essay);
+          }
+        });
+    List<TravelEssay> results = null;
+    if (recommendList.size() > 10) {
+      results = recommendList.subList(0, 10);
+    }
+    return results != null ? Response.success(results) : Response.success(recommendList);
   }
 }

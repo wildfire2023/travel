@@ -1,11 +1,16 @@
 package com.waner.primary.web.controller;
 
+import com.waner.primary.web.dto.TopMap;
+import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.service.RecommendService;
+import com.waner.primary.web.service.impl.RedisService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * 前台控制页面
@@ -16,6 +21,14 @@ import java.io.UnsupportedEncodingException;
 @Controller
 @RequestMapping("front/page")
 public class FrontPageController {
+
+  private final RedisService redisService;
+  private final RecommendService recommendService;
+
+  public FrontPageController(RedisService redisService, RecommendService recommendService) {
+    this.redisService = redisService;
+    this.recommendService = recommendService;
+  }
 
   /**
    * 跳转登录页面
@@ -53,7 +66,10 @@ public class FrontPageController {
    * @return
    */
   @GetMapping("index")
-  public String index() {
+  public String index(Model model) {
+    List<TopMap> recommend = redisService.top("recommend");
+    List<TravelRecommend> recommends = recommendService.top(recommend, false);
+    model.addAttribute("topThree", recommends);
     return "front/index";
   }
 

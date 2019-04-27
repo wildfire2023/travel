@@ -5,12 +5,10 @@ import com.google.common.collect.Maps;
 import com.waner.primary.common.cache.BasePrefix;
 import com.waner.primary.common.cache.CollectionKey;
 import com.waner.primary.common.util.RedisUtil;
+import com.waner.primary.web.dto.TopMap;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class RedisService {
@@ -154,5 +152,31 @@ public class RedisService {
     map.put("question", questionIdList);
     map.put("recommend", recommendIdList);
     return map;
+  }
+
+  /**
+   * 根据redis推荐查询
+   *
+   * @return
+   */
+  public List<TopMap> top(String type) {
+    Set<String> keys = redisUtil.keys("ViewKey:type:" + type + "*");
+    ArrayList<TopMap> results = Lists.newArrayList();
+    keys.forEach(
+        key -> {
+          int last = key.lastIndexOf(":");
+          String substring = key.substring(0, last);
+          int secondLast = substring.lastIndexOf(":");
+          String viewNumStr = substring.substring(secondLast + 1);
+          Number number = redisUtil.get(key);
+          TopMap topMap =
+              TopMap.builder()
+                  .articleId(Integer.valueOf(viewNumStr))
+                  .viewNUm(number.intValue())
+                  .build();
+          results.add(topMap);
+        });
+    results.sort((r1, r2) -> r2.getViewNUm() - r1.getViewNUm());
+    return results;
   }
 }

@@ -63,6 +63,10 @@ public class RedisUtil {
     return (T) o;
   }
 
+  public <T> T get(String key) {
+    return (T) template.opsForValue().get(key);
+  }
+
   /**
    * redis自增操作
    * @param prefix

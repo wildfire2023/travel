@@ -3,6 +3,7 @@ package com.waner.primary.web.controller;
 import com.google.common.collect.Lists;
 import com.waner.primary.common.exception.GlobalException;
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.entity.TravelRecommend;
@@ -290,4 +291,54 @@ public class CommonController {
   public void delCollectionState(String type, Integer articleId, Integer userId) {
     redisService.delCollectionState(type, articleId, userId);
   }
+
+  // -------------------------------------------------------------------------
+  // TOP
+  // -------------------------------------------------------------------------
+
+  /**
+   * 获取点击量前十的推荐
+   * @return
+   */
+  @GetMapping("top-recommend-list")
+  @ResponseBody
+  public Response<List<TravelRecommend>> topRecommendTenList() {
+    List<TopMap> recommend = redisService.top("recommend");
+    List<TravelRecommend> list = recommendService.top(recommend, true);
+    return list == null ? Response.fail(null) : Response.success(list);
+  }
+
+//  /**
+//   * 版图展示
+//   * @return
+//   */
+//  @GetMapping("top-three-recommend-list")
+//  @ResponseBody
+//  public Response<List<TravelRecommend>> topThreeRecommendTenList() {
+//    List<TopMap> recommend = redisService.top("recommend");
+//    return recommendService.top(recommend,false);
+//  }
+
+  /**
+   * 获取点击量前十的游记
+   * @return
+   */
+  @GetMapping("top-essay-list")
+  @ResponseBody
+  public Response<List<TravelEssay>> topEssayTenList() {
+    List<TopMap> essay = redisService.top("essay");
+    return essayService.top(essay);
+  }
+
+  /**
+   * 获取点击量前十的问答
+   * @return
+   */
+  @GetMapping("top-question-list")
+  @ResponseBody
+  public Response<List<TravelQuestion>> topQuestionTenList() {
+    List<TopMap> question = redisService.top("question");
+    return questionResolverService.top(question);
+  }
+
 }

@@ -60,34 +60,18 @@
         <div class="menu-icon">
             <i class="layui-icon layui-icon-more-vertical"></i>
         </div>
-        <!--<div class="mobile-nav">-->
-        <!--<ul class="layui-nav" lay-filter="">-->
-        <!--<li class="layui-nav-item layui-this"><a href="index.html">最新</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">娱乐</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">生活</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">财经</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">科技</a></li>-->
-        <!--<li class="layui-nav-item"><a href="list.html">军事</a></li>-->
-        <!--</ul>-->
-        <!--</div>-->
     </div>
 </div>
 
 
 <div class="layui-fulid micronews-banner w1000">
     <div class="layui-carousel imgbox" id="micronews-carouse">
-        <div carousel-item>
-            <div>
-                <p class="title">去南非旅行需要做什么准备</p>
-                <a href="list.html"><img th:src="@{/layuiadmin/myfile/images/news_img1.jpg}"></a>
-            </div>
-            <div>
-                <p class="title">去南非旅行需要做什么准备</p>
-                <a href="list.html"><img th:src="@{/layuiadmin/myfile/images/news_img1.jpg}"></a>
-            </div>
-            <div>
-                <p class="title">去南非旅行需要做什么准备</p>
-                <a href="list.html"><img th:src="@{/layuiadmin/myfile/images/news_img1.jpg}"></a>
+        <div carousel-item  >
+            <div th:each="elem:${topThree}">
+                <p class="title" th:text="${elem.title}"></p>
+                <a th:href="'/recommend/detail-page?id='+${elem.id}">
+                    <img th:src="${elem.headImgUrl}"  style="width: 1000px; height: 300px;"/>
+                </a>
             </div>
         </div>
     </div>
@@ -113,29 +97,8 @@
                         <div class="layui-card-header">
                             <h3>热门推荐</h3>
                         </div>
-                        <div class="layui-card-body">
-                            <ul class="list-box">
-                                <li class="list">
+                        <div class="layui-card-body" id="top-view">
 
-                                    <a href="list.html">你和我的倾城时光</a><i class="heat-icon"></i>
-
-                                </li>
-                                <li class="list">
-
-                                    <a href="list.html">顶级酒店内幕被曝光</a><i class="heat-icon"></i>
-
-                                </li>
-                                <li class="list">
-
-                                    <a href="list.html">王思聪抽奖</a><i class="heat-icon"></i>
-
-                                </li>
-                                <li class="list">
-
-                                    <a href="list.html">测试标题</a>
-
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -143,6 +106,17 @@
         </div>
     </div>
 </div>
+
+<script id="top-tpl" type="text/html">
+    <ul class="list-box" >
+        {{#  layui.each(d, function(index, item){ }}
+        <li class="list">
+            <a href="/recommend/detail-page?id={{item.id}}">{{item.title}}</a>
+        </li>
+        {{#  }); }}
+    </ul>
+</script>
+
 
 <!-- content-laytpl -->
 <script id="recommendList" type="text/html">
@@ -208,6 +182,42 @@
 
         // 加载数据
         loadData();
+        loadTop();
+        // loadTopThree();
+
+        function loadTop() {
+            admin.req({
+                url: '/common/top-recommend-list'
+                , type: 'get'
+                , success: function (res) {
+                    if (res.code === 200) {
+                        // 获取节点
+                        var getTpl = document.getElementById('top-tpl').innerHTML;
+                        // 执行tpl渲染
+                        laytpl(getTpl).render(res.data, function (html) {
+                            document.getElementById('top-view').innerHTML = html;
+                        });
+                    }
+                }
+            });
+        }
+
+        // function loadTopThree() {
+        //     admin.req({
+        //         url: '/common/top-three-recommend-list'
+        //         , type: 'get'
+        //         , success: function (res) {
+        //             if (res.code === 200) {
+        //                 // 获取节点
+        //                 var getTpl = document.getElementById('top-three-tpl').innerHTML;
+        //                 // 执行tpl渲染
+        //                 laytpl(getTpl).render(res.data, function (html) {
+        //                     document.getElementById('top-three-view').innerHTML = html;
+        //                 });
+        //             }
+        //         }
+        //     });
+        // }
 
 
         function loadData() {

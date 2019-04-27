@@ -1,3 +1,0 @@
-INSERT INTO travel.travel_essay (id, sys_user_id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag) VALUES (26, 4, '阿斯顿发斯蒂芬', '', '阿斯顿发', null, '2019-04-15 11:14:47', 0, 1);
-INSERT INTO travel.travel_essay (id, sys_user_id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag) VALUES (33, 4, '阿斯顿发斯蒂芬', '', '阿斯顿发', null, '2019-04-15 11:16:59', 0, 1);
-INSERT INTO travel.travel_essay (id, sys_user_id, title, head_img_url, content, content_img_url, create_time, del_flag, push_flag) VALUES (34, 4, '阿斯顿发斯蒂芬', '', '阿斯顿发', null, '2019-04-15 11:16:59', 0, 1);

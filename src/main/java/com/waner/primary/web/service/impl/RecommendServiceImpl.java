@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.waner.primary.common.cache.ViewKey;
+import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -129,6 +132,32 @@ public class RecommendServiceImpl implements RecommendService {
           results.add(articleWithTag);
         });
     return results;
+  }
+
+  /**
+   * 获取排好序的Top
+   *
+   * @param recommends
+   * @return
+   */
+  @Override
+  public List<TravelRecommend> top(List<TopMap> recommends, boolean topTen) {
+    if (recommends == null || recommends.size() == 0) {
+      return null;
+    }
+    List<Integer> ids = Lists.newArrayList();
+    recommends.forEach(top -> ids.add(top.getArticleId()));
+    List<TravelRecommend> recommendList = new ArrayList<>();
+    // 按照排名先后查询
+    ids.forEach(id -> recommendList.add(travelRecommendMapper.selectById(id)));
+    List<TravelRecommend> results = null;
+    if (topTen && recommendList.size() > 10) {
+      results = recommendList.subList(0, 10);
+    }
+    if (!topTen && recommendList.size() > 3) {
+      results = recommendList.subList(0, 3);
+    }
+    return results != null ? results : recommendList;
   }
 
   /**

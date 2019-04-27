@@ -1,2 +1,0 @@
-INSERT INTO travel.sys_user_role (id, user_id, role_id, operator, operator_time, operator_ip) VALUES (1, 4, 1, '', '2019-02-21 21:06:42', '0.0.0.0');
-INSERT INTO travel.sys_user_role (id, user_id, role_id, operator, operator_time, operator_ip) VALUES (2, 9, 2, '', '2019-03-02 13:50:01', '0.0.0.0');

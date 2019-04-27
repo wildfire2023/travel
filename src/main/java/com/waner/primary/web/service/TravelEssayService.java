@@ -1,6 +1,7 @@
 package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
+import com.waner.primary.web.dto.TopMap;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.vo.ArticleWithTag;
 import com.waner.primary.web.vo.EssayWithUser;
@@ -25,4 +26,6 @@ public interface TravelEssayService {
   List<TravelEssay> getListWithSearchPattern(String pattern);
 
 	List<ArticleWithTag> getListByIds(List<Integer> essayIds);
+
+	Response<List<TravelEssay>> top(List<TopMap> essay);
 }

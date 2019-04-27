@@ -206,4 +206,7 @@
 			</if>
 		</where>
 	</select>
+	<select id="selectPublishedEssay" resultMap="BaseResultMap">
+			select * from travel_essay where push_flag = 1 and id = #{id}
+	</select>
 </mapper>
