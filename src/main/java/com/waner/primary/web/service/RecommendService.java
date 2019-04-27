@@ -1,6 +1,7 @@
 package com.waner.primary.web.service;
 
 import com.waner.primary.web.entity.TravelRecommend;
+import com.waner.primary.web.vo.ArticleWithTag;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface RecommendService {
   int modifyRecommend(TravelRecommend recommend);
 
   List<TravelRecommend> getListWithSearchPattern(String pattern);
+
+	List<ArticleWithTag> getListByIds(List<Integer> recommendIds);
 }

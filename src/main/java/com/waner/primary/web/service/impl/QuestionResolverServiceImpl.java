@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.waner.primary.common.result.CodeMsg;
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelAnswer;
+import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.mapper.TravelAnswerMapper;
 import com.waner.primary.web.mapper.TravelQuestionMapper;
@@ -15,6 +16,7 @@ import com.waner.primary.web.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -183,5 +185,29 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
     QueryWrapper<TravelQuestion> wrapper = new QueryWrapper<>();
     wrapper.like("title", pattern);
     return questionMapper.selectList(wrapper);
+  }
+
+  @Override
+  public List<ArticleWithTag> getListByIds(List<Integer> questionIds) {
+    if (questionIds == null || questionIds.size() == 0){
+      return null;
+    }
+    QueryWrapper<TravelQuestion> wrapper= new QueryWrapper<>();
+    wrapper.in("id",questionIds);
+    List<TravelQuestion> recommends = questionMapper.selectList(wrapper);
+    ArrayList<ArticleWithTag> results = Lists.newArrayList();
+    recommends.forEach(
+            question -> {
+              ArticleWithTag articleWithTag =
+                      ArticleWithTag.builder()
+                              .id(question.getId())
+                              .tag("问答")
+                              .createTime(question.getCreateTime())
+                              .delFLag(question.getDelFlag())
+                              .title(question.getTitle())
+                              .build();
+              results.add(articleWithTag);
+            });
+    return results;
   }
 }

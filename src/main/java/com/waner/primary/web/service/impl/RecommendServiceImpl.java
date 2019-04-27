@@ -8,9 +8,11 @@ import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.mapper.TravelRecommendMapper;
 import com.waner.primary.web.service.RecommendService;
+import com.waner.primary.web.vo.ArticleWithTag;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +32,8 @@ public class RecommendServiceImpl implements RecommendService {
   private final TravelRecommendMapper travelRecommendMapper;
   private final RedisService redisService;
 
-  public RecommendServiceImpl(TravelRecommendMapper travelRecommendMapper, RedisService redisService) {
+  public RecommendServiceImpl(
+      TravelRecommendMapper travelRecommendMapper, RedisService redisService) {
     this.travelRecommendMapper = travelRecommendMapper;
     this.redisService = redisService;
   }
@@ -96,6 +99,36 @@ public class RecommendServiceImpl implements RecommendService {
     QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
     wrapper.like("title", pattern);
     return travelRecommendMapper.selectList(wrapper);
+  }
+
+  /**
+   * 根据推荐编号获取推荐列表
+   *
+   * @param recommendIds
+   * @return
+   */
+  @Override
+  public List<ArticleWithTag> getListByIds(List<Integer> recommendIds) {
+    if (recommendIds == null || recommendIds.size() == 0) {
+      return null;
+    }
+    QueryWrapper<TravelRecommend> wrapper = new QueryWrapper<>();
+    wrapper.in("id", recommendIds);
+    List<TravelRecommend> recommends = travelRecommendMapper.selectList(wrapper);
+    ArrayList<ArticleWithTag> results = Lists.newArrayList();
+    recommends.forEach(
+        recommend -> {
+          ArticleWithTag articleWithTag =
+              ArticleWithTag.builder()
+                  .id(recommend.getId())
+                  .tag("推荐")
+                  .createTime(recommend.getCreateTime())
+                  .delFLag(recommend.getDelFlag())
+                  .title(recommend.getTitle())
+                  .build();
+          results.add(articleWithTag);
+        });
+    return results;
   }
 
   /**

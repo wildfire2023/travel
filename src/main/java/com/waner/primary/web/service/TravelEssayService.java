@@ -2,6 +2,7 @@ package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelEssay;
+import com.waner.primary.web.vo.ArticleWithTag;
 import com.waner.primary.web.vo.EssayWithUser;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface TravelEssayService {
   List<TravelEssay> queryEssayByUser(Integer userId);
 
   List<TravelEssay> getListWithSearchPattern(String pattern);
+
+	List<ArticleWithTag> getListByIds(List<Integer> essayIds);
 }

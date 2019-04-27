@@ -6,16 +6,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.waner.primary.common.cache.ViewKey;
 import com.waner.primary.web.entity.TravelEssay;
+import com.waner.primary.web.entity.TravelRecommend;
 import com.waner.primary.web.entity.TravelUser;
 import com.waner.primary.web.mapper.TravelEssayMapper;
 import com.waner.primary.web.mapper.TravelUserMapper;
 import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.TravelEssayService;
+import com.waner.primary.web.vo.ArticleWithTag;
 import com.waner.primary.web.vo.EssayWithUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -166,5 +169,34 @@ public class TravelEssayServiceImpl implements TravelEssayService {
     QueryWrapper<TravelEssay> wrapper = new QueryWrapper<>();
     wrapper.like("title", pattern);
     return essayMapper.selectList(wrapper);
+  }
+
+  /**
+   * 根据游记编号获取文章列表
+   * @param essayIds
+   * @return
+   */
+  @Override
+  public List<ArticleWithTag> getListByIds(List<Integer> essayIds) {
+    if (essayIds == null || essayIds.size() == 0) {
+      return null;
+    }
+    QueryWrapper<TravelEssay> wrapper= new QueryWrapper<>();
+    wrapper.in("id",essayIds);
+    List<TravelEssay> recommends = essayMapper.selectList(wrapper);
+    ArrayList<ArticleWithTag> results = Lists.newArrayList();
+    recommends.forEach(
+            essay -> {
+              ArticleWithTag articleWithTag =
+                      ArticleWithTag.builder()
+                              .id(essay.getId())
+                              .tag("游记")
+                              .createTime(essay.getCreateTime())
+                              .delFLag(essay.getDelFlag())
+                              .title(essay.getTitle())
+                              .build();
+              results.add(articleWithTag);
+            });
+    return results;
   }
 }

@@ -102,28 +102,9 @@
 
                             <!-- 我的收藏 -->
                             <div class="content-box">
-                                <div class="ulCommentList">
-                                    <div class="liCont">
-                                        <div class="item">
-                                            <div class="item-info">
-                                                <h4><a href="recommend-details.html">想要头发好只要不洗头？
-                                                    英国女子留1.83米长发自爆近20年没洗过</a></h4>
-                                                <div class="b-txt">
-                                                    <span class="label">娱乐</span>
-                                                    <span class="icon message">
-                              <i class="layui-icon layui-icon-dialogue"></i>
-                              500条
-                            </span>
-                                                    <span class="icon time">
-                              <i class="layui-icon layui-icon-log"></i>
-                             2018.08.28
-                            </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="ulCommentList" id="sc-view">
                                 </div>
-                                <div id="micronews-details-test1" style="text-align: center;"></div>
+                                <div id="sc-page" style="text-align: center;"></div>
                             </div>
                             <!-- 结束-我的收藏 -->
 
@@ -179,6 +160,37 @@
     {{#  }); }}
 </script>
 <!-- 结束-我的撰写 -->
+
+<!-- 我的收藏 -->
+<script id="sc-tpl" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <div class="liCont">
+        <div class="item">
+            <div class="item-info">
+                <h4>
+                    {{# if(item.tag == '游记'){ }}
+                    <a href="/travel-essay/detail-page?id={{item.id}}">{{item.title}}</a>
+                    {{# } }}
+                    {{# if(item.tag == '问答'){ }}
+                    <a href="/question/detail-page?id={{item.id}}">{{item.title}}</a>
+                    {{# } }}
+                    {{# if(item.tag == '推荐'){ }}
+                    <a href="/recommend/detail-page?id={{item.id}}">{{item.title}}</a>
+                    {{# } }}
+                </h4>
+                <div class="b-txt">
+                    <span class="label">{{item.tag}}</span>
+                    <span class="icon time">
+                              <i class="layui-icon layui-icon-log"></i>
+                             {{item.createTime}}
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#  }); }}
+</script>
+<!-- 结束-我的收藏 -->
 
 
 <!-- 我的回复 -->
@@ -355,21 +367,60 @@
             }
         });
 
+        admin.req({
+            url: '/common/collections'
+            , type: 'get'
+            , data: {page: page, limit: limit, userId: user.id}
+            , async: false
+            , success: function (res) {
+                // 获取节点
+                var getTpl = document.getElementById('sc-tpl').innerHTML;
+                // 执行tpl渲染
+                laytpl(getTpl).render(res.data, function (html) {
+                    document.getElementById('sc-view').innerHTML = html;
+                });
+                laypage.render({
+                    elem: 'sc-page'
+                    , count: res.count
+                    , first: '首页'
+                    , last: '尾页'
+                    , prev: '<em>←</em>'
+                    , next: '<em>→</em>'
+                    , limit: limit
+                    , jump: function (obj, first) {
+                        page = obj.curr;
+                        limit = obj.limit;
+                        if (!first) {
+                            // loadData();
+                            admin.req({
+                                url: '/common/collections'
+                                , type: 'get'
+                                , async: false
+                                , data: {page: page, limit: limit, userId: user.id}
+                                , success: function (res) {
+                                    // 获取节点
+                                    var getTpl = document.getElementById('sc-tpl').innerHTML;
+                                    // 执行tpl渲染
+                                    laytpl(getTpl).render(res.data, function (html) {
+                                        document.getElementById('sc-view').innerHTML = html;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        });
+
+
 
         news.omitted('.item-cont .cont .text', 100);
         news.arrowutil();
-        var collOff = true;
-
-        $('.Collection').on('click', function () {
-            if (collOff) {
-                $(this).addClass('active');
-            } else {
-                $(this).removeClass('active');
-            }
-            collOff = !collOff
-        });
 
         news.seachBtn();
+
+
 
         element.tab({
             headerElem: '#tabHeader>li' //指定tab头元素项

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -89,6 +90,50 @@ public class CommonController {
           articleWithTag.setTag("question");
           articlesWithTag.add(articleWithTag);
         });
+    articlesWithTag.sort((a1, a2) -> a2.getCreateTime().compareTo(a1.getCreateTime()));
+    int start = (page - 1) * limit;
+    int end = page * limit - 1;
+    List<ArticleWithTag> result = Lists.newArrayList();
+    for (int i = start; i <= end; i++) {
+      if (i > articlesWithTag.size() - 1) {
+        break;
+      }
+      result.add(articlesWithTag.get(i));
+    }
+    return new TableResult<>(200, "", articlesWithTag.size(), result);
+  }
+
+  /**
+   * 获取收藏列表
+   * @param userId
+   * @param page
+   * @param limit
+   * @return
+   */
+  @GetMapping("collections")
+  @ResponseBody
+  public TableResult<List<ArticleWithTag>> getCollections(
+          @RequestParam(value = "userId") Integer userId, int page, int limit) {
+    if (userId == null) {
+      throw new GlobalException("空参数", 500100);
+    }
+    List<ArticleWithTag> articlesWithTag = Lists.newArrayList();
+    Map<String, List<Integer>> withTagArticleIds = redisService.getCollectionArticlesId(userId);
+    List<Integer> recommendIds = withTagArticleIds.get("recommend");
+    List<Integer> essayIds = withTagArticleIds.get("essay");
+    List<Integer> questionIds = withTagArticleIds.get("question");
+    List<ArticleWithTag> recommends = recommendService.getListByIds(recommendIds);
+    List<ArticleWithTag> essays = essayService.getListByIds(essayIds);
+    List<ArticleWithTag> questions = questionResolverService.getListByIds(questionIds);
+    if (recommends != null) {
+      articlesWithTag.addAll(recommends);
+    }
+    if (essays != null) {
+      articlesWithTag.addAll(essays);
+    }
+    if (questions != null) {
+      articlesWithTag.addAll(questions);
+    }
     articlesWithTag.sort((a1, a2) -> a2.getCreateTime().compareTo(a1.getCreateTime()));
     int start = (page - 1) * limit;
     int end = page * limit - 1;
@@ -222,6 +267,7 @@ public class CommonController {
 
   /**
    * 设置用户收藏
+   *
    * @param type
    * @param articleId
    * @param userId
@@ -234,6 +280,7 @@ public class CommonController {
 
   /**
    * 删除用户收藏
+   *
    * @param type
    * @param articleId
    * @param userId

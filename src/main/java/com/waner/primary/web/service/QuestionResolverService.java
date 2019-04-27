@@ -2,10 +2,7 @@ package com.waner.primary.web.service;
 
 import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelQuestion;
-import com.waner.primary.web.vo.AnswerWithUser;
-import com.waner.primary.web.vo.QuestionWithUser;
-import com.waner.primary.web.vo.Reply;
-import com.waner.primary.web.vo.ResponseWithTag;
+import com.waner.primary.web.vo.*;
 
 import java.util.List;
 
@@ -34,4 +31,6 @@ public interface QuestionResolverService {
   void removeAnswer(Integer id);
 
   List<TravelQuestion> getListWithSearchPattern(String pattern);
+
+	List<ArticleWithTag> getListByIds(List<Integer> questionIds);
 }

@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -85,6 +86,14 @@ public class RedisUtil {
     template.delete(realKey);
   }
 
+  /**
+   * 查询匹配的所有key
+   * @param pattern
+   * @return
+   */
+  public Set<String> keys(String pattern) {
+    return template.keys(pattern);
+  }
 
   /**
    * 实体类转为字符串

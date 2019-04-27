@@ -1,11 +1,16 @@
 package com.waner.primary.web.service.impl;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.waner.primary.common.cache.BasePrefix;
-import com.waner.primary.common.cache.Collectionkey;
+import com.waner.primary.common.cache.CollectionKey;
 import com.waner.primary.common.util.RedisUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RedisService {
@@ -66,17 +71,17 @@ public class RedisService {
       optional =
           Optional.ofNullable(
               redisUtil.get(
-                  Collectionkey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId));
+                  CollectionKey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId));
     } else if ("essay".equals(type)) {
       optional =
           Optional.ofNullable(
               redisUtil.get(
-                  Collectionkey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId));
+                  CollectionKey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId));
     } else {
       optional =
           Optional.ofNullable(
               redisUtil.get(
-                  Collectionkey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId));
+                  CollectionKey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId));
     }
     if (optional.isPresent()) {
       return true;
@@ -95,24 +100,59 @@ public class RedisService {
   public void setCollectionState(String type, Integer articleId, Integer userId) {
     if ("recommend".equals(type)) {
       redisUtil.set(
-          Collectionkey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId, "exist");
+          CollectionKey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId, articleId);
     } else if ("essay".equals(type)) {
       redisUtil.set(
-          Collectionkey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId, "exist");
+          CollectionKey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId, articleId);
     } else {
       redisUtil.set(
-          Collectionkey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId, "exist");
+          CollectionKey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId, articleId);
     }
   }
 
   public void delCollectionState(String type, Integer articleId, Integer userId) {
     if ("recommend".equals(type)) {
       redisUtil.delete(
-          Collectionkey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId);
+          CollectionKey.RECOMMEND_KEY, "user-id:" + userId + ":article-id:" + articleId);
     } else if ("essay".equals(type)) {
-      redisUtil.delete(Collectionkey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId);
+      redisUtil.delete(CollectionKey.ESSAY_KEY, "user-id:" + userId + ":article-id:" + articleId);
     } else {
-      redisUtil.delete(Collectionkey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId);
+      redisUtil.delete(
+          CollectionKey.QUESTION_KEY, "user-id:" + userId + ":article-id:" + articleId);
     }
+  }
+
+  /**
+   * 根据用户编号获取分好类的文章编号
+   *
+   * @param userId
+   * @return
+   */
+  public Map<String, List<Integer>> getCollectionArticlesId(Integer userId) {
+    Map<String, List<Integer>> map = Maps.newHashMap();
+    Set<String> keys = redisUtil.keys("CollectionKey:type:*:user-id:" + userId + ":article-id:*");
+    List<Integer> essayIdList = Lists.newArrayList();
+    List<Integer> questionIdList = Lists.newArrayList();
+    List<Integer> recommendIdList = Lists.newArrayList();
+    keys.forEach(
+        key -> {
+          if (key.contains("essay")) {
+            int resultBefore = key.lastIndexOf(":");
+            String idStr = key.substring(resultBefore + 1);
+            essayIdList.add(Integer.valueOf(idStr));
+          } else if (key.contains("question")) {
+            int resultBefore = key.lastIndexOf(":");
+            String idStr = key.substring(resultBefore + 1);
+            questionIdList.add(Integer.valueOf(idStr));
+          } else {
+            int resultBefore = key.lastIndexOf(":");
+            String idStr = key.substring(resultBefore + 1);
+            recommendIdList.add(Integer.valueOf(idStr));
+          }
+        });
+    map.put("essay", essayIdList);
+    map.put("question", questionIdList);
+    map.put("recommend", recommendIdList);
+    return map;
   }
 }
