@@ -2,6 +2,7 @@ package com.waner.primary.web.controller;
 
 import com.google.common.collect.Lists;
 import com.waner.primary.common.exception.GlobalException;
+import com.waner.primary.common.result.Response;
 import com.waner.primary.web.entity.TravelEssay;
 import com.waner.primary.web.entity.TravelQuestion;
 import com.waner.primary.web.entity.TravelRecommend;
@@ -9,16 +10,14 @@ import com.waner.primary.web.service.EssayCommentService;
 import com.waner.primary.web.service.QuestionResolverService;
 import com.waner.primary.web.service.RecommendService;
 import com.waner.primary.web.service.TravelEssayService;
+import com.waner.primary.web.service.impl.RedisService;
 import com.waner.primary.web.vo.ArticleWithTag;
 import com.waner.primary.web.vo.ResponseWithTag;
 import com.waner.primary.web.vo.SearchInfoWithTag;
 import com.waner.primary.web.vo.TableResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,19 +36,26 @@ public class CommonController {
   private final EssayCommentService essayCommentService;
   private final RecommendService recommendService;
   private final TravelEssayService essayService;
+  private final RedisService redisService;
 
   public CommonController(
       TravelEssayService travelEssayService,
       QuestionResolverService questionResolverService,
       EssayCommentService essayCommentService,
       RecommendService recommendService,
-      TravelEssayService essayService) {
+      TravelEssayService essayService,
+      RedisService redisService) {
     this.travelEssayService = travelEssayService;
     this.questionResolverService = questionResolverService;
     this.essayCommentService = essayCommentService;
     this.recommendService = recommendService;
     this.essayService = essayService;
+    this.redisService = redisService;
   }
+
+  // -------------------------------------------------------------------------
+  // 个人信息列表获取
+  // -------------------------------------------------------------------------
 
   /**
    * 获取撰写的内容列表
@@ -192,7 +198,49 @@ public class CommonController {
       }
       results.add(searchs.get(i));
     }
-
     return new TableResult<>(200, "", searchs.size(), results);
+  }
+
+  // -------------------------------------------------------------------------
+  // 文章收藏
+  // -------------------------------------------------------------------------
+
+  /**
+   * 获取用户收藏状态
+   *
+   * @param type 文章所属类型
+   * @param articleId 文章编号
+   * @param userId 用户编号
+   * @return
+   */
+  @GetMapping("collection-state")
+  @ResponseBody
+  public Response<Boolean> getCollectionState(String type, Integer articleId, Integer userId) {
+    boolean state = redisService.getCollectionState(type, articleId, userId);
+    return Response.success(state);
+  }
+
+  /**
+   * 设置用户收藏
+   * @param type
+   * @param articleId
+   * @param userId
+   */
+  @PutMapping("collection-state-set")
+  @ResponseBody
+  public void setCollectionState(String type, Integer articleId, Integer userId) {
+    redisService.setCollectionState(type, articleId, userId);
+  }
+
+  /**
+   * 删除用户收藏
+   * @param type
+   * @param articleId
+   * @param userId
+   */
+  @PostMapping("collection-state-del")
+  @ResponseBody
+  public void delCollectionState(String type, Integer articleId, Integer userId) {
+    redisService.delCollectionState(type, articleId, userId);
   }
 }

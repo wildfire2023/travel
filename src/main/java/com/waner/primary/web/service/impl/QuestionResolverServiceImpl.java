@@ -65,12 +65,10 @@ public class QuestionResolverServiceImpl implements QuestionResolverService {
    * @return
    */
   @Override
-  public Response<QuestionWithUser> getQuestionDetail(Integer id) {
+  public QuestionWithUser getQuestionDetail(Integer id) {
     QuestionWithUser questionWithUser = questionMapper.selectQuestionWithUser(id);
-    if (questionWithUser == null) {
-      return Response.fail(CodeMsg.FAIL);
-    }
-    return Response.success(questionWithUser);
+
+    return questionWithUser;
   }
 
   /**

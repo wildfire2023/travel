@@ -90,6 +90,12 @@
                   <i class="layui-icon layui-icon-log"></i>
                   <span id="createTime"></span>
                 </span>
+                            <!-- 登录查看收藏等 -->
+                            <span th:if="${session.sessionUser != null}" class="share-title">
+                                <button class="layui-btn Collection active">
+                                    ❤<span>收藏</span>
+                                </button>
+                            </span>
                         </div>
                     </div>
                     <div class="article">
@@ -169,22 +175,8 @@
 
 <div class="micronews-footer-wrap">
     <div class="micronews-footer w1000">
-        <div class="ft-nav">
-            <a href="#">关于我们</a>
-            <a href="#">合作伙伴</a>
-            <a href="#">广告服务</a>
-            <a href="#">常见问题</a>
-        </div>
         <div class="Copyright">
             <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
-        </div>
-        <div class="f-icon">
-            <a href="#" class="w-icon">
-                <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
-            </a>
-            <a href="#" class="wb-icon">
-                <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
-            </a>
         </div>
     </div>
 </div>
@@ -215,16 +207,43 @@
         news.MessageList(essayId);
 
         news.EnterMessage(user, essayId);
-        // index.Page('micronews-details-test', 50);
-        var collOff = true;
-        $('.Collection').on('click', function () {
+
+        if (user != null) {
+            var collOff;
+            $.ajax({
+                url: '/common/collection-state'
+                , type: 'get'
+                , data: {type: 'essay', articleId: essayId, userId: user.id}
+                , async: false
+                , success: function (res) {
+                    collOff = res.data;
+                }
+            });
             if (collOff) {
-                $(this).addClass('active')
-            } else {
-                $(this).removeClass('active')
+                $('.Collection').removeClass('active');
+            }else {
+                $('.Collection').addClass('active');
             }
-            collOff = !collOff
-        });
+
+            $('.Collection').on('click', function () {
+                if (collOff) {
+                    $('.Collection').addClass('active');
+                    $.ajax({
+                        url: '/common/collection-state-del'
+                        , type: 'post'
+                        , data: {type: 'essay', articleId: essayId, userId: user.id}
+                    });
+                } else {
+                    $('.Collection').removeClass('active');
+                    $.ajax({
+                        url: '/common/collection-state-set'
+                        , type: 'put'
+                        , data: {type: 'essay', articleId: essayId, userId: user.id}
+                    });
+                }
+            });
+        }
+
         news.seachBtn();
         news.onInput();
         news.arrowutil();

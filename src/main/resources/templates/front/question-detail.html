@@ -78,7 +78,7 @@
                 </span>
                             <span class="icon">
                   <i class="layui-icon layui-icon-radio"></i>
-                  <b>3002</b>人
+                  <b id="viewNum"></b>人
                 </span>
                             <a href="#message">
                 <span class="icon message">
@@ -90,6 +90,12 @@
                   <i class="layui-icon layui-icon-log"></i>
                   <span id="createTime"></span>
                 </span>
+                            <!-- 登录查看收藏等 -->
+                            <span th:if="${session.sessionUser != null}" class="share-title">
+                                <button class="layui-btn Collection active">
+                                    ❤<span>收藏</span>
+                                </button>
+                            </span>
                         </div>
                     </div>
                     <div class="article">
@@ -169,30 +175,12 @@
 
 <div class="micronews-footer-wrap">
     <div class="micronews-footer w1000">
-        <div class="ft-nav">
-            <a href="#">关于我们</a>
-            <a href="#">合作伙伴</a>
-            <a href="#">广告服务</a>
-            <a href="#">常见问题</a>
-        </div>
         <div class="Copyright">
             <span>Copyright&nbsp;</span>&nbsp;&copy;<span>Waner旅游网&nbsp;&nbsp;</span>
-        </div>
-        <div class="f-icon">
-            <a href="#" class="w-icon">
-                <img th:src="@{/layuiadmin/myfile/images/wechat_ic.png}">
-            </a>
-            <a href="#" class="wb-icon">
-                <img th:src="@{/layuiadmin/myfile/images/qq_ic.png}">
-            </a>
         </div>
     </div>
 </div>
 <script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
-<!--[if lt IE 9]>
-<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 <script th:inline="javascript">
     layui.config({
         base: '/layuiadmin/'
@@ -216,18 +204,42 @@
 
         news.EnterAnswer(user, questionId);
         // index.Page('micronews-details-test', 50);
-        var collOff = true;
-        $('.Collection').on('click', function () {
+        if (user != null) {
+            var collOff;
+            $.ajax({
+                url: '/common/collection-state'
+                , type: 'get'
+                , data: {type: 'question', articleId: questionId, userId: user.id}
+                , async: false
+                , success: function (res) {
+                    collOff = res.data;
+                }
+            });
             if (collOff) {
-                $(this).addClass('active')
-            } else {
-                $(this).removeClass('active')
+                $('.Collection').removeClass('active');
+            }else {
+                $('.Collection').addClass('active');
             }
-            collOff = !collOff
-        });
-        news.seachBtn();
-        news.onInput();
-        news.arrowutil();
+
+            $('.Collection').on('click', function () {
+                if (collOff) {
+                    $('.Collection').addClass('active');
+                    $.ajax({
+                        url: '/common/collection-state-del'
+                        , type: 'post'
+                        , data: {type: 'question', articleId: questionId, userId: user.id}
+                    });
+                } else {
+                    $('.Collection').removeClass('active');
+                    $.ajax({
+                        url: '/common/collection-state-set'
+                        , type: 'put'
+                        , data: {type: 'question', articleId: questionId, userId: user.id}
+                    });
+                }
+            });
+        }
+
 
         // 渲染页面主体内容
         getDetail(questionId);
@@ -250,6 +262,7 @@
                     $("#createTime").text(data.createTime);
                     $("#content").html(data.content);
                     $("#user-nickname").text(data.nickname);
+                    $("#viewNum").text(data.viewNum);
                 }
             });
         }

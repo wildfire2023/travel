@@ -17,7 +17,7 @@ public interface QuestionResolverService {
 
   int countAll();
 
-  Response<QuestionWithUser> getQuestionDetail(Integer id);
+  QuestionWithUser getQuestionDetail(Integer id);
 
   int addAnswer(Integer questionId, Integer userId, String content);
 
