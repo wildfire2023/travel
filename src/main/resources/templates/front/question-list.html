@@ -146,7 +146,8 @@
             , laypage = layui.laypage
             , admin = layui.admin
             , laytpl = layui.laytpl
-            , layedit = layui.layedit;
+            , layedit = layui.layedit
+            , $ = layui.$;
 
         // 模拟数据
         index.seachBtn();
@@ -161,7 +162,7 @@
         loadTop();
 
         function loadTop() {
-            admin.req({
+            $.ajax({
                 url: '/common/top-question-list'
                 , type: 'get'
                 , success: function (res) {
@@ -179,7 +180,7 @@
 
 
         function loadData() {
-            admin.req({
+           $.ajax({
                 url: '/question/list'
                 , type: 'post'
                 , data: {

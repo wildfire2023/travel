@@ -167,7 +167,8 @@
         var index = layui.news
             , laypage = layui.laypage
             , admin = layui.admin
-            , laytpl = layui.laytpl;
+            , laytpl = layui.laytpl
+            ,$ = layui.$;
 
         // 版图渲染
         index.banner();
@@ -186,7 +187,7 @@
         // loadTopThree();
 
         function loadTop() {
-            admin.req({
+            $.ajax({
                 url: '/common/top-recommend-list'
                 , type: 'get'
                 , success: function (res) {
@@ -221,7 +222,7 @@
 
 
         function loadData() {
-            admin.req({
+            $.ajax({
                 url: '/recommend/table-data?role=user'
                 , type: 'get'
                 , data: {

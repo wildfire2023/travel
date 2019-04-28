@@ -156,7 +156,8 @@
             , laypage = layui.laypage
             , admin = layui.admin
             , laytpl = layui.laytpl
-            , layedit = layui.layedit;
+            , layedit = layui.layedit
+            ,$ = layui.$;
 
         // 模拟数据
         index.seachBtn();
@@ -171,7 +172,7 @@
         loadTop();
 
         function loadTop() {
-            admin.req({
+           $.ajax({
                 url: '/common/top-essay-list'
                 , type: 'get'
                 , success: function (res) {
@@ -189,7 +190,7 @@
 
 
         function loadData() {
-            admin.req({
+            $.ajax({
                 url: '/travel-essay/table-data?role=user'
                 , type: 'get'
                 , data: {
