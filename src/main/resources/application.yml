@@ -8,8 +8,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/travel
-    username: monster
-    password: monster
+    username: root
+    password: root
   # 模板引擎配置
   thymeleaf:
     prefix: classpath:/templates/
